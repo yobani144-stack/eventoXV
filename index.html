@@ -3,45 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XV Diana | Glam Edition</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Invitación Digital - M3</title>
+    <!-- Fuentes de Google: Roboto para M3 y Playfair Display para un toque elegante opcional -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Iconos Oficiales de Material Design 3 -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- CSS Grid: Contenedor Principal (Simulador Móvil en Desktop) -->
-    <main class="app-grid" id="appContainer">
+    <!-- PORTADA (HERO SECTION) -->
+    <section class="m3-hero" id="hero-section">
+        <!-- Fondo con efecto de aura sutil -->
+        <div class="m3-hero__aura"></div>
         
-        <section class="hero-cover" id="heroCover">
-    <!-- Grid interno para la maquetación de la portada -->
-    <div class="hero-grid">
-        
-        <!-- Bloque superior: Branding del evento -->
-        <header class="hero-header">
-            <span class="hero-tag">CELEBRACIÓN EXCLUSIVA</span>
-            <div class="hero-line-decorator"></div>
-        </header>
-
-        <!-- Bloque central: El nombre de Diana destacado -->
-        <div class="hero-middle">
-            <p class="hero-subtitle">MIS XV AÑOS</p>
-            <h1 class="hero-title">Diana</h1>
-            <p class="hero-date">24 . 10 . 2026</p> <!-- Ajustable a la fecha real -->
-        </div>
-
-        <!-- Bloque inferior: Botón interactivo de acceso con Flexbox -->
-        <footer class="hero-footer">
-            <button class="btn-glam" id="btnEnter" aria-label="Ingresar a la invitación">
-                <span class="btn-text">ABRIR INVITACIÓN</span>
-                <span class="btn-shine"></span>
+        <div class="m3-hero__content">
+            <!-- Subtítulo / Tipo de Evento (M3 Label Large) -->
+            <p class="m3-typography--label-large text-editable" id="edit-event-type">NUESTRA BODA</p>
+            
+            <!-- Título Principal (M3 Display Large) -->
+            <h1 class="m3-typography--display-large text-editable" id="edit-main-title">Alejandro &amp; Sofía</h1>
+            
+            <!-- Frase de Bienvenida o Fecha (M3 Headline Medium) -->
+            <p class="m3-typography--headline-medium text-editable" id="edit-hero-date">12 . 12 . 2026</p>
+            
+            <!-- Botón Principal (M3 Extended FAB / Filled Button) -->
+            <button class="m3-btn m3-btn--filled" id="btn-open-invitation">
+                <span class="material-symbols-outpined m3-btn__icon">mail</span>
+                <span class="m3-btn__label">Abrir Invitación</span>
+                <span class="m3-ripple"></span>
             </button>
-            <p class="hero-footer-note">Diseñado exclusivamente para familiares y amigos</p>
-        </footer>
+        </div>
+    </section>
 
-    </div>
-</section>
-    </main>
-
-    <script src="js/main.js"></script>
-    <script src="js/particles.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
