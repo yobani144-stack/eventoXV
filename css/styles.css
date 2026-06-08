@@ -1,182 +1,58 @@
 /* ==========================================================================
-   PROYECTO: XV-años-glam (Diana) - RESET COMPLETO CON FLEXBOX Y GRID
+   REDISEÑO: PORTADA CINEMATOGRÁFICA (HERO COVER)
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght=0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap');
-
-:root {
-    /* Paleta Premium */
-    --verde-oliva-profundo: #1b261a;
-    --verde-oliva-medio: #2d3e2c;
-    --verde-oliva-claro: #475d45;
-    --oro-glam: linear-gradient(135deg, #b39355 0%, #e6d3a1 50%, #d1b473 100%);
-    --oro-solido: #d1b473;
-    --blanco-marfil: #f9f8f6;
-    --texto-oscuro: #2b2b2b;
-    
-    /* Tipografías */
-    --font-titulos: 'Cormorant Garamond', serif;
-    --font-cuerpo: 'Montserrat', sans-serif;
-    
-    --transition-premium: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-/* Reset y centrado del simulador */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background-color: #0d120d;
-    color: var(--blanco-marfil);
-    font-family: var(--font-cuerpo);
-    min-height: 100vh;
-    
-    /* Flexbox para centrar la app entera en pantallas de escritorio */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
-
-/* ==========================================================================
-   LAYOUT MACRO: CSS GRID
-   ========================================================================== */
-.app-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 100vh; /* Cada sección ocupará la vista completa inicialmente */
-    
-    width: 100%;
-    max-width: 450px;
-    height: 100vh;
-    max-height: 900px;
-    background-color: var(--verde-oliva-profundo);
-    position: relative;
-    overflow-y: auto;
-    overflow-x: hidden;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
-}
-
-/* Estructura común para las secciones usando Flexbox */
-.section-flex {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    position: relative;
-    padding: 20px;
-}
-
-/* ==========================================================================
-   COMPONENTE: SOBRE DIGITAL (CON STRATEGY MODERN)
-   ========================================================================== */
-.envelope-section {
-    background-color: #0f150e;
-    z-index: 10;
-    transition: var(--transition-premium);
-}
-
-.envelope-box {
-    position: relative;
-    width: 320px;
-    height: 220px;
-    background-color: var(--verde-oliva-medio);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-    perspective: 1000px;
-}
-
-/* Solapa Superior utilizando propiedades modernas */
-.envelope-flap {
+/* Portada completa que bloquea la pantalla al inicio */
+.hero-cover {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 50%;
-    background-color: var(--verde-oliva-claro);
-    clip-path: polygon(0 0, 100% 0, 50% 100%); /* Geometría perfecta sin hacks de bordes */
-    transform-origin: top;
-    transition: var(--transition-premium);
-    z-index: 4;
-}
-
-/* Cuerpo/Bolsillo del sobre */
-.envelope-body {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
     height: 100%;
-    background-color: var(--verde-oliva-medio);
-    clip-path: polygon(0 40%, 50% 75%, 100% 40%, 100% 100%, 0 100%);
-    z-index: 3;
-    box-shadow: inset 0 4px 20px rgba(0,0,0,0.2);
+    background-color: var(--verde-oliva-profundo);
+    /* Capa de textura de fondo muy sutil */
+    background-image: linear-gradient(rgba(27, 38, 26, 0.85), rgba(15, 21, 14, 0.95)),
+                      radial-gradient(rgba(209, 180, 115, 0.15) 1px, transparent 0);
+    background-size: 100% 100%, 16px 16px;
+    z-index: 20;
+    transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+    padding: 30px;
 }
 
-/* Sello de Cera - Flexbox interno */
-.wax-seal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 65px;
-    height: 65px;
-    background: var(--oro-glam);
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 5;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-    transition: var(--transition-premium);
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.wax-seal:hover {
-    transform: translate(-50%, -50%) scale(1.08);
-}
-
-.seal-text {
-    font-family: var(--font-titulos);
-    font-weight: bold;
-    font-size: 13px;
-    color: var(--verde-oliva-profundo);
-    border: 1px dashed rgba(27, 38, 26, 0.4);
-    border-radius: 50%;
-    width: 53px;
-    height: 53px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Tarjeta Interna - Centrada y estructurada con Flexbox */
-.letter-card {
-    position: absolute;
-    top: 5%;
-    left: 5%;
-    width: 90%;
-    height: 90%;
-    background-color: var(--blanco-marfil);
-    padding: 12px;
-    z-index: 2;
-    transition: var(--transition-premium);
-    box-shadow: 0 0 15px rgba(0,0,0,0.15);
-}
-
-.letter-border {
-    border: 1px solid var(--oro-solido);
-    width: 100%;
+/* CSS Grid interno para distribuir los tres bloques de la portada simétricamente */
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto; /* Cabecera estrecha, centro expandido, pie estrecho */
     height: 100%;
-    padding: 15px;
-    
-    /* Flexbox para alinear verticalmente el texto de la invitación */
+    width: 100%;
+    border: 1px solid rgba(209, 180, 115, 0.25); /* Marco dorado fino perimetral */
+    padding: 25px 15px;
+}
+
+/* 1. Cabecera (Flexbox) */
+.hero-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.hero-tag {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--oro-solido);
+    font-weight: 500;
+}
+
+.hero-line-decorator {
+    width: 30px;
+    height: 1px;
+    background-color: rgba(209, 180, 115, 0.4);
+}
+
+/* 2. Centro (Flexbox para centrado absoluto del nombre) */
+.hero-middle {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -184,81 +60,121 @@ body {
     text-align: center;
 }
 
-.letter-tag {
-    font-size: 10px;
-    letter-spacing: 4px;
-    color: var(--verde-oliva-claro);
-    font-weight: 500;
-}
-
-.letter-name {
-    font-family: var(--font-titulos);
-    font-size: 36px;
-    color: var(--verde-oliva-profundo);
-    margin: 5px 0;
-}
-
-.letter-line {
-    width: 50px;
-    border: 0;
-    height: 1px;
-    background-color: var(--oro-solido);
-    margin: 10px 0;
-}
-
-.letter-phrase {
+.hero-subtitle {
+    font-family: var(--font-cuerpo);
     font-size: 12px;
-    font-style: italic;
-    color: #444;
-    line-height: 1.4;
+    letter-spacing: 6px;
+    color: var(--blanco-marfil);
+    opacity: 0.8;
+    margin-bottom: 5px;
 }
 
-.letter-scroll {
-    font-size: 9px;
-    margin-top: 15px;
-    color: var(--oro-solido);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+.hero-title {
+    font-family: var(--font-titulos);
+    font-size: 64px; /* Tamaño impactante */
+    font-weight: 400;
+    color: var(--blanco-marfil);
+    line-height: 1;
+    /* Efecto de degradado dorado de texto sutil */
+    background: linear-gradient(135deg, #ffffff 30%, #e6d3a1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Indicador de interacción exterior */
-.interaction-hint {
-    margin-top: 30px;
-    font-size: 11px;
+.hero-date {
+    font-family: var(--font-titulos);
+    font-size: 18px;
     letter-spacing: 3px;
     color: var(--oro-solido);
+    margin-top: 15px;
+}
+
+/* 3. Pie de página (Flexbox para el botón premium) */
+.hero-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Botón de lujo con Flexbox interno */
+.btn-glam {
+    position: relative;
+    width: 85%;
+    max-width: 280px;
+    padding: 16px 20px;
+    background: var(--oro-glam);
+    border: none;
+    border-radius: 0; /* Ángulos rectos muy modernos y arquitectónicos */
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    transition: var(--transition-premium);
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-glam:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(209, 180, 115, 0.3);
+}
+
+.btn-text {
+    font-family: var(--font-cuerpo);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    color: var(--verde-oliva-profundo);
+}
+
+/* Destello de luz lineal que cruza el botón */
+.btn-shine {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transform: skewX(-20deg);
+    animation: lightShine 3.5s infinite ease-in-out;
+}
+
+.hero-footer-note {
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: var(--blanco-marfil);
+    opacity: 0.4;
     text-transform: uppercase;
-    animation: fadePulse 2s infinite;
 }
 
 /* ==========================================================================
-   CONTROL DE APERTURA (JS ANIMATIONS)
+   ESTADOS DE SALIDA TRANSICIÓN APARTAR PORTADA
    ========================================================================== */
 
-.envelope-box.open .envelope-flap {
-    transform: rotateX(180deg);
-    z-index: 1;
+/* Al presionar el botón, la portada sube elegantemente */
+.hero-cover.dismissed {
+    transform: translateY(-100%);
 }
 
-.envelope-box.open .letter-card {
-    transform: translateY(-55%);
-    height: 180%; /* Crece proporcionalmente usando Flexbox hacia arriba */
-    z-index: 4;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
-
-.envelope-box.open .letter-scroll {
-    opacity: 1;
-}
-
-.envelope-box.open .wax-seal {
+/* Flujo del contenido real que espera abajo */
+.main-content-flow {
     opacity: 0;
-    pointer-events: none;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s;
+    padding: 40px 20px;
 }
 
-@keyframes fadePulse {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; }
+.hero-cover.dismissed + .main-content-flow {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Animación del destello */
+@keyframes lightShine {
+    0% { left: -100%; }
+    20% { left: 120%; }
+    100% { left: 120%; }
 }
