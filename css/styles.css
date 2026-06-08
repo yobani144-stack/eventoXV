@@ -1,17 +1,15 @@
 /* ==========================================================================
-   PROYECTO: XV-años-glam (Diana)
-   ESTILOS BASE Y VARIABLES PREMIUM
+   PROYECTO: XV-años-glam (Diana) - RESET COMPLETO CON FLEXBOX Y GRID
    ========================================================================== */
 
-/* Importación de tipografías elegantes desde Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght=0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap');
 
 :root {
-    /* Paleta de Colores Glam */
+    /* Paleta Premium */
     --verde-oliva-profundo: #1b261a;
     --verde-oliva-medio: #2d3e2c;
     --verde-oliva-claro: #475d45;
-    --oro-glam-gradient: linear-gradient(135deg, #b39355 0%, #e6d3a1 50%, #d1b473 100%);
+    --oro-glam: linear-gradient(135deg, #b39355 0%, #e6d3a1 50%, #d1b473 100%);
     --oro-solido: #d1b473;
     --blanco-marfil: #f9f8f6;
     --texto-oscuro: #2b2b2b;
@@ -20,11 +18,10 @@
     --font-titulos: 'Cormorant Garamond', serif;
     --font-cuerpo: 'Montserrat', sans-serif;
     
-    /* Transiciones */
-    --transition-suave: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-premium: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Reset y Configuración General */
+/* Reset y centrado del simulador */
 * {
     margin: 0;
     padding: 0;
@@ -32,256 +29,236 @@
 }
 
 body {
-    font-family: var(--font-cuerpo);
-    background-color: #0f150e; /* Fondo ultra oscuro para resaltar el sobre */
+    background-color: #0d120d;
     color: var(--blanco-marfil);
-    overflow-x: hidden;
+    font-family: var(--font-cuerpo);
     min-height: 100vh;
+    
+    /* Flexbox para centrar la app entera en pantallas de escritorio */
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 
-/* Contenedor Vista Mobile (Mockup Premium para Escritorio) */
-.app-container {
+/* ==========================================================================
+   LAYOUT MACRO: CSS GRID
+   ========================================================================== */
+.app-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 100vh; /* Cada sección ocupará la vista completa inicialmente */
+    
     width: 100%;
-    max-width: 450px; /* Dimensiones perfectas de smartphone */
+    max-width: 450px;
     height: 100vh;
     max-height: 900px;
     background-color: var(--verde-oliva-profundo);
     position: relative;
     overflow-y: auto;
     overflow-x: hidden;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-    scrollbar-width: none; /* Ocultar scroll en Firefox */
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
 }
 
-.app-container::-webkit-scrollbar {
-    display: none; /* Ocultar scroll en Chrome/Safari */
-}
-
-/* Capa del Canvas para Destellos de Oro de Fondo */
-#particles-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-}
-
-/* Estilos de Tipografía Globales */
-h1, h2, h3 {
-    font-family: var(--font-titulos);
-    letter-spacing: 1px;
-}
-
-/* ==========================================================================
-   MÓDULO: SOBRE DIGITAL INTERACTIVO (3D)
-   ========================================================================== */
-
-.envelope-wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+/* Estructura común para las secciones usando Flexbox */
+.section-flex {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 10;
-    background-color: #0f150e;
-    transition: var(--transition-suave);
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding: 20px;
 }
 
-/* Contenedor con perspectiva para el efecto 3D */
-.envelope {
+/* ==========================================================================
+   COMPONENTE: SOBRE DIGITAL (CON STRATEGY MODERN)
+   ========================================================================== */
+.envelope-section {
+    background-color: #0f150e;
+    z-index: 10;
+    transition: var(--transition-premium);
+}
+
+.envelope-box {
     position: relative;
     width: 320px;
     height: 220px;
     background-color: var(--verde-oliva-medio);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
     perspective: 1000px;
-    margin-top: 40px;
 }
 
-/* Solapa Superior (Flap) */
+/* Solapa Superior utilizando propiedades modernas */
 .envelope-flap {
     position: absolute;
     top: 0;
     left: 0;
-    width: 0;
-    height: 0;
-    border-left: 160px solid transparent;
-    border-right: 160px solid transparent;
-    border-top: 115px solid var(--verde-oliva-claro);
+    width: 100%;
+    height: 50%;
+    background-color: var(--verde-oliva-claro);
+    clip-path: polygon(0 0, 100% 0, 50% 100%); /* Geometría perfecta sin hacks de bordes */
     transform-origin: top;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: var(--transition-premium);
     z-index: 4;
 }
 
-/* Cuerpo/Bolsillo del sobre (Caras laterales e inferior superpuestas) */
-.envelope-pocket {
+/* Cuerpo/Bolsillo del sobre */
+.envelope-body {
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
-    width: 0;
-    height: 0;
-    border-left: 160px solid var(--verde-oliva-medio);
-    border-right: 160px solid var(--verde-oliva-medio);
-    border-bottom: 110px solid var(--verde-oliva-profundo);
-    border-top: 110px solid transparent;
+    width: 100%;
+    height: 100%;
+    background-color: var(--verde-oliva-medio);
+    clip-path: polygon(0 40%, 50% 75%, 100% 40%, 100% 100%, 0 100%);
     z-index: 3;
+    box-shadow: inset 0 4px 20px rgba(0,0,0,0.2);
 }
 
-/* Sello de Cera Premium */
+/* Sello de Cera - Flexbox interno */
 .wax-seal {
     position: absolute;
-    top: 110px;
+    top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(1);
-    width: 60px;
-    height: 60px;
-    background: var(--oro-glam-gradient);
+    transform: translate(-50%, -50%);
+    width: 65px;
+    height: 65px;
+    background: var(--oro-glam);
+    border: none;
     border-radius: 50%;
     cursor: pointer;
     z-index: 5;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    transition: var(--transition-premium);
+    
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.4);
-    transition: var(--transition-suave);
 }
 
 .wax-seal:hover {
     transform: translate(-50%, -50%) scale(1.08);
 }
 
-.seal-inner {
+.seal-text {
     font-family: var(--font-titulos);
     font-weight: bold;
-    font-size: 14px;
+    font-size: 13px;
     color: var(--verde-oliva-profundo);
-    border: 2px dashed rgba(27, 38, 26, 0.3);
+    border: 1px dashed rgba(27, 38, 26, 0.4);
     border-radius: 50%;
-    width: 48px;
-    height: 48px;
+    width: 53px;
+    height: 53px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* La Tarjeta de Invitación (Oculta dentro) */
-.letter {
+/* Tarjeta Interna - Centrada y estructurada con Flexbox */
+.letter-card {
     position: absolute;
-    top: 10px;
-    left: 10px;
-    width: 300px;
-    height: 200px;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
     background-color: var(--blanco-marfil);
-    background-image: radial-gradient(rgba(209, 180, 115, 0.05) 1px, transparent 0);
-    background-size: 12px 12px;
-    padding: 20px;
+    padding: 12px;
     z-index: 2;
-    transition: var(--transition-suave);
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    transition: var(--transition-premium);
+    box-shadow: 0 0 15px rgba(0,0,0,0.15);
+}
+
+.letter-border {
+    border: 1px solid var(--oro-solido);
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    
+    /* Flexbox para alinear verticalmente el texto de la invitación */
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
 }
 
-.letter-content {
-    color: var(--texto-oscuro);
-    border: 1px solid var(--oro-solido);
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-}
-
-.letter-subtitle {
-    font-size: 11px;
-    letter-spacing: 3px;
+.letter-tag {
+    font-size: 10px;
+    letter-spacing: 4px;
     color: var(--verde-oliva-claro);
     font-weight: 500;
 }
 
-.letter-title {
-    font-size: 32px;
+.letter-name {
+    font-family: var(--font-titulos);
+    font-size: 36px;
     color: var(--verde-oliva-profundo);
     margin: 5px 0;
 }
 
-.letter-divider {
-    width: 40px;
+.letter-line {
+    width: 50px;
+    border: 0;
     height: 1px;
     background-color: var(--oro-solido);
-    margin: 8px 0;
+    margin: 10px 0;
 }
 
-.letter-tagline {
+.letter-phrase {
     font-size: 12px;
     font-style: italic;
-    color: #555;
+    color: #444;
+    line-height: 1.4;
 }
 
-.scroll-indicator {
+.letter-scroll {
     font-size: 9px;
-    margin-top: 10px;
-    color: var(--oro-solido);
-    animation: bounce 1.5s infinite;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-.envelope-hint {
-    margin-top: 25px;
-    font-size: 12px;
-    letter-spacing: 2px;
+    margin-top: 15px;
     color: var(--oro-solido);
     text-transform: uppercase;
-    animation: pulse 2s infinite;
+    letter-spacing: 1px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Indicador de interacción exterior */
+.interaction-hint {
+    margin-top: 30px;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--oro-solido);
+    text-transform: uppercase;
+    animation: fadePulse 2s infinite;
 }
 
 /* ==========================================================================
-   ESTADOS DE ANIMACIÓN (DISPARADOS POR JS)
+   CONTROL DE APERTURA (JS ANIMATIONS)
    ========================================================================== */
 
-/* 1. Rotación del Flap hacia arriba en 3D */
-.envelope.open .envelope-flap {
+.envelope-box.open .envelope-flap {
     transform: rotateX(180deg);
-    z-index: 1; /* Pasa hacia atrás al abrirse */
+    z-index: 1;
 }
 
-/* 2. Extracción de la carta */
-.envelope.open .letter {
-    transform: translateY(-120px);
-    z-index: 4; /* Pasa al frente del sobre */
-    height: 380px; /* Se expande de forma fluida */
+.envelope-box.open .letter-card {
+    transform: translateY(-55%);
+    height: 180%; /* Crece proporcionalmente usando Flexbox hacia arriba */
+    z-index: 4;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
-.envelope.open .scroll-indicator {
+.envelope-box.open .letter-scroll {
     opacity: 1;
 }
 
-/* 3. Desvanecimiento del sello y texto guía */
-.envelope.open .wax-seal {
+.envelope-box.open .wax-seal {
     opacity: 0;
     pointer-events: none;
 }
 
-/* Animaciones Keyframes */
-@keyframes pulse {
-    0%, 100% { opacity: 0.6; }
+@keyframes fadePulse {
+    0%, 100% { opacity: 0.5; }
     50% { opacity: 1; }
-}
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-4px); }
 }
