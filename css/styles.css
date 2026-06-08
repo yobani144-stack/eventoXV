@@ -1,116 +1,219 @@
 /* ==========================================================================
-   REDISEÑO: PORTADA CINEMATOGRÁFICA (HERO COVER)
+   PROYECTO: XV-años-glam (Diana) - REDISEÑO PREMIUM & TOTALMENTE RESPONSIVO
    ========================================================================== */
 
-/* Portada completa que bloquea la pantalla al inicio */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,400&family=Montserrat:wght@200;400;600&display=swap');
+
+:root {
+    /* Paleta Glam Corregida: Mayor contraste y brillo */
+    --verde-fondo-frio: #0c120c;
+    --verde-oliva-lux: #1a2419;
+    --verde-oliva-brillante: #384e36;
+    
+    /* Degradados Metálicos reales para simular Oro Líquido */
+    --gold-premium: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
+    --gold-text: linear-gradient(to right, #bf953f, #fcf6ba, #b38728);
+    --gold-solido: #d4af37;
+    
+    --blanco-marfil: #fbfbf9;
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(209, 175, 55, 0.2);
+    
+    /* Tipografías */
+    --font-titulos: 'Cormorant Garamond', serif;
+    --font-cuerpo: 'Montserrat', sans-serif;
+    
+    --transition-lux: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   RESET & SIMULADOR RESPONSIVO AVANZADO
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--verde-fondo-frio);
+    color: var(--blanco-marfil);
+    font-family: var(--font-cuerpo);
+    min-height: 100vh;
+    overflow-x: hidden;
+    
+    /* Centrado dinámico en Escritorio */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: radial-gradient(circle at 50% 50%, #1c2b1b 0%, #0c120c 100%);
+}
+
+/* CSS Grid Macro: Contenedor Responsivo Inteligente */
+.app-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 100vh;
+    
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: var(--verde-oliva-lux);
+    box-shadow: 0 30px 100px rgba(0, 0, 0, 0.8);
+}
+
+/* Ajuste estructural para monitores/laptops grandes */
+@media (min-width: 480px) {
+    .app-grid {
+        width: 430px;
+        height: 92vh;
+        max-height: 850px;
+        border-radius: 16px;
+        border: 1px solid rgba(212, 175, 55, 0.15);
+    }
+}
+
+/* Capa del canvas para los brillos flotantes */
+#particles-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Estructura Base de Secciones con Flexbox */
+.section-flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 40px 25px;
+    position: relative;
+}
+
+/* ==========================================================================
+   REDISEÑO: PORTADA HERO CINEMATOGRÁFICA
+   ========================================================================== */
 .hero-cover {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--verde-oliva-profundo);
-    /* Capa de textura de fondo muy sutil */
-    background-image: linear-gradient(rgba(27, 38, 26, 0.85), rgba(15, 21, 14, 0.95)),
-                      radial-gradient(rgba(209, 180, 115, 0.15) 1px, transparent 0);
-    background-size: 100% 100%, 16px 16px;
+    background: linear-gradient(135deg, #131a12 0%, #1e2a1d 50%, #0d130c 100%);
     z-index: 20;
-    transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
-    padding: 30px;
+    transition: var(--transition-lux);
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* CSS Grid interno para distribuir los tres bloques de la portada simétricamente */
+/* Grid Interno de la Portada: Evita cortes abajo y distribuye con aire */
 .hero-grid {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr auto; /* Cabecera estrecha, centro expandido, pie estrecho */
-    height: 100%;
+    grid-template-rows: auto 1fr auto;
     width: 100%;
-    border: 1px solid rgba(209, 180, 115, 0.25); /* Marco dorado fino perimetral */
-    padding: 25px 15px;
+    height: 100%;
+    max-height: 750px; /* Evita dispersión exagerada */
+    
+    /* Efecto Glassmorphism Premium */
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    padding: 40px 20px;
+    box-shadow: inset 0 0 20px rgba(212, 175, 55, 0.05);
 }
 
-/* 1. Cabecera (Flexbox) */
+/* 1. Header Portada */
 .hero-header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+    animation: fadeInDown 1.2s ease;
 }
 
 .hero-tag {
-    font-size: 10px;
-    letter-spacing: 4px;
-    color: var(--oro-solido);
-    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: var(--gold-solido);
+    font-weight: 600;
 }
 
 .hero-line-decorator {
-    width: 30px;
+    width: 40px;
     height: 1px;
-    background-color: rgba(209, 180, 115, 0.4);
+    background: var(--gold-premium);
 }
 
-/* 2. Centro (Flexbox para centrado absoluto del nombre) */
+/* 2. Centro (El Nombre de Diana con Impacto) */
 .hero-middle {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+    animation: fadeIn 1.8s ease;
 }
 
 .hero-subtitle {
-    font-family: var(--font-cuerpo);
-    font-size: 12px;
-    letter-spacing: 6px;
-    color: var(--blanco-marfil);
-    opacity: 0.8;
-    margin-bottom: 5px;
+    font-size: 13px;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 10px;
 }
 
 .hero-title {
     font-family: var(--font-titulos);
-    font-size: 64px; /* Tamaño impactante */
-    font-weight: 400;
-    color: var(--blanco-marfil);
+    font-size: 72px; /* Más grande e imponente */
+    font-weight: 300;
     line-height: 1;
-    /* Efecto de degradado dorado de texto sutil */
-    background: linear-gradient(135deg, #ffffff 30%, #e6d3a1 100%);
+    background: var(--gold-premium);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    filter: drop-shadow(0 2px 10px rgba(0,0,0,0.5));
 }
 
 .hero-date {
     font-family: var(--font-titulos);
-    font-size: 18px;
-    letter-spacing: 3px;
-    color: var(--oro-solido);
-    margin-top: 15px;
+    font-size: 20px;
+    letter-spacing: 4px;
+    color: var(--blanco-marfil);
+    margin-top: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 5px;
 }
 
-/* 3. Pie de página (Flexbox para el botón premium) */
+/* 3. Footer de la Portada (Botón Fijo Sin Desplazarse) */
 .hero-footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
 }
 
-/* Botón de lujo con Flexbox interno */
+/* Botón Premium Totalmente Rediseñado */
 .btn-glam {
     position: relative;
-    width: 85%;
+    width: 100%;
     max-width: 280px;
-    padding: 16px 20px;
-    background: var(--oro-glam);
+    padding: 18px;
+    background: var(--gold-premium);
     border: none;
-    border-radius: 0; /* Ángulos rectos muy modernos y arquitectónicos */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     cursor: pointer;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
     overflow: hidden;
-    transition: var(--transition-premium);
+    transition: all 0.4s ease;
     
     display: flex;
     justify-content: center;
@@ -118,53 +221,50 @@
 }
 
 .btn-glam:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 30px rgba(209, 180, 115, 0.3);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(191, 149, 63, 0.4);
 }
 
 .btn-text {
     font-family: var(--font-cuerpo);
     font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 3px;
-    color: var(--verde-oliva-profundo);
+    font-weight: 600;
+    letter-spacing: 4px;
+    color: var(--verde-oliva-lux);
 }
 
-/* Destello de luz lineal que cruza el botón */
 .btn-shine {
     position: absolute;
     top: 0;
     left: -100%;
-    width: 50%;
+    width: 60%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-    transform: skewX(-20deg);
-    animation: lightShine 3.5s infinite ease-in-out;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+    transform: skewX(-25deg);
+    animation: lightShine 4s infinite ease-in-out;
 }
 
 .hero-footer-note {
     font-size: 9px;
-    letter-spacing: 1px;
-    color: var(--blanco-marfil);
+    letter-spacing: 2px;
     opacity: 0.4;
     text-transform: uppercase;
 }
 
 /* ==========================================================================
-   ESTADOS DE SALIDA TRANSICIÓN APARTAR PORTADA
+   ESTADOS DE DISMISS (TRANSICIONES ANIMADAS)
    ========================================================================== */
-
-/* Al presionar el botón, la portada sube elegantemente */
 .hero-cover.dismissed {
-    transform: translateY(-100%);
+    transform: translateY(-100vh);
+    opacity: 0;
+    pointer-events: none;
 }
 
-/* Flujo del contenido real que espera abajo */
 .main-content-flow {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s;
-    padding: 40px 20px;
+    transform: translateY(40px);
+    transition: opacity 1s ease 0.3s, transform 1s ease 0.3s;
+    background: linear-gradient(to bottom, var(--verde-oliva-lux), var(--verde-fondo-frio));
 }
 
 .hero-cover.dismissed + .main-content-flow {
@@ -172,9 +272,61 @@
     transform: translateY(0);
 }
 
-/* Animación del destello */
+/* ==========================================================================
+   ANIMACIONES CORE
+   ========================================================================== */
 @keyframes lightShine {
-    0% { left: -100%; }
-    20% { left: 120%; }
+    0% { left: -110%; }
+    15% { left: 120%; }
     100% { left: 120%; }
+}
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ==========================================================================
+   SECCIONES SECUNDARIAS (AJUSTE RESPONSIVO)
+   ========================================================================== */
+.section-title {
+    font-family: var(--font-titulos);
+    font-size: 28px;
+    color: var(--gold-solido);
+    letter-spacing: 3px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* Grid del Contador Regresivo Inteligente */
+.countdown-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    width: 100%;
+}
+
+.time-box {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    padding: 15px 5px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.time-val {
+    font-family: var(--font-titulos);
+    font-size: 28px;
+    color: var(--blanco-marfil);
+}
+
+.time-lbl {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.6;
 }
