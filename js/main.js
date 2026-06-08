@@ -1,11 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const waxSeal = document.getElementById("waxSeal");
-    const envelopeBox = document.querySelector(".envelope-box");
+    const btnEnter = document.getElementById("btnEnter");
+    const heroCover = document.getElementById("heroCover");
 
-    waxSeal.addEventListener("click", () => {
-        if (!envelopeBox.classList.contains("open")) {
-            envelopeBox.classList.add("open");
-            console.log("Proyecto XV-años-glam: Inicializado con Flexbox & Grid.");
-        }
+    btnEnter.addEventListener("click", () => {
+        // Desliza la portada cinematográfica hacia arriba
+        heroCover.classList.add("dismissed");
+        
+        console.log("Proyecto XV-años-glam: Portada removida. Revelando contenido principal.");
     });
 });
