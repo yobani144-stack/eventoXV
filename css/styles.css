@@ -503,7 +503,16 @@ body {
 
 
 
-
+/* --- CAPA DE PARTÍCULAS DORADAS (GLITTER) --- */
+.particula-oro {
+    position: absolute;
+    background: radial-gradient(circle, #f5dfb3 0%, rgba(197, 160, 89, 0) 70%);
+    border-radius: 50%;
+    pointer-events: none; /* No estorban los clics en la pantalla */
+    z-index: 2;
+    opacity: 0;
+    animation: flotarParticula linear infinite;
+}
 
 /* --- NUEVAS ANIMACIONES SPECTACULARES --- */
 
