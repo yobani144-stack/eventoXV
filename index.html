@@ -1,53 +1,36 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XV Diana | Glam Edition</title>
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
+<!-- Colocar justo dentro de <main class="app-grid" id="appContainer"> -->
 
-    <!-- CSS Grid: Contenedor Principal (Simulador Móvil en Desktop) -->
-    <main class="app-grid" id="appContainer">
+<!-- NUEVO INICIO: PORTADA CINEMATOGRÁFICA PREMIUM -->
+<section class="hero-cover" id="heroCover">
+    <!-- Grid interno para la maquetación de la portada -->
+    <div class="hero-grid">
         
-        <!-- Canvas para efectos visuales flotantes -->
-        <canvas id="particles-canvas"></canvas>
+        <!-- Bloque superior: Branding del evento -->
+        <header class="hero-header">
+            <span class="hero-tag">CELEBRACIÓN EXCLUSIVA</span>
+            <div class="hero-line-decorator"></div>
+        </header>
 
-        <!-- CSS Flexbox: Sección del Sobre Digital Interactivo -->
-        <section class="section-flex envelope-section" id="envelopeWrapper">
-            
-            <div class="envelope-box">
-                <!-- Solapa Superior -->
-                <div class="envelope-flap"></div>
-                
-                <!-- Cuerpo del Sobre -->
-                <div class="envelope-body"></div>
-                
-                <!-- Sello con Flexbox -->
-                <button class="wax-seal" id="waxSeal" aria-label="Abrir invitación">
-                    <span class="seal-text">D · XV</span>
-                </button>
-                
-                <!-- Carta/Invitación interna con Flexbox -->
-                <article class="letter-card" id="mainLetter">
-                    <div class="letter-border">
-                        <span class="letter-tag">XV AÑOS</span>
-                        <h1 class="letter-name">Diana</h1>
-                        <hr class="letter-line">
-                        <p class="letter-phrase">Una noche glamurosa e inolvidable</p>
-                        <span class="letter-scroll">Desliza hacia arriba ↓</span>
-                    </div>
-                </article>
-            </div>
-            
-            <p class="interaction-hint">Toca el sello de oro para ingresar</p>
-        </section>
+        <!-- Bloque central: El nombre de Diana destacado -->
+        <div class="hero-middle">
+            <p class="hero-subtitle">MIS XV AÑOS</p>
+            <h1 class="hero-title">Diana</h1>
+            <p class="hero-date">24 . 10 . 2026</p> <!-- Ajustable a la fecha real -->
+        </div>
 
-        <!-- Las siguientes secciones (Contador, Ubicaciones, RSVP) se añadirán aquí abajo flotando en el flujo del Grid -->
+        <!-- Bloque inferior: Botón interactivo de acceso con Flexbox -->
+        <footer class="hero-footer">
+            <button class="btn-glam" id="btnEnter" aria-label="Ingresar a la invitación">
+                <span class="btn-text">ABRIR INVITACIÓN</span>
+                <span class="btn-shine"></span>
+            </button>
+            <p class="hero-footer-note">Diseñado exclusivamente para familiares y amigos</p>
+        </footer>
 
-    </main>
+    </div>
+</section>
 
-    <script src="js/main.js"></script>
-</body>
-</html>
+<!-- SECCIÓN 2: CONTENIDO PRINCIPAL (Se desbloquea al dar clic) -->
+<div class="main-content-flow" id="mainContent">
+    <!-- Aquí continuará el flujo del evento: Cuenta regresiva, Ubicaciones, etc. -->
+</div>
