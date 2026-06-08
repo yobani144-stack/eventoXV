@@ -3,54 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XV Años Diana | Invitación Digital Glam</title>
-    <!-- Estilos Principales -->
+    <title>XV Diana | Glam Edition</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-    <!-- Contenedor Premium (Mobile-First) -->
-    <div class="app-container" id="appContainer">
+    <!-- CSS Grid: Contenedor Principal (Simulador Móvil en Desktop) -->
+    <main class="app-grid" id="appContainer">
         
-        <!-- Canvas para la lluvia de partículas de oro -->
+        <!-- Canvas para efectos visuales flotantes -->
         <canvas id="particles-canvas"></canvas>
 
-        <!-- Aquí construiremos modularmente las secciones -->
-        <!-- PARTE 1: El Sobre Digital Interactiva (Siguiente paso) -->
-        <!-- SECCIÓN 1: SOBRE DIGITAL INTERACTIVO -->
-<div class="envelope-wrapper" id="envelopeWrapper">
-    <div class="envelope" id="envelope">
-        
-        <!-- Solapa Superior (Flap) -->
-        <div class="envelope-flap"></div>
-        
-        <!-- Caras internas y laterales del sobre -->
-        <div class="envelope-pocket"></div>
-        
-        <!-- Sello de Cera Dorado Interactivo -->
-        <div class="wax-seal" id="waxSeal">
-            <div class="seal-inner">D · XV</div>
-        </div>
-        
-        <!-- La Invitación Premium (Oculta dentro del sobre) -->
-        <div class="letter" id="mainLetter">
-            <div class="letter-content">
-                <p class="letter-subtitle">XV AÑOS</p>
-                <h1 class="letter-title">Diana</h1>
-                <div class="letter-divider"></div>
-                <p class="letter-tagline">Una noche llena de brillo y elegancia</p>
-                <span class="scroll-indicator">Desliza hacia arriba ↓</span>
+        <!-- CSS Flexbox: Sección del Sobre Digital Interactivo -->
+        <section class="section-flex envelope-section" id="envelopeWrapper">
+            
+            <div class="envelope-box">
+                <!-- Solapa Superior -->
+                <div class="envelope-flap"></div>
+                
+                <!-- Cuerpo del Sobre -->
+                <div class="envelope-body"></div>
+                
+                <!-- Sello con Flexbox -->
+                <button class="wax-seal" id="waxSeal" aria-label="Abrir invitación">
+                    <span class="seal-text">D · XV</span>
+                </button>
+                
+                <!-- Carta/Invitación interna con Flexbox -->
+                <article class="letter-card" id="mainLetter">
+                    <div class="letter-border">
+                        <span class="letter-tag">XV AÑOS</span>
+                        <h1 class="letter-name">Diana</h1>
+                        <hr class="letter-line">
+                        <p class="letter-phrase">Una noche glamurosa e inolvidable</p>
+                        <span class="letter-scroll">Desliza hacia arriba ↓</span>
+                    </div>
+                </article>
             </div>
-        </div>
+            
+            <p class="interaction-hint">Toca el sello de oro para ingresar</p>
+        </section>
 
-    </div>
-    <p class="envelope-hint">Toca el sello dorado para abrir</p>
-</div>
-    </div>
+        <!-- Las siguientes secciones (Contador, Ubicaciones, RSVP) se añadirán aquí abajo flotando en el flujo del Grid -->
 
-    <!-- Scripts del Proyecto -->
-    <script href="js/main.js"></script>
-    <script href="js/particles.js"></script>
-  
+    </main>
+
+    <script src="js/main.js"></script>
 </body>
 </html>
