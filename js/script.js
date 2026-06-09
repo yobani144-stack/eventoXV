@@ -125,43 +125,42 @@ function inicializarInvitacion() {
        D. TRANSICIÓN LIMPIA Y APERTURA DE SOBRE
        ========================================== */
    if (btnOpen) {
-    btnOpen.addEventListener("click", function (e) {
-        const oldRipple = this.querySelector(".m3-ripple-active");
-        if (oldRipple) oldRipple.remove();
+        btnOpen.addEventListener("click", function (e) {
+            const oldRipple = this.querySelector(".m3-ripple-active");
+            if (oldRipple) oldRipple.remove();
 
-        const ripple = document.createElement("span");
-        ripple.classList.add("m3-ripple", "m3-ripple-active");
-        const rect = this.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        ripple.style.width = ripple.style.height = `${size}px`;
-        ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
-        ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
-        this.appendChild(ripple);
-
-        setTimeout(() => {
-            // 1. Desvanecer la portada de inicio de forma fluida
-            heroSection.style.opacity = "0";
-            heroSection.style.transform = "scale(1.02)";
-            heroSection.style.transition = "opacity 0.4s ease, transform 0.4s ease";
+            const ripple = document.createElement("span");
+            ripple.classList.add("m3-ripple", "m3-ripple-active");
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            ripple.style.width = ripple.style.height = `${size}px`;
+            ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
+            ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
+            this.appendChild(ripple);
 
             setTimeout(() => {
-                // 2. Ocultamos por completo la pantalla de inicio
-                heroSection.style.display = "none";
+                // Desvanecer limpiamente la sección de portada
+                heroSection.style.opacity = "0";
+                heroSection.style.transform = "scale(1.02)";
+                heroSection.style.transition = "opacity 0.4s ease, transform 0.4s ease";
 
-                // 3. Activamos el contenedor del contenido premium
-                envelopeSection.style.display = "flex"; 
-                envelopeSection.classList.remove("m3-hidden");
-                
-                // Forzar Reflow del navegador
-                void envelopeSection.offsetWidth; 
-                
-                // 4. Mostramos la tarjeta y disparamos las animaciones escalonadas
-                envelopeSection.style.opacity = "1";
-                envelopeSection.classList.add("is-active");
+                setTimeout(() => {
+                    heroSection.style.display = "none";
 
-            }, 400);
-        }, 350);
-    });
-}
+                    // Mostrar exclusivamente la sección del sobre aislado
+                    envelopeSection.classList.remove("m3-hidden");
+                    void envelopeSection.offsetWidth; 
+                    envelopeSection.style.opacity = "1";
+                    envelopeSection.style.transform = "scale(1)";
+
+                    // Disparar la apertura mecánica del sobre y la salida de la tarjeta
+                    setTimeout(() => {
+                        envelope.classList.add("is-open");
+                    }, 500);
+
+                }, 400);
+            }, 350);
+        });
+    }
 }
 });
