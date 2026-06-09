@@ -1,0 +1,154 @@
+/* ==========================================
+   OPTIMIZACIÓN DE CONTENIDO INTERNO PREMIUM
+   ========================================== */
+
+/* Asegurar que el sobre esté completamente centrado y no herede desbordamientos */
+.m3-envelope-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Evita scrolls raros en el fondo */
+}
+
+/* Modificación vital: Permitir scroll interno en la tarjeta que sale del sobre */
+.m3-envelope__card {
+    position: absolute;
+    bottom: 10px;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+    background-color: var(--md-sys-color-surface);
+    border-radius: 16px;
+    z-index: 2;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.4);
+    overflow: hidden; /* Oculta desbordamientos externos */
+}
+
+/* Contenedor con scroll táctil suave */
+.m3-inner-card__scroll-container {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto; /* Permite el scroll del contenido de la invitación */
+    overflow-x: hidden;
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch; /* Scroll ultra suave en iOS */
+}
+
+/* Secciones de la tarjeta */
+.m3-card-section {
+    width: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* Forzar que aparezca el contenido con delay cuando el sobre esté abierto */
+.m3-envelope.is-open .m3-card-section {
+    opacity: 1;
+    transform: translateY(0);
+}
+.m3-envelope.is-open .m3-card-header { transition-delay: 0.6s; }
+.m3-envelope.is-open .m3-card-photo-wrapper { transition-delay: 0.8s; }
+.m3-envelope.is-open .m3-countdown { transition-delay: 1s; }
+
+/* CONTENEDOR DE FOTO PREMIUM */
+.m3-card-photo-wrapper {
+    max-width: 280px;
+    height: 320px;
+    padding: 6px;
+    background: linear-gradient(135deg, rgba(208, 188, 255, 0.3), rgba(243, 202, 101, 0.3));
+    border-radius: 20px;
+    box-shadow: 0px 8px 20px rgba(0,0,0,0.3);
+}
+
+.m3-card-photo {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    border-radius: 14px;
+    position: relative;
+}
+
+.m3-card-photo__overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 60%, rgba(35, 27, 46, 0.4));
+    border-radius: 14px;
+}
+
+/* CONTADOR REGRESIVO M3 */
+.m3-countdown {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.m3-countdown__title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--md-sys-color-primary);
+}
+
+.m3-countdown__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    width: 100%;
+    max-width: 300px;
+}
+
+/* Cajas contenedoras del tiempo (M3 Elevated Sub-cards) */
+.m3-countdown__box {
+    background-color: #2d233a; /* Un tono un poco más claro que la superficie */
+    border: 1px solid rgba(208, 188, 255, 0.1);
+    border-radius: 12px;
+    padding: 10px 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.2);
+}
+
+.m3-countdown__number {
+    font-family: var(--md-ref-typeface-plain);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--md-color-gold-accent); /* Números dorados brillantes */
+}
+
+.m3-countdown__label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+/* Modificación de la apertura de la tarjeta para móviles */
+.m3-envelope.is-open .m3-envelope__card {
+    transform: translateY(-55%); /* Elevación óptima para permitir scroll cómodo */
+    height: 500px; /* Expandimos la tarjeta para albergar la foto y el contador */
+}
+
+@media (max-width: 440px) {
+    .m3-envelope.is-open .m3-envelope__card {
+        height: 115vw; /* Responsivo basado en el viewport móvil */
+        transform: translateY(-50%);
+    }
+}
