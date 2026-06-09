@@ -291,34 +291,27 @@ body {
 /* ==========================================================================
    FASE 2: COMPONENTE SOBRE DIGITAL PROFESIONAL (RESPONSIVO PC & MÓVIL)
    ========================================================================== */
-.m3-hidden {
-    opacity: 0 !important;
-    pointer-events: none !important;
-    display: none !important;
-}
-/* El contenedor principal permite scroll natural del documento tras abrir */
+/* Contenedor principal de la invitación abierta */
 .m3-envelope-section {
-    position: absolute; /* Cambiado de fixed a absolute para scroll natural */
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     min-height: 100vh;
     background: radial-gradient(circle at center, #211730 0%, var(--md-sys-color-surface-container) 100%);
-    display: none; /* JS lo cambia a flex coordinadamente */
+    display: none; /* Controlado limpiamente por JS */
     flex-direction: column;
-    justify-content: flex-start; /* Permite crecimiento hacia abajo */
+    justify-content: flex-start;
     align-items: center;
-    padding: 100px 20px; /* Espacio superior para la carta que sube */
+    padding: 40px 16px;
     z-index: 20;
     opacity: 0;
-    transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.6s ease-in-out;
 }
-
-/* Activa scroll en la página principal únicamente cuando el sobre está abierto */
-.m3-envelope-section:has(.is-open) {
+/* Habilitar el scroll nativo cuando la invitación esté activa */
+.m3-envelope-section.is-active {
     overflow-y: auto;
 }
-
 /* Contenedor del Sobre Estricto para evitar deformación horizontal en PC */
 .m3-envelope-wrapper {
     perspective: 1500px; /* Profundidad para la solapa */
@@ -541,4 +534,146 @@ m3-envelope__flap {
     line-height: 1;
     display: inline-block;
     -webkit-font-smoothing: antialiased;
+}
+
+
+/* TARJETA PRINCIPAL DE CONTENIDO (M3 Elevated Card Layout) */
+.m3-main-card {
+    width: 100%;
+    max-width: 450px; /* Ancho ideal ultra profesional para PC y Móviles */
+    background-color: var(--md-sys-color-surface);
+    border-radius: var(--md-sys-shape-corner-large);
+    padding: 40px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    box-shadow: 0px 20px 50px rgba(0, 0, 0, 0.5);
+    transform: translateY(30px);
+    transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Cuando la sección se activa, la tarjeta sube elegantemente */
+.m3-envelope-section.is-active .m3-main-card {
+    transform: translateY(0);
+}
+/* Animaciones de entrada por secciones (Fade in + slide up) */
+.m3-card-section {
+    width: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.m3-envelope-section.is-active .m3-card-section {
+    opacity: 1;
+    transform: translateY(0);
+}
+.m3-envelope-section.is-active .m3-card-header { transition-delay: 0.2s; }
+.m3-envelope-section.is-active .m3-card-photo-wrapper { transition-delay: 0.4s; }
+.m3-envelope-section.is-active .m3-countdown { transition-delay: 0.6s; }
+
+/* ==========================================================================
+   DISEÑO FOTO PORTADA (RETRATO DE ALTA GAMA)
+   ========================================================================== */
+.m3-card-photo-wrapper {
+    width: 100%;
+    max-width: 320px; /* Un poco más grande para que luzca espectacular */
+    padding: 6px;
+    background: linear-gradient(135deg, rgba(208, 188, 255, 0.4), rgba(243, 202, 101, 0.4));
+    border-radius: 24px;
+    box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.4);
+}
+
+.m3-card-photo {
+    width: 100%;
+    aspect-ratio: 3 / 4; /* Relación de aspecto vertical de estudio fotográfico */
+    background-size: cover;
+    background-position: center;
+    border-radius: 18px;
+    position: relative;
+}
+
+.m3-card-photo__overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: linear-gradient(to bottom, transparent 60%, rgba(35, 27, 46, 0.5));
+    border-radius: 18px;
+}
+
+.m3-inner-card__icon {
+    color: var(--md-color-gold-accent);
+    font-size: 36px !important;
+    margin-bottom: 8px;
+}
+
+/* ==========================================================================
+   MÓDULO CUENTA REGRESIVA REFORZADO
+   ========================================================================== */
+.m3-countdown {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.m3-countdown__title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--md-sys-color-primary);
+}
+
+.m3-countdown__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    width: 100%;
+    max-width: 340px;
+}
+
+.m3-countdown__box {
+    background-color: #2b2137;
+    border: 1px solid rgba(208, 188, 255, 0.08);
+    border-radius: 14px;
+    padding: 14px 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+}
+
+.m3-countdown__number {
+    font-family: var(--md-ref-typeface-plain);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--md-color-gold-accent);
+}
+
+.m3-countdown__label {
+    font-size: 0.6rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+/* Indicador Animado de Continuación */
+.m3-scroll-indicator {
+    color: var(--md-sys-color-primary);
+    opacity: 0.8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    animation: bounceIndicator 1.5s infinite;
+}
+
+@keyframes bounceIndicator {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(5px); }
 }
