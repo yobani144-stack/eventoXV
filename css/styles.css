@@ -318,7 +318,7 @@ body {
     perspective: 1500px;
     width: 100%;
     max-width: 380px;
-    margin-top: 120px;
+    margin-top: 260px; /* Incrementamos el margen superior para dar espacio a la carta que sube */
     position: relative;
 }
 
@@ -395,14 +395,15 @@ body {
    ========================================================================== */
 .m3-envelope.is-open .m3-envelope__flap {
     transform: rotateX(180deg);
-    z-index: 1;
-    border-top-color: #171020; /* Sombra interior al abrirse */
+    z-index: 1; /* Pasa al fondo para liberar la tarjeta */
+    border-top-color: #171020; 
 }
 
+/* 2. La tarjeta interna sale con fuerza hacia arriba y se sobrepone de forma limpia */
 .m3-envelope.is-open .m3-envelope__card {
-    transform: translateY(-85%); /* Despliegue hacia arriba libre */
-    z-index: 5; /* Pasa al frente del sobre */
-    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.5);
+    transform: translateY(-90%); /* Empuja la carta completamente fuera del sobre */
+    z-index: 10; /* Forzamos a que pase por encima de cualquier capa del sobre */
+    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.6);
 }
 
 /* Animación secuencial por bloques para el contenido de la carta */
