@@ -15,28 +15,30 @@
 <body>
 
     <!-- PORTADA (HERO SECTION) -->
-    <section class="m3-hero" id="hero-section">
-        <!-- Fondo con efecto de aura sutil -->
-        <div class="m3-hero__aura"></div>
-        
-        <div class="m3-hero__content">
-            <!-- Subtítulo / Tipo de Evento (M3 Label Large) -->
+   <section class="m3-hero" id="hero-section">
+    <div class="m3-hero__pattern"></div>
+    
+    <div class="m3-card">
+        <div class="m3-card__border-line"></div>
+        <div class="m3-card__content">
+            
             <p class="m3-typography--label-large text-editable" id="edit-event-type">NUESTRA BODA</p>
             
-            <!-- Título Principal (M3 Display Large) -->
-            <h1 class="m3-typography--display-large text-editable" id="edit-main-title">Alejandro &amp; Sofía</h1>
+            <h1 class="m3-typography--display-large text-editable" id="edit-main-title">
+                Alejandro <span class="m3-ampersand">&amp;</span> Sofía
+            </h1>
             
-            <!-- Frase de Bienvenida o Fecha (M3 Headline Medium) -->
             <p class="m3-typography--headline-medium text-editable" id="edit-hero-date">12 . 12 . 2026</p>
             
-            <!-- Botón Principal (M3 Extended FAB / Filled Button) -->
             <button class="m3-btn m3-btn--filled" id="btn-open-invitation">
-                <span class="material-symbols-outpined m3-btn__icon">mail</span>
+                <span class="material-symbols-outlined m3-btn__icon">mail</span>
                 <span class="m3-btn__label">Abrir Invitación</span>
                 <span class="m3-ripple"></span>
             </button>
+            
         </div>
-    </section>
+    </div>
+</section>
 
     <script src="js/script.js"></script>
 </body>
