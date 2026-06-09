@@ -1,41 +1,327 @@
-/* ==========================================
-   FASE 2: COMPONENTE SOBRE DIGITAL PROFESIONAL
-   ========================================== */
+/* ==========================================================================
+   IMPORTACIÓN DE FUENTES PREMIUM
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:wght@400;500;700&display=swap');
 
+/* ==========================================================================
+   TOKENS DE CONFIGURACIÓN PREMIUM (100% EDITABLE)
+   ========================================================================== */
+:root {
+    /* Paleta Material Design 3 - Modo Noche Místico */
+    --md-sys-color-primary: #D0BCFF;          /* Lavanda brillante para contrastar */
+    --md-sys-color-on-primary: #381E72;       /* Texto oscuro dentro del botón lila */
+    --md-sys-color-surface: #231B2E;          /* Fondo de la Tarjeta (Lila muy oscuro) */
+    --md-sys-color-surface-container: #140E1B; /* Fondo Exterior General */
+    --md-sys-color-on-surface: #E6E1E9;       /* Nombres y textos principales */
+    --md-sys-color-on-surface-variant: #CAC4D0; /* Fecha y textos secundarios */
+    
+    /* Acentos Metálicos */
+    --md-color-gold-accent: #F3CA65;          /* Oro brillante para detalles premium */
+
+    /* Tipografías Oficiales */
+    --md-ref-typeface-brand: 'Alex Brush', cursive; /* Fuente manuscrita para nombres */
+    --md-ref-typeface-serif: 'Playfair Display', serif;
+    --md-ref-typeface-plain: 'Roboto', sans-serif;
+
+    /* Curvaturas de Bordes M3 */
+    --md-sys-shape-corner-large: 28px;
+    --md-sys-shape-corner-full: 999px;
+}
+
+/* ==========================================================================
+   RESET & BASE RESPONSIVA GENERAL
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent; /* Quita flash azul táctil en móviles */
+}
+
+body {
+    font-family: var(--md-ref-typeface-plain);
+    background-color: var(--md-sys-color-surface-container);
+    color: var(--md-sys-color-on-surface);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Clases globales estrictas para el aislamiento de pantallas */
 .m3-hidden {
     opacity: 0 !important;
     pointer-events: none !important;
     display: none !important;
 }
 
-/* El contenedor principal ahora permite scroll natural del documento */
+/* ==========================================================================
+   ROLES DE TIPOGRAFÍA M3
+   ========================================================================== */
+.m3-typography--display-large {
+    font-family: var(--md-ref-typeface-brand);
+    font-size: 4rem;
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--md-sys-color-on-surface);
+    text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.m3-typography--headline-medium {
+    font-family: var(--md-ref-typeface-plain);
+    font-size: 1.15rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+.m3-typography--label-large {
+    font-family: var(--md-ref-typeface-plain);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: var(--md-sys-color-primary);
+}
+
+.m3-typography--title-large {
+    font-family: var(--md-ref-typeface-serif);
+    font-size: 1.6rem;
+    color: var(--md-sys-color-primary);
+    font-weight: 600;
+}
+
+.m3-typography--body-medium {
+    font-size: 0.95rem;
+    color: var(--md-sys-color-on-surface-variant);
+    line-height: 1.5;
+}
+
+/* Detalle especial para el ampersand (&) */
+.m3-ampersand {
+    font-family: var(--md-ref-typeface-serif);
+    font-size: 2.6rem;
+    font-style: italic;
+    vertical-align: middle;
+    margin: 0 6px;
+    color: var(--md-color-gold-accent);
+    text-shadow: 0px 0px 8px rgba(243, 202, 101, 0.3);
+}
+
+/* ==========================================================================
+   FASE 1: COMPONENTE PORTADA (HERO SECTION)
+   ========================================================================== */
+.m3-hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: radial-gradient(circle at center, #211730 0%, var(--md-sys-color-surface-container) 100%);
+    overflow: hidden;
+    z-index: 5;
+}
+
+.m3-hero__pattern {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.15;
+    background-image: radial-gradient(var(--md-sys-color-primary) 1px, transparent 0);
+    background-size: 32px 32px;
+    pointer-events: none;
+}
+
+/* Contenedor de perspectiva tridimensional */
+.m3-card-3d-wrapper {
+    perspective: 1000px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+/* La Tarjeta de Bienvenida de la Portada */
+.m3-card {
+    position: relative;
+    width: 100%;
+    max-width: 350px;
+    background-color: var(--md-sys-color-surface);
+    border-radius: var(--md-sys-shape-corner-large);
+    padding: 6px;
+    box-shadow: 0px 12px 30px 4px rgba(0, 0, 0, 0.5), 
+                0px 4px 10px 0px rgba(0, 0, 0, 0.3);
+    transform-style: preserve-3d;
+    transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+}
+
+.m3-card__border-line {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    border: 1px solid rgba(208, 188, 255, 0.12);
+    border-radius: calc(var(--md-sys-shape-corner-large) - 6px);
+    pointer-events: none;
+}
+
+.m3-card__content {
+    padding: 44px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 32px;
+}
+
+/* ==========================================================================
+   SISTEMA DE PARTÍCULAS MÁGICAS FLOTANTES
+   ========================================================================== */
+.m3-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.m3-particle {
+    position: absolute;
+    border-radius: 50%;
+    bottom: -30px;
+    animation: floatUp linear infinite;
+    filter: blur(1px); /* Efecto glow orgánico */
+    box-shadow: 0 0 8px currentColor;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) translateX(0) scale(0.3);
+        opacity: 0;
+    }
+    15% { opacity: 0.7; }
+    85% { opacity: 0.7; }
+    100% {
+        transform: translateY(-110vh) translateX(60px) scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* ==========================================================================
+   BOTÓN RE-DISEÑADO M3 CON RIPPLE Y DESTELLO METÁLICO
+   ========================================================================== */
+.m3-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    height: 48px;
+    padding: 0 28px;
+    border: none;
+    outline: none;
+    font-family: var(--md-ref-typeface-plain);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: .5px;
+    border-radius: var(--md-sys-shape-corner-full);
+    cursor: pointer;
+    overflow: hidden;
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    box-shadow: 0px 4px 12px rgba(208, 188, 255, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.m3-btn:hover {
+    box-shadow: 0px 6px 16px rgba(208, 188, 255, 0.4);
+    transform: translateY(-1px);
+}
+
+.m3-btn__icon {
+    font-size: 22px !important;
+}
+
+/* Efecto Brillo Metálico (Glint) */
+.m3-btn__glint {
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.4) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-25deg);
+    pointer-events: none;
+    animation: buttonGlint 4s infinite ease-in-out;
+}
+
+@keyframes buttonGlint {
+    0% { left: -150%; }
+    15% { left: 150%; }
+    100% { left: 150%; }
+}
+
+/* Efecto de Onda de Clic (Ripple) */
+.m3-ripple {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.35);
+    transform: scale(0);
+    animation: ripple-effect 0.5s ease-out;
+    pointer-events: none;
+}
+
+@keyframes ripple-effect {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* ==========================================================================
+   FASE 2: COMPONENTE SOBRE DIGITAL PROFESIONAL (RESPONSIVO PC & MÓVIL)
+   ========================================================================== */
 .m3-envelope-section {
-    position: absolute; /* Cambiado de fixed a absolute para permitir scroll natural */
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     min-height: 100vh;
     background: radial-gradient(circle at center, #211730 0%, var(--md-sys-color-surface-container) 100%);
-    display: flex;
-    flex-direction: column; /* Alineación vertical */
-    justify-content: flex-start; /* Permite que el contenido crezca hacia abajo */
+    display: none; /* JS lo cambia a flex coordinadamente */
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
-    padding: 80px 20px; /* Espacio superior para cuando la carta emerja */
+    padding: 80px 20px;
     z-index: 20;
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
 }
 
-/* Envoltura con tamaño máximo estricto para evitar que se deforme en PC */
+/* Activa scroll en la página principal únicamente cuando el sobre está abierto */
+.m3-envelope-section:has(.is-open) {
+    overflow-y: auto;
+}
+
+/* Contenedor del Sobre Estricto para evitar deformación horizontal en PC */
 .m3-envelope-wrapper {
     perspective: 1500px;
     width: 100%;
-    max-width: 380px; /* Jamás se estirará de más en monitores grandes */
-    margin-top: 120px; /* Espacio para que la carta suba en el aire */
+    max-width: 380px;
+    margin-top: 120px;
     position: relative;
 }
 
-/* EL SOBRE (Con dimensiones físicas realistas) */
 .m3-envelope {
     position: relative;
     width: 100%;
@@ -45,7 +331,7 @@
     box-shadow: 0px 25px 50px rgba(0, 0, 0, 0.6);
 }
 
-/* SOLAPA SUPERIOR (FLAP) */
+/* Solapa Superior Mecánica (Flap) */
 .m3-envelope__flap {
     position: absolute;
     top: 0;
@@ -61,7 +347,7 @@
     transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Responsivo matemático exacto para la solapa en móviles */
+/* Cálculo responsivo exacto de la solapa triangular en celulares */
 @media (max-width: 420px) {
     .m3-envelope-wrapper { max-width: 88vw; }
     .m3-envelope { height: calc(88vw * 0.65); }
@@ -72,7 +358,7 @@
     }
 }
 
-/* CUERPO DEL SOBRE (BOLSILLO INFERIOR) */
+/* Cuerpo frontal del sobre (Corte de Bolsillo) */
 .m3-envelope__pocket {
     position: absolute;
     bottom: 0;
@@ -85,54 +371,62 @@
     z-index: 4;
 }
 
-/* LA TARJETA INTERNA (Evolución: Ya no tiene scroll interno feo) */
+/* La Tarjeta de Invitación Real (Emerge fluidamente con altura automática) */
 .m3-envelope__card {
     position: absolute;
     bottom: 10px;
     left: 4%;
     width: 92%;
+    height: auto; 
     background-color: var(--md-sys-color-surface);
     border-radius: 16px;
     z-index: 2;
-    padding: 32px 20px;
+    padding: 36px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 36px;
     box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
-    
-    /* Altura automática basada en su contenido real */
-    height: auto; 
     transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* ==========================================
-   ANIMACIÓN DE APERTURA NATIVA
-   ========================================== */
+/* ==========================================================================
+   ESTADOS DE APERTURA ACTIVA (JS CLASES)
+   ========================================================================== */
 .m3-envelope.is-open .m3-envelope__flap {
     transform: rotateX(180deg);
     z-index: 1;
-    border-top-color: #171020;
+    border-top-color: #171020; /* Sombra interior al abrirse */
 }
 
-/* La tarjeta sale completamente del sobre y se acomoda en la página */
 .m3-envelope.is-open .m3-envelope__card {
-    transform: translateY(-85%); /* Sube de forma espectacular */
-    z-index: 5;
+    transform: translateY(-85%); /* Despliegue hacia arriba libre */
+    z-index: 5; /* Pasa al frente del sobre */
     box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.5);
 }
 
-/* Permitir que el contenedor de la sección gane scroll cuando el sobre abra */
-.m3-envelope-section:has(.is-open) {
-    overflow-y: auto;
+/* Animación secuencial por bloques para el contenido de la carta */
+.m3-card-section {
+    width: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* ==========================================
-   DISEÑO FOTO PORTADA (M3 VERTICAL RETRATO)
-   ========================================== */
+.m3-envelope.is-open .m3-card-section {
+    opacity: 1;
+    transform: translateY(0);
+}
+.m3-envelope.is-open .m3-card-header { transition-delay: 0.5s; }
+.m3-envelope.is-open .m3-card-photo-wrapper { transition-delay: 0.7s; }
+.m3-envelope.is-open .m3-countdown { transition-delay: 0.9s; }
+
+/* ==========================================================================
+   CONTENEDOR DE FOTO PORTADA (RETRATO DE GALERÍA VERTICAL)
+   ========================================================================== */
 .m3-card-photo-wrapper {
     width: 100%;
-    max-width: 280px; /* Ancho elegante */
+    max-width: 280px;
     padding: 6px;
     background: linear-gradient(135deg, rgba(208, 188, 255, 0.4), rgba(243, 202, 101, 0.4));
     border-radius: 24px;
@@ -141,7 +435,7 @@
 
 .m3-card-photo {
     width: 100%;
-    aspect-ratio: 3 / 4; /* Proporción vertical perfecta de retrato */
+    aspect-ratio: 3 / 4; /* Proporción ideal de retrato */
     background-size: cover;
     background-position: center;
     border-radius: 18px;
@@ -158,9 +452,15 @@
     border-radius: 18px;
 }
 
-/* ==========================================
-   COMPONENTES DEL CONTADOR CORREGIDOS
-   ========================================== */
+.m3-inner-card__icon {
+    color: var(--md-color-gold-accent);
+    font-size: 36px !important;
+    margin-bottom: 8px;
+}
+
+/* ==========================================================================
+   MÓDULO CUENTA REGRESIVA (M3 ELEVATED GRID CARDS)
+   ========================================================================== */
 .m3-countdown {
     width: 100%;
     display: flex;
@@ -196,6 +496,7 @@
 }
 
 .m3-countdown__number {
+    font-family: var(--md-ref-typeface-plain);
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--md-color-gold-accent);
@@ -203,11 +504,13 @@
 
 .m3-countdown__label {
     font-size: 0.6rem;
+    font-weight: 500;
+    text-transform: uppercase;
     letter-spacing: 0.5px;
     color: var(--md-sys-color-on-surface-variant);
 }
 
-/* Indicador de continuar navegando */
+/* Indicador Animado de Scroll */
 .m3-scroll-indicator {
     color: var(--md-sys-color-primary);
     opacity: 0.8;
@@ -216,4 +519,21 @@
     align-items: center;
     gap: 4px;
     margin-top: 12px;
+    animation: bounceIndicator 1.5s infinite;
+}
+
+@keyframes bounceIndicator {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(5px); }
+}
+
+/* UTILERÍA: FORZAR RENDERING CORRECTO DE ICONOS NATIVOS */
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined' !important;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    display: inline-block;
+    -webkit-font-smoothing: antialiased;
 }
