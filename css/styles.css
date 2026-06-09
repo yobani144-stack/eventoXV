@@ -291,8 +291,14 @@ body {
 /* ==========================================================================
    FASE 2: COMPONENTE SOBRE DIGITAL PROFESIONAL (RESPONSIVO PC & MÓVIL)
    ========================================================================== */
+.m3-hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    display: none !important;
+}
+/* El contenedor principal permite scroll natural del documento tras abrir */
 .m3-envelope-section {
-    position: absolute;
+    position: absolute; /* Cambiado de fixed a absolute para scroll natural */
     top: 0;
     left: 0;
     width: 100%;
@@ -300,9 +306,9 @@ body {
     background: radial-gradient(circle at center, #211730 0%, var(--md-sys-color-surface-container) 100%);
     display: none; /* JS lo cambia a flex coordinadamente */
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: flex-start; /* Permite crecimiento hacia abajo */
     align-items: center;
-    padding: 80px 20px;
+    padding: 100px 20px; /* Espacio superior para la carta que sube */
     z-index: 20;
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
@@ -315,24 +321,26 @@ body {
 
 /* Contenedor del Sobre Estricto para evitar deformación horizontal en PC */
 .m3-envelope-wrapper {
-    perspective: 1500px;
+    perspective: 1500px; /* Profundidad para la solapa */
     width: 100%;
-    max-width: 380px;
-    margin-top: 260px; /* Incrementamos el margen superior para dar espacio a la carta que sube */
+    max-width: 380px; /* Límite profesional para PC */
+    margin-top: 180px; /* Espacio para que la carta suba en el aire */
     position: relative;
+    display: flex;
+    justify-content: center;
 }
 
 .m3-envelope {
     position: relative;
     width: 100%;
-    height: 250px;
-    background-color: #1c1426;
+    height: 250px; /* Proporción estándar de sobre horizontal */
+    background-color: #1c1426; /* Color interior base */
     border-radius: 0 0 16px 16px;
     box-shadow: 0px 25px 50px rgba(0, 0, 0, 0.6);
 }
 
 /* Solapa Superior Mecánica (Flap) */
-.m3-envelope__flap {
+m3-envelope__flap {
     position: absolute;
     top: 0;
     left: 0;
@@ -340,14 +348,15 @@ body {
     height: 0;
     border-left: 190px solid transparent;
     border-right: 190px solid transparent;
-    border-top: 135px solid #2b1f3a;
+    border-top: 135px solid #2b1f3a; /* Mismo tono de la tarjeta pero con volumen */
     border-radius: 4px;
     z-index: 3;
-    transform-origin: top center;
+    /* Punto de pivote central y superior para giro vertical */
+    transform-origin: top center; 
     transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Cálculo responsivo exacto de la solapa triangular en celulares */
+/* Responsivo matemático exacto para la solapa triangular en celulares */
 @media (max-width: 420px) {
     .m3-envelope-wrapper { max-width: 88vw; }
     .m3-envelope { height: calc(88vw * 0.65); }
@@ -368,7 +377,7 @@ body {
     background-color: #231b2e;
     border-radius: 0 0 16px 16px;
     clip-path: polygon(0% 20%, 50% 62%, 100% 20%, 100% 100%, 0% 100%);
-    z-index: 4;
+    z-index: 4; /* Pasa por encima del bolsillo interior */
 }
 
 /* La Tarjeta de Invitación Real (Emerge fluidamente con altura automática) */
@@ -377,10 +386,10 @@ body {
     bottom: 10px;
     left: 4%;
     width: 92%;
-    height: auto; 
+    height: auto; /* Altura automática basada en su contenido */
     background-color: var(--md-sys-color-surface);
     border-radius: 16px;
-    z-index: 2;
+    z-index: 2; /* Guardada detrás del sobre */
     padding: 36px 20px;
     display: flex;
     flex-direction: column;
@@ -394,18 +403,17 @@ body {
    ESTADOS DE APERTURA ACTIVA (JS CLASES)
    ========================================================================== */
 .m3-envelope.is-open .m3-envelope__flap {
-    transform: rotateX(180deg);
-    z-index: 1; /* Pasa al fondo para liberar la tarjeta */
-    border-top-color: #171020; 
+    transform: rotateX(180deg); /* Gira 180 grados */
+    z-index: 1; /* Pasa al fondo de todo, contra el fondo exterior */
+    border-top-color: #1a1024; /* Se oscurece al plegarse hacia atrás */
 }
 
-/* 2. La tarjeta interna sale con fuerza hacia arriba y se sobrepone de forma limpia */
+/* 2. La tarjeta interna sale completamente y se libera del sobre */
 .m3-envelope.is-open .m3-envelope__card {
-    transform: translateY(-90%); /* Empuja la carta completamente fuera del sobre */
-    z-index: 10; /* Forzamos a que pase por encima de cualquier capa del sobre */
+    transform: translateY(-90%); /* Sube espectacularmente liberada */
+    z-index: 10; /* Pasa al frente absoluto */
     box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.6);
 }
-
 /* Animación secuencial por bloques para el contenido de la carta */
 .m3-card-section {
     width: 100%;
@@ -421,7 +429,6 @@ body {
 .m3-envelope.is-open .m3-card-header { transition-delay: 0.5s; }
 .m3-envelope.is-open .m3-card-photo-wrapper { transition-delay: 0.7s; }
 .m3-envelope.is-open .m3-countdown { transition-delay: 0.9s; }
-
 /* ==========================================================================
    CONTENEDOR DE FOTO PORTADA (RETRATO DE GALERÍA VERTICAL)
    ========================================================================== */
@@ -434,13 +441,14 @@ body {
     box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.4);
 }
 
-.m3-card-photo {
+.m3-card-photo__overlay {
+    position: absolute;
     width: 100%;
-    aspect-ratio: 3 / 4; /* Proporción ideal de retrato */
-    background-size: cover;
-    background-position: center;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: linear-gradient(to bottom, transparent 60%, rgba(35, 27, 46, 0.5));
     border-radius: 18px;
-    position: relative;
 }
 
 .m3-card-photo__overlay {
@@ -487,7 +495,6 @@ body {
 
 .m3-countdown__box {
     background-color: #2b2137;
-    border: 1px solid rgba(208, 188, 255, 0.08);
     border-radius: 14px;
     padding: 12px 2px;
     display: flex;
@@ -497,12 +504,10 @@ body {
 }
 
 .m3-countdown__number {
-    font-family: var(--md-ref-typeface-plain);
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--md-color-gold-accent);
 }
-
 .m3-countdown__label {
     font-size: 0.6rem;
     font-weight: 500;
@@ -527,7 +532,6 @@ body {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(5px); }
 }
-
 /* UTILERÍA: FORZAR RENDERING CORRECTO DE ICONOS NATIVOS */
 .material-symbols-outlined {
     font-family: 'Material Symbols Outlined' !important;
