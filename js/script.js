@@ -1,8 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
+       // 1. Esperamos a que los archivos HTML externos se inyecten por completo
+    await window.loadTemplates();
+
+    // 2. Ahora que el HTML ya existe en el DOM, declaramos las variables
+    const btnOpen = document.getElementById("btn-open-invitation");
+    const heroSection = document.getElementById("hero-section");
+    const envelopeSection = document.getElementById("envelope-section");
+    const envelope = document.getElementById("envelope");
     const cardWrapper = document.getElementById("card-wrapper");
     const mainCard = document.getElementById("main-card");
     const particlesContainer = document.getElementById("particles-container");
-
+    
     /* ==========================================
        1. CREACIÓN DE PARTÍCULAS DE LUZ
        ========================================== */
