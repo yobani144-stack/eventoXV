@@ -1,324 +1,219 @@
-/* Importamos una fuente caligráfica premium adicional para los nombres */
-@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:wght@400;500;700&display=swap');
-
 /* ==========================================
-   TOKENS DE CONFIGURACIÓN PREMIUM
+   FASE 2: COMPONENTE SOBRE DIGITAL PROFESIONAL
    ========================================== */
-:root {
-    /* M3 Dark Theme Concept */
-    --md-sys-color-primary: #D0BCFF;          /* Lavanda brillante para contrastar */
-    --md-sys-color-on-primary: #381E72;       /* Texto oscuro dentro del botón lila */
-    --md-sys-color-surface: #231B2E;          /* Fondo de la Tarjeta (Lila muy oscuro) */
-    --md-sys-color-surface-container: #140E1B; /* Fondo Exterior General */
-    --md-sys-color-on-surface: #E6E1E9;       /* Nombres y textos principales en blanco grisáceo */
-    --md-sys-color-on-surface-variant: #CAC4D0; /* Fecha en tono secundario legible */
-    
-    --md-color-gold-accent: #F3CA65;          /* Oro brillante para el ampersand */
 
-    /* Fuentes y Bordes */
-    --md-ref-typeface-brand: 'Alex Brush', cursive;
-    --md-ref-typeface-serif: 'Playfair Display', serif;
-    --md-ref-typeface-plain: 'Roboto', sans-serif;
-    --md-sys-shape-corner-large: 28px;
-    --md-sys-shape-corner-full: 999px;
-}
-/* ==========================================
-   RESET & BASE CONTENEDORA
-   ========================================== */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    -webkit-tap-highlight-color: transparent;
+.m3-hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    display: none !important;
 }
 
-body {
-    font-family: var(--md-ref-typeface-plain);
-    background-color: var(--md-sys-color-surface-container);
-    color: var(--md-sys-color-on-surface);
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
-
-/* ==========================================
-   PORTADA DE FONDO (HERO)
-   ========================================== */
-.m3-hero {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    /* Degradado profundo místico */
-    background: radial-gradient(circle at center, #211730 0%, var(--md-sys-color-surface-container) 100%);
-    overflow: hidden;
-}
-
-/* Patrón elegante de fondo para romper la uniformidad plana */
-.m3-hero__pattern {
-    position: absolute;
-    width: 100%;
-    height: 100%;
+/* El contenedor principal ahora permite scroll natural del documento */
+.m3-envelope-section {
+    position: absolute; /* Cambiado de fixed a absolute para permitir scroll natural */
     top: 0;
     left: 0;
-    opacity: 0.15; /* Un poco más visible en fondo oscuro */
-    background-image: radial-gradient(var(--md-sys-color-primary) 1px, transparent 0);
-    background-size: 32px 32px;
-    pointer-events: none;
+    width: 100%;
+    min-height: 100vh;
+    background: radial-gradient(circle at center, #211730 0%, var(--md-sys-color-surface-container) 100%);
+    display: flex;
+    flex-direction: column; /* Alineación vertical */
+    justify-content: flex-start; /* Permite que el contenido crezca hacia abajo */
+    align-items: center;
+    padding: 80px 20px; /* Espacio superior para cuando la carta emerja */
+    z-index: 20;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 }
 
-/* ==========================================
-   TARJETA PREMIUM (M3 ELEVATED CARD CONFIG)
-   ========================================== */
-.m3-card {
+/* Envoltura con tamaño máximo estricto para evitar que se deforme en PC */
+.m3-envelope-wrapper {
+    perspective: 1500px;
+    width: 100%;
+    max-width: 380px; /* Jamás se estirará de más en monitores grandes */
+    margin-top: 120px; /* Espacio para que la carta suba en el aire */
+    position: relative;
+}
+
+/* EL SOBRE (Con dimensiones físicas realistas) */
+.m3-envelope {
     position: relative;
     width: 100%;
-    max-width: 350px;
-    background-color: var(--md-sys-color-surface);
-    border-radius: var(--md-sys-shape-corner-large);
-    padding: 6px;
-    
-    /* Sombras más profundas e intensas para fondos oscuros */
-    box-shadow: 0px 12px 30px 4px rgba(0, 0, 0, 0.5), 
-                0px 4px 10px 0px rgba(0, 0, 0, 0.3);
-    
-    transform-style: preserve-3d;
-    transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+    height: 250px;
+    background-color: #1c1426;
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0px 25px 50px rgba(0, 0, 0, 0.6);
 }
 
-/* Detalle de borde interno de alta costura */
-.m3-card__border-line {
+/* SOLAPA SUPERIOR (FLAP) */
+.m3-envelope__flap {
     position: absolute;
-    top: 12px;
-    left: 12px;
-    right: 12px;
-    bottom: 12px;
-    border: 1px solid rgba(208, 188, 255, 0.12); /* Brillo lavanda sutil */
-    border-radius: calc(var(--md-sys-shape-corner-large) - 6px);
-    pointer-events: none;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 190px solid transparent;
+    border-right: 190px solid transparent;
+    border-top: 135px solid #2b1f3a;
+    border-radius: 4px;
+    z-index: 3;
+    transform-origin: top center;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.m3-card__content {
-    padding: 44px 24px;
+/* Responsivo matemático exacto para la solapa en móviles */
+@media (max-width: 420px) {
+    .m3-envelope-wrapper { max-width: 88vw; }
+    .m3-envelope { height: calc(88vw * 0.65); }
+    .m3-envelope__flap {
+        border-left-width: 44vw;
+        border-right-width: 44vw;
+        border-top-width: calc(88vw * 0.35);
+    }
+}
+
+/* CUERPO DEL SOBRE (BOLSILLO INFERIOR) */
+.m3-envelope__pocket {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #231b2e;
+    border-radius: 0 0 16px 16px;
+    clip-path: polygon(0% 20%, 50% 62%, 100% 20%, 100% 100%, 0% 100%);
+    z-index: 4;
+}
+
+/* LA TARJETA INTERNA (Evolución: Ya no tiene scroll interno feo) */
+.m3-envelope__card {
+    position: absolute;
+    bottom: 10px;
+    left: 4%;
+    width: 92%;
+    background-color: var(--md-sys-color-surface);
+    border-radius: 16px;
+    z-index: 2;
+    padding: 32px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 32px;
-}
-
-/* ==========================================
-   TIPOGRAFÍAS MEJORADAS
-   ========================================== */
-.m3-typography--label-large {
-    font-family: var(--md-ref-typeface-plain);
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 4px;
-    color: var(--md-sys-color-primary); /* Resalta en lila claro */
-}
-
-.m3-typography--display-large {
-    font-family: var(--md-ref-typeface-brand);
-    font-size: 4rem;
-    font-weight: 400;
-    line-height: 1.1;
-    color: var(--md-sys-color-on-surface);
-    text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
-}
-
-/* Detalles para el ampersand (&) */
-.m3-ampersand {
-    font-family: var(--md-ref-typeface-serif);
-    font-size: 2.6rem;
-    font-style: italic;
-    vertical-align: middle;
-    margin: 0 6px;
-    color: var(--md-color-gold-accent); /* Brillo de oro */
-    text-shadow: 0px 0px 8px rgba(243, 202, 101, 0.3);
-}
-
-.m3-typography--headline-medium {
-    font-family: var(--md-ref-typeface-plain);
-    font-size: 1.15rem;
-    font-weight: 400;
-    letter-spacing: 2px;
-    color: var(--md-sys-color-on-surface-variant);
-}
-
-/* ==========================================
-   BOTÓN RE-DISEÑADO CON SOPORTE DE ÍCONO M3
-   ========================================== */
-.m3-btn {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    height: 48px; /* Altura estándar M3 para targets táctiles cómodos */
-    padding: 0 28px;
-    border: none;
-    outline: none;
-    font-family: var(--md-ref-typeface-plain);
-    font-size: 0.95rem;
-    font-weight: 500;
-    letter-spacing: .5px;
-    border-radius: var(--md-sys-shape-corner-full);
-    cursor: pointer;
-    overflow: hidden;
-    background-color: var(--md-sys-color-primary);
-    color: var(--md-sys-color-on-primary);
+    gap: 36px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
     
-    /* Sombra del botón */
-    box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15), 
-                0px 1px 2px 0px rgba(0, 0, 0, 0.3);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    /* Altura automática basada en su contenido real */
+    height: auto; 
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
-
-.m3-btn:hover {
-    box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15), 
-                0px 1px 3px 0px rgba(0, 0, 0, 0.3);
-    transform: translateY(-1px);
-}
-
-/* Estilos nativos para forzar que los Material Symbols funcionen */
-.material-symbols-outlined {
-    font-family: 'Material Symbols Outlined' !important;
-    font-weight: normal;
-    font-style: normal;
-    font-size: 22px !important;
-    line-height: 1;
-    letter-spacing: normal;
-    text-transform: none;
-    display: inline-block;
-    white-space: nowrap;
-    word-wrap: normal;
-    direction: ltr;
-    -webkit-font-smoothing: antialiased;
-}
-
-/* Animación sutil de entrada para la tarjeta */
-@keyframes cardEntrance {
-    from {
-        opacity: 0;
-        transform: translateY(30px) scale(0.96);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-/* Efecto Onda (Ripple) */
-.m3-ripple {
-    position: absolute;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.3);
-    transform: scale(0);
-    animation: ripple-effect 0.5s ease-out;
-    pointer-events: none;
-}
-@keyframes ripple-effect {
-    to {
-        transform: scale(4);
-        opacity: 0;
-    }
-}
-
 
 /* ==========================================
-   CONFIGURACIÓN PREMIUM DE EFECTOS DINGAMICOS
+   ANIMACIÓN DE APERTURA NATIVA
    ========================================== */
+.m3-envelope.is-open .m3-envelope__flap {
+    transform: rotateX(180deg);
+    z-index: 1;
+    border-top-color: #171020;
+}
 
-/* Contenedor de perspectiva para el efecto 3D */
-.m3-card-3d-wrapper {
-    perspective: 1000px; /* Profundidad de la escena */
+/* La tarjeta sale completamente del sobre y se acomoda en la página */
+.m3-envelope.is-open .m3-envelope__card {
+    transform: translateY(-85%); /* Sube de forma espectacular */
+    z-index: 5;
+    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Permitir que el contenedor de la sección gane scroll cuando el sobre abra */
+.m3-envelope-section:has(.is-open) {
+    overflow-y: auto;
+}
+
+/* ==========================================
+   DISEÑO FOTO PORTADA (M3 VERTICAL RETRATO)
+   ========================================== */
+.m3-card-photo-wrapper {
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2;
+    max-width: 280px; /* Ancho elegante */
+    padding: 6px;
+    background: linear-gradient(135deg, rgba(208, 188, 255, 0.4), rgba(243, 202, 101, 0.4));
+    border-radius: 24px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.4);
 }
 
-.m3-card {
-    /* Mantenemos tus estilos anteriores y agregamos soporte de transformación 3D */
-    transform-style: preserve-3d;
-    transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
-    will-change: transform, box-shadow;
+.m3-card-photo {
+    width: 100%;
+    aspect-ratio: 3 / 4; /* Proporción vertical perfecta de retrato */
+    background-size: cover;
+    background-position: center;
+    border-radius: 18px;
+    position: relative;
 }
 
-/* ==========================================
-   EFECTO: PARTÍCULAS MÁGICAS FLOTANTES
-   ========================================== */
-.m3-particles {
+.m3-card-photo__overlay {
     position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
-    pointer-events: none;
-    z-index: 1;
+    background: linear-gradient(to bottom, transparent 60%, rgba(35, 27, 46, 0.5));
+    border-radius: 18px;
 }
 
-.m3-particle {
-    position: absolute;
-    border-radius: 50%;
-    bottom: -30px;
-    animation: floatUp linear infinite;
-    /* Efecto de desenfoque tipo "glow" de luz real */
-    filter: blur(1px); 
-    box-shadow: 0 0 8px currentColor;
-}
-
-@keyframes floatUp {
-    0% {
-        transform: translateY(0) translateX(0) scale(0.3);
-        opacity: 0;
-    }
-    15% {
-        opacity: 0.7; /* Se hacen visibles rápido */
-    }
-    85% {
-        opacity: 0.7;
-    }
-    100% {
-        transform: translateY(-110vh) translateX(60px) scale(1.5);
-        opacity: 0;
-    }
-}
 /* ==========================================
-   EFECTO: DESTELLO METÁLICO EN EL BOTÓN (GLINT)
+   COMPONENTES DEL CONTADOR CORREGIDOS
    ========================================== */
-.m3-btn--filled {
-    background-color: var(--md-sys-color-primary);
-    color: var(--md-sys-color-on-primary);
+.m3-countdown {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.m3-countdown__title {
+    font-size: 0.8rem;
     font-weight: 700;
-    box-shadow: 0px 4px 12px rgba(208, 188, 255, 0.25);
+    letter-spacing: 3px;
+    color: var(--md-sys-color-primary);
 }
 
-.m3-btn__glint {
-    position: absolute;
-    top: 0;
-    left: -150%;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.4) 50%,
-        rgba(255, 255, 255, 0) 100%
-    );
-    transform: skewX(-25deg);
-    pointer-events: none;
-    animation: buttonGlint 4s infinite ease-in-out;
+.m3-countdown__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    width: 100%;
+    max-width: 320px;
 }
 
-@keyframes buttonGlint {
-    0% { left: -150%; }
-    15% { left: 150%; } /* Cruza rápido al inicio */
-    100% { left: 150%; } /* Se queda esperando antes de reiniciar el ciclo */
+.m3-countdown__box {
+    background-color: #2b2137;
+    border: 1px solid rgba(208, 188, 255, 0.08);
+    border-radius: 14px;
+    padding: 12px 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+}
+
+.m3-countdown__number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--md-color-gold-accent);
+}
+
+.m3-countdown__label {
+    font-size: 0.6rem;
+    letter-spacing: 0.5px;
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+/* Indicador de continuar navegando */
+.m3-scroll-indicator {
+    color: var(--md-sys-color-primary);
+    opacity: 0.8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin-top: 12px;
 }
