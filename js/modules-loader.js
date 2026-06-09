@@ -13,7 +13,7 @@ async function loadComponent(url, containerId) {
 // Exportamos la carga para sincronizarla con el script principal
 window.loadTemplates = async function() {
     await Promise.all([
-        loadComponent('hero.html', 'hero-container'),
-        loadComponent('envelope.html', 'envelope-container')
+        loadComponent('../hero.html', 'hero-container'),
+        loadComponent('../envelope.html', 'envelope-container')
     ]);
 };
