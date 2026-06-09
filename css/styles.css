@@ -233,3 +233,96 @@ body {
         opacity: 0;
     }
 }
+
+
+/* ==========================================
+   CONFIGURACIÓN PREMIUM DE EFECTOS DINGAMICOS
+   ========================================== */
+
+/* Contenedor de perspectiva para el efecto 3D */
+.m3-card-3d-wrapper {
+    perspective: 1000px; /* Profundidad de la escena */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.m3-card {
+    /* Mantenemos tus estilos anteriores y agregamos soporte de transformación 3D */
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
+    will-change: transform, box-shadow;
+}
+
+/* ==========================================
+   EFECTO: PARTÍCULAS MÁGICAS FLOTANTES
+   ========================================== */
+.m3-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.m3-particle {
+    position: absolute;
+    background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(222,221,255,0) 70%);
+    border-radius: 50%;
+    bottom: -20px;
+    animation: floatUp linear infinite;
+    opacity: 0;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) translateX(0) scale(0.5);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.6;
+    }
+    90% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(-105vh) translateX(50px) scale(1.2);
+        opacity: 0;
+    }
+}
+
+/* ==========================================
+   EFECTO: DESTELLO METÁLICO EN EL BOTÓN (GLINT)
+   ========================================== */
+.m3-btn--filled {
+    position: relative;
+    overflow: hidden;
+}
+
+.m3-btn__glint {
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.4) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-25deg);
+    pointer-events: none;
+    animation: buttonGlint 4s infinite ease-in-out;
+}
+
+@keyframes buttonGlint {
+    0% { left: -150%; }
+    15% { left: 150%; } /* Cruza rápido al inicio */
+    100% { left: 150%; } /* Se queda esperando antes de reiniciar el ciclo */
+}
