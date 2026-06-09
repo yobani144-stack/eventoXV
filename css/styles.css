@@ -1,81 +1,54 @@
+/* Importamos una fuente caligráfica premium adicional para los nombres */
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:wght@400;500;700&display=swap');
+
 /* ==========================================
-   TOKENS DE CONFIGURACIÓN (100% EDITABLE)
+   TOKENS DE CONFIGURACIÓN PREMIUM
    ========================================== */
 :root {
-    /* Paleta de Colores de Material Design 3 */
-    --md-sys-color-primary: #6750A4;          /* Color principal (Botones, detalles importantes) */
-    --md-sys-color-on-primary: #FFFFFF;       /* Texto sobre color principal */
-    --md-sys-color-primary-container: #EADDFF; /* Fondos de contenedores destacados */
-    --md-sys-color-on-primary-container: #21005D;
+    /* Paleta Material Design 3 - Tonos Ciruela / Lila Profundo */
+    --md-sys-color-primary: #523A78;          /* Lila profundo / Premium */
+    --md-sys-color-on-primary: #FFFFFF;
+    --md-sys-color-surface: #FFF9FF;          /* Superficie de la tarjeta (Off-white lila) */
+    --md-sys-color-surface-container: #F3EDF7; /* Fondo exterior */
+    --md-sys-color-on-surface: #1D1A22;
+    --md-sys-color-on-surface-variant: #49454F;
+    --md-sys-color-outline: #79747E;
     
-    --md-sys-color-surface: #FEF7FF;          /* Fondo general de la app / tarjeta */
-    --md-sys-color-on-surface: #1D1B20;       /* Texto principal sobre fondo */
-    --md-sys-color-on-surface-variant: #49454F; /* Texto secundario */
-    --md-sys-color-outline: #79747E;          /* Bordes y separadores */
+    /* Toque de realce metálico opcional para los bordes */
+    --md-color-gold-accent: #D4AF37;          /* Oro sutil para acabados finos */
 
-    /* Aura de Fondo Personalizable (Color inicial y final del degradado) */
-    --bg-aura-start: rgba(103, 80, 164, 0.15);
-    --bg-aura-end: rgba(254, 247, 255, 0);
+    /* Fuentes */
+    --md-ref-typeface-brand: 'Alex Brush', cursive; /* Caligrafía espectacular */
+    --md-ref-typeface-serif: 'Playfair Display', serif;
+    --md-ref-typeface-plain: 'Roboto', sans-serif;
 
-    /* Tipografías M3 */
-    --md-ref-typeface-brand: 'Playfair Display', serif; /* Para títulos elegantes */
-    --md-ref-typeface-plain: 'Roboto', sans-serif;       /* Para textos e información */
-
-    /* Bordes Redondeados de M3 (Shapes) */
-    --md-sys-shape-corner-full: 9999px;
+    /* Curvaturas Oficiales M3 */
     --md-sys-shape-corner-large: 28px;
+    --md-sys-shape-corner-full: 999px;
 }
 
 /* ==========================================
-   RESET & RESPONSIVE BASE
+   RESET & BASE CONTENEDORA
    ========================================== */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    -webkit-tap-highlight-color: transparent; /* Quita el flash azul feo en móviles */
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
     font-family: var(--md-ref-typeface-plain);
-    background-color: var(--md-sys-color-surface);
+    background-color: var(--md-sys-color-surface-container);
     color: var(--md-sys-color-on-surface);
-    overflow-x: hidden;
     min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* ==========================================
-   ROLES DE TIPOGRAFÍA M3
-   ========================================== */
-.m3-typography--display-large {
-    font-family: var(--md-ref-typeface-brand);
-    font-size: clamp(2.5rem, 8vw, 4.5rem); /* Ajuste fluido automático según pantalla */
-    font-weight: 400;
-    line-height: 1.1;
-    letter-spacing: -0.25px;
-    color: var(--md-sys-color-primary);
-}
-
-.m3-typography--headline-medium {
-    font-family: var(--md-ref-typeface-plain);
-    font-size: clamp(1.2rem, 4vw, 1.75rem);
-    font-weight: 400;
-    line-height: 1.33;
-    letter-spacing: 0px;
-    color: var(--md-sys-color-on-surface-variant);
-}
-
-.m3-typography--label-large {
-    font-family: var(--md-ref-typeface-plain);
-    font-size: 0.875rem;
-    font-weight: 500;
-    line-height: 1.43;
-    letter-spacing: 0.1px;
-    color: var(--md-sys-color-outline);
-}
-
-/* ==========================================
-   COMPONENTE: PORTADA (HERO)
+   PORTADA DE FONDO (HERO)
    ========================================== */
 .m3-hero {
     position: relative;
@@ -84,88 +57,176 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    padding: 24px;
-    background-color: var(--md-sys-color-surface);
+    padding: 20px;
+    background: radial-gradient(circle at center, #FDF8FF 0%, #E8DEF8 100%);
+    overflow: hidden;
 }
 
-/* Aura flotante/degradado de fondo */
-.m3-hero__aura {
+/* Patrón elegante de fondo para romper la uniformidad plana */
+.m3-hero__pattern {
     position: absolute;
-    top: -10%;
-    left: -10%;
-    width: 120%;
-    height: 120%;
-    background: radial-gradient(circle at center, var(--bg-aura-start) 0%, var(--bg-aura-end) 70%);
-    z-index: 1;
-    animation: floatingAura 8s ease-in-out infinite alternate;
-}
-
-.m3-hero__content {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    gap: 24px; /* Espaciado estándar M3 */
-    max-width: 600px;
-    align-items: center;
-}
-
-@keyframes floatingAura {
-    0% { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(2%, 4%) scale(1.05); }
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.04;
+    background-image: radial-gradient(var(--md-sys-color-primary) 1px, transparent 0);
+    background-size: 24px 24px;
+    pointer-events: none;
 }
 
 /* ==========================================
-   COMPONENTE: BOTÓN M3 CON RIPPLE
+   TARJETA PREMIUM (M3 ELEVATED CARD CONFIG)
+   ========================================== */
+.m3-card {
+    position: relative;
+    width: 100%;
+    max-width: 360px; /* Tamaño ideal emulando pantalla móvil estética */
+    background-color: var(--md-sys-color-surface);
+    border-radius: var(--md-sys-shape-corner-large);
+    padding: 8px; /* Espacio para el doble borde */
+    
+    /* Sombra física de nivel de elevación 3 de M3 (Da volumen real) */
+    box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15), 
+                0px 1px 3px 0px rgba(0, 0, 0, 0.3);
+    
+    animation: cardEntrance 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Detalle de borde interno de alta costura */
+.m3-card__border-line {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    border: 1px solid rgba(82, 58, 120, 0.15);
+    border-radius: calc(var(--md-sys-shape-corner-large) - 8px);
+    pointer-events: none;
+}
+
+.m3-card__content {
+    padding: 48px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 32px;
+}
+
+/* ==========================================
+   TIPOGRAFÍAS MEJORADAS
+   ========================================== */
+.m3-typography--label-large {
+    font-family: var(--md-ref-typeface-plain);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 3px; /* Mayor tracking para verse premium */
+    color: var(--md-sys-color-primary);
+    opacity: 0.8;
+}
+
+.m3-typography--display-large {
+    font-family: var(--md-ref-typeface-brand);
+    font-size: 3.8rem; /* Tamaño óptimo para la fuente caligráfica */
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--md-sys-color-primary);
+    text-shadow: 0px 1px 2px rgba(0,0,0,0.05);
+}
+
+/* Detalles para el ampersand (&) */
+.m3-ampersand {
+    font-family: var(--md-ref-typeface-serif);
+    font-size: 2.5rem;
+    font-style: italic;
+    vertical-align: middle;
+    display: inline-block;
+    margin: 0 8px;
+    color: var(--md-color-gold-accent); /* Toque dorado distinguido */
+}
+
+.m3-typography--headline-medium {
+    font-family: var(--md-ref-typeface-plain);
+    font-size: 1.15rem;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+/* ==========================================
+   BOTÓN RE-DISEÑADO CON SOPORTE DE ÍCONO M3
    ========================================== */
 .m3-btn {
     position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    height: 40px;
-    padding: 0 24px;
+    gap: 12px;
+    height: 48px; /* Altura estándar M3 para targets táctiles cómodos */
+    padding: 0 28px;
     border: none;
     outline: none;
     font-family: var(--md-ref-typeface-plain);
-    font-size: 0.875rem;
+    font-size: 0.95rem;
     font-weight: 500;
-    letter-spacing: 0.1px;
+    letter-spacing: .5px;
     border-radius: var(--md-sys-shape-corner-full);
     cursor: pointer;
     overflow: hidden;
-    transition: box-shadow 0.2s ease, background-color 0.2s ease;
-    box-shadow: 0px 1px 3px rgba(0,0,0,0.1), 0px 1px 2px rgba(0,0,0,0.06);
-}
-
-.m3-btn--filled {
     background-color: var(--md-sys-color-primary);
     color: var(--md-sys-color-on-primary);
+    
+    /* Sombra del botón */
+    box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15), 
+                0px 1px 2px 0px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Estados M3 (Hover y Focus State Layer) */
-.m3-btn--filled:hover {
-    background-color: rgb(minimum-black-level); /* Simulación de overlay M3 */
-    box-shadow: 0px 4px 8px rgba(0,0,0,0.15), 0px 1px 3px rgba(0,0,0,0.1);
-    background-image: linear-gradient(rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08));
+.m3-btn:hover {
+    box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15), 
+                0px 1px 3px 0px rgba(0, 0, 0, 0.3);
+    transform: translateY(-1px);
 }
 
-.m3-btn__icon {
-    font-size: 18px !important;
+/* Estilos nativos para forzar que los Material Symbols funcionen */
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined' !important;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 22px !important;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Animación sutil de entrada para la tarjeta */
+@keyframes cardEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 /* Efecto Onda (Ripple) */
 .m3-ripple {
     position: absolute;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.35);
+    background-color: rgba(255, 255, 255, 0.3);
     transform: scale(0);
-    animation: ripple-effect 0.6s linear;
+    animation: ripple-effect 0.5s ease-out;
     pointer-events: none;
 }
-
 @keyframes ripple-effect {
     to {
         transform: scale(4);
