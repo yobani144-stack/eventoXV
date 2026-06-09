@@ -138,31 +138,21 @@ function inicializarInvitacion() {
         ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
         this.appendChild(ripple);
 
-        setTimeout(() => {
-            // 1. Animamos la salida de la portada
-            heroSection.style.opacity = "0";
-            heroSection.style.transform = "scale(1.02)";
-            heroSection.style.transition = "opacity 0.4s ease, transform 0.4s ease";
+       setTimeout(() => {
+    heroSection.style.display = "none";
 
-            setTimeout(() => {
-                // 2. Ocultamos la portada por completo para limpiar la pantalla
-                heroSection.style.display = "none";
+    envelopeSection.style.display = "flex"; 
+    envelopeSection.classList.remove("m3-hidden");
+    
+    void envelopeSection.offsetWidth; // Forzar lectura del navegador
+    envelopeSection.style.opacity = "1";
 
-                // 3. Activamos el contenedor del sobre cambiando el display antes de animar opacidad
-                envelopeSection.style.display = "flex"; 
-                envelopeSection.classList.remove("m3-hidden");
-                
-                // Forzar Reflow
-                void envelopeSection.offsetWidth; 
-                
-                // 4. Mostramos el sobre elegantemente
-                envelopeSection.style.opacity = "1";
+    // Disparar la apertura del sobre
+    setTimeout(() => {
+        envelope.classList.add("is-open");
+    }, 300); // Se abre 300ms después de que aparece el sobre
 
-                setTimeout(() => {
-                    envelope.classList.add("is-open");
-                }, 400);
-
-            }, 400);
+}, 400);
         }, 350);
     });
 }
