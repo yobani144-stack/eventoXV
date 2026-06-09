@@ -1,547 +1,174 @@
-/* ==========================================================================
-   PROYECTO: XV-años-glam (Diana) - REDISEÑO PREMIUM & TOTALMENTE RESPONSIVO
-   ========================================================================== */
-
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,400&family=Montserrat:wght@200;400;600&display=swap');
-
+/* ==========================================
+   TOKENS DE CONFIGURACIÓN (100% EDITABLE)
+   ========================================== */
 :root {
-    /* Nueva Paleta: Verdes Vivos, Frescos y Tonos Pastel Premium */
-    --verde-fondo-frio: #142217;       /* Base profunda pero más viva */
-    --verde-sage-pastel: #72967e;      /* Verde Sabio Pastel principal */
-    --verde-menta-glam: #a2c4b0;       /* Menta Pastel iluminado */
-    --verde-bright-aura: rgba(142, 196, 160, 0.25); /* Aura flotante */
+    /* Paleta de Colores de Material Design 3 */
+    --md-sys-color-primary: #6750A4;          /* Color principal (Botones, detalles importantes) */
+    --md-sys-color-on-primary: #FFFFFF;       /* Texto sobre color principal */
+    --md-sys-color-primary-container: #EADDFF; /* Fondos de contenedores destacados */
+    --md-sys-color-on-primary-container: #21005D;
     
-    /* Oro Líquido Refinado */
-    --gold-premium: linear-gradient(135deg, #cda753 0%, #fef9cb 30%, #bca04c 60%, #fef9cb 80%, #aa822c 100%);
-    --gold-solido: #dfba6b;
-    --blanco-marfil: #fbfbf9;
-    
-    /* Configuración de Cristal (Glassmorphism) */
-    --glass-bg: rgba(255, 255, 255, 0.05);
-    --glass-border: rgba(223, 186, 107, 0.3);
-    
-    --font-titulos: 'Cormorant Garamond', serif;
-    --font-cuerpo: 'Montserrat', sans-serif;
-    --transition-lux: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    --md-sys-color-surface: #FEF7FF;          /* Fondo general de la app / tarjeta */
+    --md-sys-color-on-surface: #1D1B20;       /* Texto principal sobre fondo */
+    --md-sys-color-on-surface-variant: #49454F; /* Texto secundario */
+    --md-sys-color-outline: #79747E;          /* Bordes y separadores */
+
+    /* Aura de Fondo Personalizable (Color inicial y final del degradado) */
+    --bg-aura-start: rgba(103, 80, 164, 0.15);
+    --bg-aura-end: rgba(254, 247, 255, 0);
+
+    /* Tipografías M3 */
+    --md-ref-typeface-brand: 'Playfair Display', serif; /* Para títulos elegantes */
+    --md-ref-typeface-plain: 'Roboto', sans-serif;       /* Para textos e información */
+
+    /* Bordes Redondeados de M3 (Shapes) */
+    --md-sys-shape-corner-full: 9999px;
+    --md-sys-shape-corner-large: 28px;
 }
 
-/* Reset y Base */
+/* ==========================================
+   RESET & RESPONSIVE BASE
+   ========================================== */
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent; /* Quita el flash azul feo en móviles */
 }
 
 body {
-    background-color: var(--verde-fondo-frio);
-    color: var(--blanco-marfil);
-    font-family: var(--font-cuerpo);
+    font-family: var(--md-ref-typeface-plain);
+    background-color: var(--md-sys-color-surface);
+    color: var(--md-sys-color-on-surface);
+    overflow-x: hidden;
     min-height: 100vh;
-    overflow-x: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* Fondo con degradado radial dinámico que simula iluminación central */
-    background-image: radial-gradient(circle at 50% 50%, #223a27 0%, #0f1a11 100%);
 }
 
-/* Contenedor Responsivo Inteligente */
-.app-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 100vh;
-    width: 100vw;
+/* ==========================================
+   ROLES DE TIPOGRAFÍA M3
+   ========================================== */
+.m3-typography--display-large {
+    font-family: var(--md-ref-typeface-brand);
+    font-size: clamp(2.5rem, 8vw, 4.5rem); /* Ajuste fluido automático según pantalla */
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.25px;
+    color: var(--md-sys-color-primary);
+}
+
+.m3-typography--headline-medium {
+    font-family: var(--md-ref-typeface-plain);
+    font-size: clamp(1.2rem, 4vw, 1.75rem);
+    font-weight: 400;
+    line-height: 1.33;
+    letter-spacing: 0px;
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+.m3-typography--label-large {
+    font-family: var(--md-ref-typeface-plain);
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.43;
+    letter-spacing: 0.1px;
+    color: var(--md-sys-color-outline);
+}
+
+/* ==========================================
+   COMPONENTE: PORTADA (HERO)
+   ========================================== */
+.m3-hero {
+    position: relative;
+    width: 100%;
     height: 100vh;
-    position: relative;
-    overflow-y: auto;
-    overflow-x: hidden;
-    background-color: #17271b;
-    box-shadow: 0 30px 100px rgba(0, 0, 0, 0.7);
-
-    /* Ocultar barra en Firefox */
-    scrollbar-width: none; 
-    
-    /* Ocultar barra en Internet Explorer y Edge antiguo */
-    -ms-overflow-style: none; 
-}
-/* Ocultar barra en navegadores basados en WebKit (Chrome, Safari, Opera, Brave, Edge Moderno) */
-.app-grid::-webkit-scrollbar {
-    display: none;
-    width: 0 !important;
-    height: 0 !important;
-    background: transparent;
-}
-@media (min-width: 480px) {
-    .app-grid {
-        width: 430px;
-        height: 92vh;
-        max-height: 850px;
-        border-radius: 20px;
-        border: 1px solid rgba(223, 186, 107, 0.25);
-    }
-}
-   
-
-
-/* Capa del canvas para los brillos flotantes */
-#particles-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 2;
-}
-
-/* Estructura Base de Secciones con Flexbox */
-.section-flex {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    padding: 40px 25px;
-    position: relative;
-}
-
-/* ==========================================================================
-   REDISEÑO: PORTADA HERO CINEMATOGRÁFICA
-   ========================================================================== */
-.hero-cover {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Fondo degradado satinado que transiciona hacia tonos pastel */
-    background: linear-gradient(135deg, #18281d 0%, #284130 50%, #132017 100%);
-    z-index: 20;
-    transition: var(--transition-lux);
+    text-align: center;
     padding: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden; /* Clave para que el aura no se desborde */
+    background-color: var(--md-sys-color-surface);
 }
 
-/* Grid Interno de la Portada: Evita cortes abajo y distribuye con aire */
-.hero-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr auto;
-    width: 100%;
-    height: 100%;
-    max-height: 750px; /* Evita dispersión exagerada */
-    
-    /* Efecto Glassmorphism Premium */
-    background: var(--glass-bg);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid var(--glass-border);
-    padding: 40px 20px;
-    box-shadow: inset 0 0 20px rgba(212, 175, 55, 0.05);
-}
-
-/* 1. Header Portada */
-.hero-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    animation: fadeInDown 1.2s ease;
-}
-
-.hero-tag {
-    font-size: 11px;
-    letter-spacing: 5px;
-    color: var(--gold-solido);
-    font-weight: 600;
-}
-
-.hero-line-decorator {
-    width: 40px;
-    height: 1px;
-    background: var(--gold-premium);
-}
-
-/* 2. Centro (El Nombre de Diana con Impacto) */
-.hero-middle {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    animation: fadeIn 1.8s ease;
-}
-
-.hero-subtitle {
-    font-size: 13px;
-    letter-spacing: 8px;
-    text-transform: uppercase;
-    opacity: 0.7;
-    margin-bottom: 10px;
-}
-
-.hero-title {
-    font-family: var(--font-titulos);
-    font-size: 72px; /* Más grande e imponente */
-    font-weight: 300;
-    line-height: 1;
-    background: var(--gold-premium);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 2px 10px rgba(0,0,0,0.5));
-}
-
-.hero-date {
-    font-family: var(--font-titulos);
-    font-size: 20px;
-    letter-spacing: 4px;
-    color: var(--blanco-marfil);
-    margin-top: 20px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    padding-bottom: 5px;
-}
-
-/* 3. Footer de la Portada (Botón Fijo Sin Desplazarse) */
-.hero-footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-}
-
-/* Botón Premium Totalmente Rediseñado */
-.btn-glam {
-    position: relative;
-    width: 100%;
-    max-width: 280px;
-    padding: 18px;
-    background: var(--gold-premium);
-    border: none;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    cursor: pointer;
-    overflow: hidden;
-    transition: all 0.4s ease;
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.btn-glam:hover {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 15px 35px rgba(191, 149, 63, 0.4);
-}
-
-.btn-text {
-    font-family: var(--font-cuerpo);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 4px;
-    color: var(--verde-oliva-lux);
-}
-
-.btn-shine {
+/* Aura flotante/degradado de fondo */
+.m3-hero__aura {
     position: absolute;
-    top: 0;
-    left: -100%;
-    width: 60%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
-    transform: skewX(-25deg);
-    animation: lightShine 4s infinite ease-in-out;
-}
-
-.hero-footer-note {
-    font-size: 9px;
-    letter-spacing: 2px;
-    opacity: 0.4;
-    text-transform: uppercase;
-}
-
-/* ==========================================================================
-   ESTADOS DE DISMISS (TRANSICIONES ANIMADAS)
-   ========================================================================== */
-.hero-cover.dismissed {
-    transform: translateY(-100vh);
-    opacity: 0;
-    pointer-events: none;
-}
-
-.main-content-flow {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 1s ease 0.3s, transform 1s ease 0.3s;
-    background: linear-gradient(to bottom, var(--verde-oliva-lux), var(--verde-fondo-frio));
-}
-
-.hero-cover.dismissed + .main-content-flow {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* ==========================================================================
-   ANIMACIONES CORE
-   ========================================================================== */
-@keyframes lightShine {
-    0% { left: -110%; }
-    15% { left: 120%; }
-    100% { left: 120%; }
-}
-@keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* ==========================================================================
-   SECCIONES SECUNDARIAS (AJUSTE RESPONSIVO)
-   ========================================================================== */
-.section-title {
-    font-family: var(--font-titulos);
-    font-size: 28px;
-    color: var(--gold-solido);
-    letter-spacing: 3px;
-    margin-bottom: 25px;
-    text-align: center;
-}
-
-/* Grid del Contador Regresivo Inteligente */
-.countdown-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    width: 100%;
-}
-
-.time-box {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    padding: 15px 5px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-}
-
-.time-val {
-    font-family: var(--font-titulos);
-    font-size: 28px;
-    color: var(--blanco-marfil);
-}
-
-.time-lbl {
-    font-size: 9px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    opacity: 0.6;
-}
-
-/* --- ELEMENTOS DE LAS AURAS INTERACTIVAS (CSS PURÓ) --- */
-.hero-cover::before,
-.hero-cover::after {
-    content: '';
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(60px);
-    z-index: 1;
-    pointer-events: none;
-}
-
-/* Aura Superior (Menta Pastel flotante) */
-.hero-cover::before {
     top: -10%;
     left: -10%;
-    width: 250px;
-    height: 250px;
-    background: var(--verde-bright-aura);
-    animation: floatingAuraTop 8s infinite alternate ease-in-out;
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle at center, var(--bg-aura-start) 0%, var(--bg-aura-end) 70%);
+    z-index: 1;
+    animation: floatingAura 8s ease-in-out infinite alternate;
 }
 
-/* Aura Inferior (Resplandor Esmeralda/Menta Vivo) */
-.hero-cover::after {
-    bottom: 5%;
-    right: -10%;
-    width: 300px;
-    height: 300px;
-    background: rgba(162, 196, 176, 0.2);
-    animation: floatingAuraBottom 10s infinite alternate ease-in-out;
-}
-
-/* Grid Interno de la Portada (Efecto Cristal Esmeralda) */
-.hero-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr auto;
-    width: 100%;
-    height: 100%;
-    max-height: 760px;
-    background: rgba(255, 255, 255, 0.02);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--glass-border);
-    padding: 45px 25px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), 
-                inset 0 0 30px rgba(223, 186, 107, 0.08);
-    z-index: 3; /* Por encima de las auras flotantes */
-}
-
-/* 1. Header Portada */
-.hero-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-}
-
-.hero-tag {
-    font-size: 11px;
-    letter-spacing: 6px;
-    color: var(--gold-solido);
-    font-weight: 600;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-}
-
-.hero-line-decorator {
-    width: 50px;
-    height: 1px;
-    background: var(--gold-premium);
-}
-
-/* 2. Centro (Brillo en el nombre de Diana) */
-.hero-middle {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.hero-subtitle {
-    font-size: 13px;
-    letter-spacing: 9px;
-    text-transform: uppercase;
-    color: var(--verde-menta-glam); /* Texto en tono pastel */
-    font-weight: 400;
-    margin-bottom: 8px;
-}
-
-.hero-title {
-    font-family: var(--font-titulos);
-    font-size: 76px;
-    font-weight: 300;
-    line-height: 1;
-    background: var(--gold-premium);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 4px 15px rgba(0,0,0,0.4));
-}
-
-.hero-date {
-    font-family: var(--font-titulos);
-    font-size: 22px;
-    letter-spacing: 4px;
-    color: var(--blanco-marfil);
-    margin-top: 25px;
-    border-bottom: 1px solid rgba(223, 186, 107, 0.3);
-    padding-bottom: 6px;
-}
-
-/* 3. Footer */
-.hero-footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 18px;
-}
-
-/* Ajustes a las Secciones del flujo posterior para mantener coherencia */
-.main-content-flow {
-    background: linear-gradient(to bottom, #17271b, #0f1a11);
-}
-
-.section-title {
-    color: var(--gold-solido);
-    font-weight: 400;
-}
-
-/* ==========================================================================
-   ANIMACIONES DE LAS AURAS FLOTANTES
-   ========================================================================== */
-@keyframes floatingAuraTop {
-    0% {
-        transform: translate(0, 0) scale(1);
-        background: rgba(142, 196, 160, 0.2);
-    }
-    50% {
-        transform: translate(30px, 40px) scale(1.2);
-        background: rgba(162, 210, 181, 0.3);
-    }
-    100% {
-        transform: translate(-20px, 20px) scale(0.9);
-        background: rgba(114, 150, 126, 0.25);
-    }
-}
-
-@keyframes floatingAuraBottom {
-    0% {
-        transform: translate(0, 0) scale(1);
-    }
-    50% {
-        transform: translate(-40px, -30px) scale(1.3);
-        background: rgba(142, 196, 160, 0.25);
-    }
-    100% {
-        transform: translate(20px, -50px) scale(1);
-    }
-}
-
-
-
-
-/* --- CAPA DE PARTÍCULAS DORADAS (GLITTER) --- */
-.particula-oro {
-    position: absolute;
-    background: radial-gradient(circle, #f5dfb3 0%, rgba(197, 160, 89, 0) 70%);
-    border-radius: 50%;
-    pointer-events: none; /* No estorban los clics en la pantalla */
+.m3-hero__content {
+    position: relative;
     z-index: 2;
-    opacity: 0;
-    animation: flotarParticula linear infinite;
+    display: flex;
+    flex-direction: column;
+    gap: 24px; /* Espaciado estándar M3 */
+    max-width: 600px;
+    align-items: center;
 }
 
-/* --- NUEVAS ANIMACIONES SPECTACULARES --- */
-
-/* Hace que el sobre parezca flotar suavemente y que su luz respire */
-@keyframes auraFlotante {
-    0% {
-      /*  transform: translateY(0);
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(197, 160, 89, 0.15);*/
-           }
-    100% {
-        transform: translateY(-12px); /* Flota un poco hacia arriba */
-        box-shadow: 0 25px 55px rgba(0, 0, 0, 0.6), 0 0 50px rgba(197, 160, 89, 0.35); /* El brillo se expande */
-    }
+@keyframes floatingAura {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(2%, 4%) scale(1.05); }
 }
 
-/* Mueve las partículas de oro desde abajo hacia arriba desapareciendo suavemente */
-@keyframes flotarParticula {
-    0% {
-        transform: translateY(105vh) scale(0.5);
-        opacity: 0;
-    }
-    10% {
-        opacity: 0.7;
-    }
-    90% {
-        opacity: 0.7;
-    }
-    100% {
-        transform: translateY(-5vh) scale(1.2);
+/* ==========================================
+   COMPONENTE: BOTÓN M3 CON RIPPLE
+   ========================================== */
+.m3-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 24px;
+    border: none;
+    outline: none;
+    font-family: var(--md-ref-typeface-plain);
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.1px;
+    border-radius: var(--md-sys-shape-corner-full);
+    cursor: pointer;
+    overflow: hidden;
+    transition: box-shadow 0.2s ease, background-color 0.2s ease;
+    box-shadow: 0px 1px 3px rgba(0,0,0,0.1), 0px 1px 2px rgba(0,0,0,0.06);
+}
+
+.m3-btn--filled {
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+}
+
+/* Estados M3 (Hover y Focus State Layer) */
+.m3-btn--filled:hover {
+    background-color: rgb(minimum-black-level); /* Simulación de overlay M3 */
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.15), 0px 1px 3px rgba(0,0,0,0.1);
+    background-image: linear-gradient(rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08));
+}
+
+.m3-btn__icon {
+    font-size: 18px !important;
+}
+
+/* Efecto Onda (Ripple) */
+.m3-ripple {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.35);
+    transform: scale(0);
+    animation: ripple-effect 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple-effect {
+    to {
+        transform: scale(4);
         opacity: 0;
     }
 }
