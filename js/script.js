@@ -138,29 +138,26 @@ function inicializarInvitacion() {
         ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
         this.appendChild(ripple);
 
-      setTimeout(() => {
-            // 1. Animamos la salida de la portada
+        setTimeout(() => {
+            // 1. Desvanecer la portada de inicio de forma fluida
             heroSection.style.opacity = "0";
             heroSection.style.transform = "scale(1.02)";
             heroSection.style.transition = "opacity 0.4s ease, transform 0.4s ease";
 
             setTimeout(() => {
-                // 2. Ocultamos la portada por completo para limpiar la pantalla
+                // 2. Ocultamos por completo la pantalla de inicio
                 heroSection.style.display = "none";
 
-                // 3. Activamos el contenedor del sobre cambiando el display antes de animar opacidad
+                // 3. Activamos el contenedor del contenido premium
                 envelopeSection.style.display = "flex"; 
                 envelopeSection.classList.remove("m3-hidden");
                 
-                // Forzar Reflow
+                // Forzar Reflow del navegador
                 void envelopeSection.offsetWidth; 
                 
-                // 4. Mostramos el sobre elegantemente
+                // 4. Mostramos la tarjeta y disparamos las animaciones escalonadas
                 envelopeSection.style.opacity = "1";
-
-                setTimeout(() => {
-                    envelope.classList.add("is-open");
-                }, 400);
+                envelopeSection.classList.add("is-active");
 
             }, 400);
         }, 350);
