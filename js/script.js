@@ -143,7 +143,6 @@ document.addEventListener("DOMContentLoaded", () => {
            ---------------------------------------------------------------------- */
         if (btnOpen) {
             btnOpen.addEventListener("click", function (e) {
-                // Animación nativa de ondas M3 (Ripple) al hacer clic
                 const oldRipple = this.querySelector(".m3-ripple-active");
                 if (oldRipple) oldRipple.remove();
 
@@ -156,27 +155,25 @@ document.addEventListener("DOMContentLoaded", () => {
                 ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
                 this.appendChild(ripple);
 
-                // Secuencia coordinada de desvanecimiento entre pantallas
                 setTimeout(() => {
-                    // Desvanece la portada suavemente hacia adelante
                     heroSection.style.opacity = "0";
                     heroSection.style.transform = "scale(1.02)";
                     heroSection.style.transition = "opacity 0.4s ease, transform 0.4s ease";
 
                     setTimeout(() => {
-                        // Corta la existencia de la portada para liberar recursos del navegador
                         heroSection.style.display = "none";
 
-                        // Monta el contenedor de la tarjeta interna en formato Flex
-                        envelopeSection.style.display = "flex"; 
-                        envelopeSection.classList.remove("m3-hidden");
-                        
-                        // Forzar Reflow (Garantiza que la transición CSS se renderice limpia)
-                        void envelopeSection.offsetWidth; 
-                        
-                        // Enciende la opacidad y activa el scroll nativo de la invitación
-                        envelopeSection.style.opacity = "1";
-                        envelopeSection.classList.add("is-active");
+                        // Buscamos directamente la sección inyectada
+                        const targetSection = document.getElementById("envelope-section");
+                        if (targetSection) {
+                            targetSection.style.display = "flex"; 
+                            targetSection.classList.remove("m3-hidden");
+                            
+                            void targetSection.offsetWidth; 
+                            
+                            targetSection.style.opacity = "1";
+                            targetSection.classList.add("is-active");
+                        }
 
                     }, 400);
                 }, 350);
