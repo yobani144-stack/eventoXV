@@ -291,7 +291,7 @@ body {
 /* ==========================================================================
    FASE 2: SECCIÓN DE CONTENIDO PREMIUM (PROPORCIONES DE GALA SIN SOBRE)
    ========================================================================== */
-.m3-envelope-section {
+.m3-content-section {
     position: absolute;
     top: 0;
     left: 0;
@@ -301,7 +301,7 @@ body {
     display: none; /* Controlado limpiamente por JS */
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    align-items: center; /* Esto centra horizontalmente en PC */
     padding: 60px 16px;
     z-index: 20;
     opacity: 0;
@@ -316,7 +316,7 @@ body {
 /* TARJETA PRINCIPAL DE CONTENIDO (M3 Elevated Card Layout) */
 .m3-main-card {
     width: 100%;
-    max-width: 440px; /* Ancho profesional ideal y responsivo para PC y móvil */
+    max-width: 440px; /* Ancho profesional ideal. No se moverá a la izquierda en PC */
     background-color: var(--md-sys-color-surface);
     border-radius: var(--md-sys-shape-corner-large);
     padding: 44px 24px;
@@ -327,10 +327,10 @@ body {
     box-shadow: 0px 20px 50px rgba(0, 0, 0, 0.5);
     transform: translateY(30px);
     transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    margin: 0 auto; /* Refuerza el centrado absoluto en pantallas de escritorio */
 }
-
 /* Entrada animada al activarse */
-.m3-envelope-section.is-active .m3-main-card {
+.m3-content-section.is-active .m3-main-card {
     transform: translateY(0);
 }
 
