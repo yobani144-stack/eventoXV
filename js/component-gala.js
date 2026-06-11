@@ -1,22 +1,21 @@
 class InvitacionGala extends HTMLElement {
-    connectedCallback() {
-        // Inyectamos el HTML de la invitación abierta (Foto y Contador)
+   connectedCallback() {
         this.innerHTML = `
             <section class="m3-content-section">
-                <div class="m3-main-card">
-                    <div class="m3-card-section m3-card-header">
-                        <span class="material-symbols-outlined m3-inner-card__icon">celebration</span>
+                <div class="m3-hero-bg-wrapper">
+                    <div class="m3-hero-bg-image" style="background-image: url('https://picsum.photos/1080/1920');"></div>
+                    <div class="m3-hero-bg-overlay"></div>
+                </div>
+
+                <div class="m3-gala-container">
+                    
+                    <div class="m3-card-section m3-gala-header">
+                        <span class="material-symbols-outlined m3-gala__icon">celebration</span>
                         <h2 class="m3-typography--title-large">¡Estás Invitado!</h2>
-                        <p class="m3-typography--body-medium">Acompáñanos a celebrar nuestra historia de amor.</p>
+                        <p class="m3-typography--body-medium">Acompáñanos a celebrar nuestra historia de amor</p>
                     </div>
 
-                    <div class="m3-card-section m3-card-photo-wrapper">
-                        <div class="m3-card-photo" style="background-image: url('https://picsum.photos/900/1200');">
-                            <div class="m3-card-photo__overlay"></div>
-                        </div>
-                    </div>
-
-                    <div class="m3-card-section m3-countdown">
+                    <div class="m3-card-section m3-gala-countdown">
                         <p class="m3-countdown__title">FALTAN SÓLO:</p>
                         <div class="m3-countdown__grid">
                             <div class="m3-countdown__box">
@@ -25,7 +24,7 @@ class InvitacionGala extends HTMLElement {
                             </div>
                             <div class="m3-countdown__box">
                                 <span class="m3-countdown__number" id="timer-hours">00</span>
-                                <span class="m3-countdown__label">Horas</span>
+                                <span class="m3-countdown__label">Hrs</span>
                             </div>
                             <div class="m3-countdown__box">
                                 <span class="m3-countdown__number" id="timer-minutes">00</span>
@@ -42,6 +41,7 @@ class InvitacionGala extends HTMLElement {
                         <span class="material-symbols-outlined">keyboard_double_arrow_down</span>
                         <p class="m3-typography--label-small">Desliza para ver detalles</p>
                     </div>
+
                 </div>
             </section>
         `;
