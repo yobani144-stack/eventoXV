@@ -51,62 +51,237 @@ body { font-family: var(--md-ref-typeface-plain); background-color: var(--md-sys
 /* ==========================================================================
    SECCIÓN DE INVITACIÓN ABIERTA (TARJETA CENTRADA DE GALA)
    ========================================================================== */
+/* ==========================================================================
+   FASE 2: SECCIÓN DE CONTENIDO PREMIUM (RESPONSIVO REAL: PC & MÓVIL)
+   ========================================================================== */
+
+/* Contenedor principal de la invitación abierta */
 .m3-content-section {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     min-height: 100vh;
     background: radial-gradient(circle at center, #211730 0%, var(--md-sys-color-surface-container) 100%);
-    display: flex;
+    display: none; /* Controlado por JS */
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 60px 16px;
+    justify-content: center; /* Centrado vertical riguroso */
+    align-items: center;     /* Centrado horizontal riguroso */
+    padding: 16px;
+    z-index: 20;
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease-in-out, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: opacity 0.6s ease-in-out;
 }
 
-/* Manejo de estados mediante el ancestro Custom Element */
-invitacion-gala.is-active .m3-content-section {
-    opacity: 1;
-    transform: translateY(0);
+.m3-content-section.is-active {
+    display: flex;
 }
 
+/* ==========================================================================
+   DISEÑO PARA DISPOSITIVOS MÓVILES (AJUSTE PERFECTO EN UNA PANTALLA)
+   ========================================================================== */
 .m3-main-card {
     width: 100%;
-    max-width: 440px;
+    max-width: 400px;
+    height: 90vh; /* Ocupa el 90% del alto de la pantalla móvil */
+    max-height: 680px; /* Evita que crezca de más en pantallas gigantes */
     background-color: var(--md-sys-color-surface);
     border-radius: var(--md-sys-shape-corner-large);
-    padding: 44px 24px;
+    padding: 24px 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 40px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-    margin: 0 auto;
+    justify-content: space-between; /* Distribuye el contenido para eliminar scroll */
+    box-shadow: 0px 20px 50px rgba(0, 0, 0, 0.5);
+    margin: auto;
+    overflow: hidden; /* Garantiza que nada se desborde */
 }
 
-/* Animaciones del Contenido */
-.m3-card-section { width: 100%; opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
-invitacion-gala.is-active .m3-card-section { opacity: 1; transform: translateY(0); }
-invitacion-gala.is-active .m3-card-header { transition-delay: 0.2s; }
-invitacion-gala.is-active .m3-card-photo-wrapper { transition-delay: 0.4s; }
-invitacion-gala.is-active .m3-countdown { transition-delay: 0.6s; }
+/* Encabezado en móvil */
+.m3-card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+.m3-inner-card__icon {
+    color: var(--md-color-gold-accent);
+    font-size: 28px !important;
+}
 
-/* FOTO PORTADA VERTICAL */
-.m3-card-photo-wrapper { width: 100%; max-width: 300px; padding: 6px; background: linear-gradient(135deg, rgba(208, 188, 255, 0.4), rgba(243, 202, 101, 0.4)); border-radius: 24px; box-shadow: 0 12px 24px rgba(0,0,0,0.4); }
-.m3-card-photo { width: 100%; aspect-ratio: 3 / 4; background-size: cover; background-position: center; border-radius: 18px; position: relative; }
-.m3-card-photo__overlay { position: absolute; width: 100%; height: 100%; top: 0; left: 0; background: linear-gradient(to bottom, transparent 60%, rgba(35, 27, 46, 0.5)); border-radius: 18px; }
-.m3-inner-card__icon { color: var(--md-color-gold-accent); font-size: 36px !important; margin-bottom: 8px; }
+/* Reducción controlada de la foto para que quepa en el alto del celular */
+.m3-card-photo-wrapper {
+    width: 100%;
+    max-width: 200px; /* Tamaño optimizado para pantallas verticales */
+    padding: 4px;
+    background: linear-gradient(135deg, rgba(208, 188, 255, 0.4), rgba(243, 202, 101, 0.4));
+    border-radius: 20px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
+}
+.m3-card-photo {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background-size: cover;
+    background-position: center;
+    border-radius: 16px;
+    position: relative;
+}
+.m3-card-photo__overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: linear-gradient(to bottom, transparent 60%, rgba(35, 27, 46, 0.5));
+    border-radius: 16px;
+}
 
-/* CONTADOR REGRESIVO */
-.m3-countdown { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 16px; }
-.m3-countdown__title { font-size: 0.8rem; font-weight: 700; letter-spacing: 3px; color: var(--md-sys-color-primary); }
-.m3-countdown__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; width: 100%; max-width: 340px; }
-.m3-countdown__box { background-color: #2b2137; border: 1px solid rgba(208, 188, 255, 0.08); border-radius: 14px; padding: 14px 2px; display: flex; flex-direction: column; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-.m3-countdown__number { font-size: 1.6rem; font-weight: 700; color: var(--md-color-gold-accent); }
-.m3-countdown__label { font-size: 0.6rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; color: var(--md-sys-color-on-surface-variant); }
+/* Bloque del contador en móvil */
+.m3-countdown {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+.m3-countdown__title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--md-sys-color-primary);
+}
+.m3-countdown__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    width: 100%;
+    max-width: 280px;
+}
+.m3-countdown__box {
+    background-color: #2b2137;
+    border: 1px solid rgba(208, 188, 255, 0.06);
+    border-radius: 12px;
+    padding: 8px 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+}
+.m3-countdown__number {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--md-color-gold-accent);
+}
+.m3-countdown__label {
+    font-size: 0.55rem;
+    color: var(--md-sys-color-on-surface-variant);
+}
 
-/* Indicador de Scroll */
-.m3-scroll-indicator { color: var(--md-sys-color-primary); opacity: 0.8; display: flex; flex-direction: column; align-items: center; gap: 4px; animation: bounceIndicator 1.5s infinite; }
-@keyframes bounceIndicator { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
-.material-symbols-outlined { font-family: 'Material Symbols Outlined' !important; font-weight: normal; font-style: normal; font-size: 24px; line-height: 1; display: inline-block; -webkit-font-smoothing: antialiased; }
+/* Indicador de scroll inferior */
+.m3-scroll-indicator {
+    color: var(--md-sys-color-primary);
+    opacity: 0.7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+/* Animaciones de entrada de bloques */
+.m3-card-section {
+    width: 100%;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.m3-content-section.is-active .m3-card-section { opacity: 1; transform: translateY(0); }
+.m3-content-section.is-active .m3-card-header { transition-delay: 0.15s; }
+.m3-content-section.is-active .m3-card-photo-wrapper { transition-delay: 0.3s; }
+.m3-content-section.is-active .m3-countdown { transition-delay: 0.45s; }
+
+
+/* ==========================================================================
+   PANTALLAS GRANDES: DISEÑO DE GALA PREMIUM PARA PC (DOPÌE COLUMNA)
+   ========================================================================== */
+@media (min-width: 850px) {
+    /* Permitimos que la sección respire y tenga scroll normal hacia abajo para futuras secciones */
+    .m3-content-section {
+        justify-content: flex-start;
+        padding: 80px 40px;
+    }
+    
+    .m3-content-section.is-active {
+        overflow-y: auto;
+    }
+
+    /* Transformación de la tarjeta en un lienzo panorámico de dos columnas */
+    .m3-main-card {
+        max-width: 850px; /* Ancho extendido espectacular */
+        height: auto;
+        max-height: none;
+        padding: 50px;
+        display: grid;
+        grid-template-columns: 1.1fr 1fr; /* Columna izquierda para foto, derecha para textos */
+        grid-template-areas: 
+            "photo header"
+            "photo countdown"
+            "photo indicator";
+        align-items: center;
+        gap: 48px;
+        overflow: visible;
+    }
+
+    /* Posicionamiento de las secciones en la rejilla de la PC */
+    .m3-card-photo-wrapper {
+        grid-area: photo;
+        max-width: 100%; /* Toma todo el ancho de su columna */
+        padding: 8px;
+        border-radius: 28px;
+    }
+    
+    .m3-card-photo {
+        aspect-ratio: 3 / 4; /* Proporción de retrato majestuosa */
+        border-radius: 22px;
+    }
+
+    .m3-card-header {
+        grid-area: header;
+        align-items: flex-start; /* Alineación del texto a la izquierda como revista */
+        text-align: left;
+    }
+    
+    .m3-inner-card__icon {
+        align-self: flex-start;
+        font-size: 40px !important;
+    }
+
+    .m3-countdown {
+        grid-area: countdown;
+        align-items: flex-start;
+    }
+
+    .m3-countdown__grid {
+        max-width: 100%; /* Agranda las cajas del contador en PC */
+        gap: 12px;
+    }
+
+    .m3-countdown__box {
+        padding: 18px 4px;
+        border-radius: 16px;
+    }
+
+    .m3-countdown__number {
+        font-size: 2rem; /* Números más grandes e imponentes en monitor */
+    }
+
+    .m3-countdown__label {
+        font-size: 0.65rem;
+        letter-spacing: 1px;
+    }
+
+    .m3-scroll-indicator {
+        grid-area: indicator;
+        align-items: flex-start;
+        margin-top: 0;
+    }
+}
