@@ -1,0 +1,112 @@
+/* ==========================================================================
+   CONFIGURACIÓN TOKENS MATERIAL DESIGN 3
+   ========================================================================== */
+:root {
+    --md-sys-color-primary: #D0BCFF;
+    --md-sys-color-on-primary: #381E72;
+    --md-sys-color-surface: #231B2E;
+    --md-sys-color-surface-container: #140E1B;
+    --md-sys-color-on-surface: #E6E1E9;
+    --md-sys-color-on-surface-variant: #CAC4D0;
+    --md-color-gold-accent: #F3CA65;
+    --md-ref-typeface-brand: 'Alex Brush', cursive;
+    --md-ref-typeface-serif: 'Playfair Display', serif;
+    --md-ref-typeface-plain: 'Roboto', sans-serif;
+    --md-sys-shape-corner-large: 28px;
+    --md-sys-shape-corner-full: 999px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+body { font-family: var(--md-ref-typeface-plain); background-color: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface); min-height: 100vh; }
+.m3-hidden { display: none !important; opacity: 0 !important; }
+
+/* TIPOGRAFÍAS */
+.m3-typography--display-large { font-family: var(--md-ref-typeface-brand); font-size: 4rem; line-height: 1.1; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+.m3-typography--headline-medium { font-size: 1.15rem; letter-spacing: 2px; color: var(--md-sys-color-on-surface-variant); }
+.m3-typography--label-large { font-size: 0.85rem; font-weight: 700; letter-spacing: 4px; color: var(--md-sys-color-primary); }
+.m3-typography--title-large { font-family: var(--md-ref-typeface-serif); font-size: 1.6rem; color: var(--md-sys-color-primary); font-weight: 600; }
+.m3-typography--body-medium { font-size: 0.95rem; color: var(--md-sys-color-on-surface-variant); line-height: 1.5; }
+.m3-ampersand { font-family: var(--md-ref-typeface-serif); font-size: 2.6rem; font-style: italic; color: var(--md-color-gold-accent); vertical-align: middle; }
+
+/* COMPONENTE PORTADA (HERO) */
+.m3-hero { position: relative; width: 100%; height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; overflow: hidden; z-index: 5; }
+.m3-hero__pattern { position: absolute; width: 100%; height: 100%; top: 0; left: 0; opacity: 0.15; background-image: radial-gradient(var(--md-sys-color-primary) 1px, transparent 0); background-size: 32px 32px; }
+.m3-card-3d-wrapper { perspective: 1000px; width: 100%; display: flex; justify-content: center; align-items: center; z-index: 2; }
+.m3-card { position: relative; width: 100%; max-width: 350px; background-color: var(--md-sys-color-surface); border-radius: var(--md-sys-shape-corner-large); padding: 6px; box-shadow: 0 12px 30px rgba(0,0,0,0.5); transform-style: preserve-3d; transition: transform 0.15s ease-out; }
+.m3-card__border-line { position: absolute; top: 12px; left: 12px; right: 12px; bottom: 12px; border: 1px solid rgba(208, 188, 255, 0.12); border-radius: calc(var(--md-sys-shape-corner-large) - 6px); }
+.m3-card__content { padding: 44px 24px; display: flex; flex-direction: column; align-items: center; gap: 32px; }
+
+/* BOTÓN M3 */
+.m3-btn { position: relative; display: inline-flex; align-items: center; gap: 12px; height: 48px; padding: 0 28px; border: none; font-family: var(--md-ref-typeface-plain); font-size: 0.95rem; font-weight: 700; border-radius: var(--md-sys-shape-corner-full); cursor: pointer; overflow: hidden; background-color: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary); box-shadow: 0 4px 12px rgba(208, 188, 255, 0.25); }
+.m3-btn__glint { position: absolute; top: 0; left: -150%; width: 50%; height: 100%; background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.4), rgba(255,255,255,0)); transform: skewX(-25deg); animation: buttonGlint 4s infinite ease-in-out; }
+@keyframes buttonGlint { 0% { left: -150%; } 15% { left: 150%; } 100% { left: 150%; } }
+.m3-ripple { position: absolute; border-radius: 50%; background-color: rgba(255, 255, 255, 0.35); transform: scale(0); animation: ripple-effect 0.5s ease-out; pointer-events: none; }
+@keyframes ripple-effect { to { transform: scale(4); opacity: 0; } }
+
+/* PARTÍCULAS */
+.m3-particles { position: absolute; width: 100%; height: 100%; top: 0; left: 0; pointer-events: none; }
+.m3-particle { position: absolute; border-radius: 50%; bottom: -30px; animation: floatUp linear infinite; filter: blur(1px); box-shadow: 0 0 8px currentColor; }
+@keyframes floatUp { 0% { transform: translateY(0) scale(0.3); opacity: 0; } 15% { opacity: 0.7; } 85% { opacity: 0.7; } 100% { transform: translateY(-110vh) translateX(60px) scale(1.5); opacity: 0; } }
+
+/* ==========================================================================
+   SECCIÓN DE INVITACIÓN ABIERTA (TARJETA CENTRADA DE GALA)
+   ========================================================================== */
+.m3-content-section {
+    width: 100%;
+    min-height: 100vh;
+    background: radial-gradient(circle at center, #211730 0%, var(--md-sys-color-surface-container) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 60px 16px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-in-out, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Manejo de estados mediante el ancestro Custom Element */
+invitacion-gala.is-active .m3-content-section {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.m3-main-card {
+    width: 100%;
+    max-width: 440px;
+    background-color: var(--md-sys-color-surface);
+    border-radius: var(--md-sys-shape-corner-large);
+    padding: 44px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
+}
+
+/* Animaciones del Contenido */
+.m3-card-section { width: 100%; opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+invitacion-gala.is-active .m3-card-section { opacity: 1; transform: translateY(0); }
+invitacion-gala.is-active .m3-card-header { transition-delay: 0.2s; }
+invitacion-gala.is-active .m3-card-photo-wrapper { transition-delay: 0.4s; }
+invitacion-gala.is-active .m3-countdown { transition-delay: 0.6s; }
+
+/* FOTO PORTADA VERTICAL */
+.m3-card-photo-wrapper { width: 100%; max-width: 300px; padding: 6px; background: linear-gradient(135deg, rgba(208, 188, 255, 0.4), rgba(243, 202, 101, 0.4)); border-radius: 24px; box-shadow: 0 12px 24px rgba(0,0,0,0.4); }
+.m3-card-photo { width: 100%; aspect-ratio: 3 / 4; background-size: cover; background-position: center; border-radius: 18px; position: relative; }
+.m3-card-photo__overlay { position: absolute; width: 100%; height: 100%; top: 0; left: 0; background: linear-gradient(to bottom, transparent 60%, rgba(35, 27, 46, 0.5)); border-radius: 18px; }
+.m3-inner-card__icon { color: var(--md-color-gold-accent); font-size: 36px !important; margin-bottom: 8px; }
+
+/* CONTADOR REGRESIVO */
+.m3-countdown { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.m3-countdown__title { font-size: 0.8rem; font-weight: 700; letter-spacing: 3px; color: var(--md-sys-color-primary); }
+.m3-countdown__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; width: 100%; max-width: 340px; }
+.m3-countdown__box { background-color: #2b2137; border: 1px solid rgba(208, 188, 255, 0.08); border-radius: 14px; padding: 14px 2px; display: flex; flex-direction: column; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+.m3-countdown__number { font-size: 1.6rem; font-weight: 700; color: var(--md-color-gold-accent); }
+.m3-countdown__label { font-size: 0.6rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; color: var(--md-sys-color-on-surface-variant); }
+
+/* Indicador de Scroll */
+.m3-scroll-indicator { color: var(--md-sys-color-primary); opacity: 0.8; display: flex; flex-direction: column; align-items: center; gap: 4px; animation: bounceIndicator 1.5s infinite; }
+@keyframes bounceIndicator { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+.material-symbols-outlined { font-family: 'Material Symbols Outlined' !important; font-weight: normal; font-style: normal; font-size: 24px; line-height: 1; display: inline-block; -webkit-font-smoothing: antialiased; }
