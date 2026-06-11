@@ -21,7 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
     function inicializarInvitacion() {
         const btnOpen = document.getElementById("btn-open-invitation");
         const heroSection = document.getElementById("hero-section");
-        const envelopeSection = document.getElementById("envelope-section");
         const cardWrapper = document.getElementById("card-wrapper");
         const mainCard = document.getElementById("main-card");
         const particlesContainer = document.getElementById("particles-container");
@@ -30,38 +29,33 @@ document.addEventListener("DOMContentLoaded", () => {
         const targetDate = new Date("December 12, 2026 18:00:00").getTime();
 
         /* ----------------------------------------------------------------------
-           A. SISTEMA DE CUENTA REGRESIVA
+           A. SISTEMA DE CUENTA REGRESIVA (Blindado)
            ---------------------------------------------------------------------- */
         const updateCountdown = () => {
             const now = new Date().getTime();
             const difference = targetDate - now;
 
-            // Si la fecha ya llegó o pasó, detenemos el reloj
             if (difference < 0) {
                 clearInterval(countdownInterval);
                 return;
             }
 
-            // Cálculos matemáticos de conversión de tiempo
             const days = Math.floor(difference / (1000 * 60 * 60 * 24));
             const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-            // Captura de elementos en el DOM
             const dDays = document.getElementById("timer-days");
             const dHours = document.getElementById("timer-hours");
             const dMins = document.getElementById("timer-minutes");
             const dSecs = document.getElementById("timer-seconds");
 
-            // Formateo e inyección con dos dígitos fijos (ej: 09 en lugar de 9)
             if (dDays) dDays.innerText = days < 10 ? "0" + days : days;
             if (dHours) dHours.innerText = hours < 10 ? "0" + hours : hours;
             if (dMins) dMins.innerText = minutes < 10 ? "0" + minutes : minutes;
             if (dSecs) dSecs.innerText = seconds < 10 ? "0" + seconds : seconds;
         };
         
-        // Ejecución inmediata inicial y arranque del intervalo por segundo
         updateCountdown();
         const countdownInterval = setInterval(updateCountdown, 1000);
 
@@ -70,14 +64,14 @@ document.addEventListener("DOMContentLoaded", () => {
            ---------------------------------------------------------------------- */
         const createParticles = () => {
             if (!particlesContainer) return;
-            const particleCount = 20; // Cantidad óptima de rendimiento
-            const colors = ['#FFFFFF', '#D0BCFF', '#F3CA65']; // Blanco, lila y oro
+            const particleCount = 20;
+            const colors = ['#FFFFFF', '#D0BCFF', '#F3CA65'];
 
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement("div");
                 particle.classList.add("m3-particle");
                 
-                const size = Math.random() * 8 + 4; // Tamaños variados finos
+                const size = Math.random() * 8 + 4;
                 const randomColor = colors[Math.floor(Math.random() * colors.length)];
                 
                 particle.style.width = `${size}px`;
@@ -86,7 +80,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 particle.style.color = randomColor;
                 particle.style.backgroundColor = randomColor;
                 
-                // Duración y retrasos aleatorios para flujo natural orgánico
                 particle.style.animationDuration = `${Math.random() * 7 + 6}s`;
                 particle.style.animationDelay = `${Math.random() * 6}s`;
                 
@@ -96,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
         createParticles();
 
         /* ----------------------------------------------------------------------
-           C. EFECTO PARALLAX 3D TÁCTIL Y DE MOUSE (PORTADA)
+           C. EFECTO PARALLAX 3D PROTEGIDO (Evita el TypeError de la consola)
            ---------------------------------------------------------------------- */
         const handleMove = (clientX, clientY) => {
             if (!cardWrapper || !mainCard) return;
@@ -104,15 +97,13 @@ document.addEventListener("DOMContentLoaded", () => {
             const cardCenterX = rect.left + rect.width / 2;
             const cardCenterY = rect.top + rect.height / 2;
             
-            // Distancia del cursor o dedo relativa al centro de la tarjeta (-1 a 1)
             const angleX = (clientX - cardCenterX) / (rect.width / 2);
             const angleY = (clientY - cardCenterY) / (rect.height / 2);
             
-            const maxRotation = 12; // Grados máximos sugeridos por M3
+            const maxRotation = 12;
             const rotateY = (angleX * maxRotation).toFixed(2);
             const rotateX = (-angleY * maxRotation).toFixed(2);
             
-            // Rotación física y proyección de sombras inversas
             mainCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
             mainCard.style.boxShadow = `
                 ${-rotateY * 1.5}px ${rotateX * 1.5}px 16px 3px rgba(0, 0, 0, 0.5), 
@@ -120,16 +111,14 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
         };
 
-        // Eventos para computadoras (Mouse)
-        if (cardWrapper) {
+        // EVALUACIÓN ESTRICTA: Solo añade listeners si cardWrapper existe físicamente
+        if (cardWrapper && mainCard) {
             cardWrapper.addEventListener("mousemove", (e) => handleMove(e.clientX, e.clientY));
             cardWrapper.addEventListener("mouseleave", () => {
-                // Restablecer tarjeta a su estado plano original de forma limpia
                 mainCard.style.transform = `rotateX(0deg) rotateY(0deg)`;
                 mainCard.style.boxShadow = `0px 12px 30px 4px rgba(0, 0, 0, 0.5), 0px 4px 10px 0px rgba(0, 0, 0, 0.3)`;
             });
 
-            // Eventos para dispositivos móviles (Touch)
             cardWrapper.addEventListener("touchmove", (e) => {
                 if (e.touches.length > 0) handleMove(e.touches[0].clientX, e.touches[0].clientY);
             });
@@ -139,9 +128,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         /* ----------------------------------------------------------------------
-           D. TRANSICIÓN FLUIDA AL CONTENIDO DE GALA
+           D. TRANSICIÓN FLUIDA AL CONTENIDO DE GALA (CORREGIDA)
            ---------------------------------------------------------------------- */
-        if (btnOpen) {
+        if (btnOpen && heroSection) {
             btnOpen.addEventListener("click", function (e) {
                 const oldRipple = this.querySelector(".m3-ripple-active");
                 if (oldRipple) oldRipple.remove();
@@ -163,16 +152,18 @@ document.addEventListener("DOMContentLoaded", () => {
                     setTimeout(() => {
                         heroSection.style.display = "none";
 
-                        // Buscamos directamente la sección inyectada
+                        // Buscamos dinámicamente la sección premium inyectada
                         const targetSection = document.getElementById("envelope-section");
                         if (targetSection) {
                             targetSection.style.display = "flex"; 
                             targetSection.classList.remove("m3-hidden");
                             
-                            void targetSection.offsetWidth; 
+                            void targetSection.offsetWidth; // Forzar reflow del DOM
                             
                             targetSection.style.opacity = "1";
                             targetSection.classList.add("is-active");
+                        } else {
+                            console.warn("Advertencia: No se encontró '#envelope-section' en el documento.");
                         }
 
                     }, 400);
