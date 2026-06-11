@@ -1,18 +1,15 @@
-import './component-hero.js';
-import './component-gala.js';
-
 document.addEventListener("DOMContentLoaded", () => {
-    // Escuchamos el clic cuando el componente Hero ya se inyectó en el DOM
+    // Monitoreamos la existencia del botón una vez que los Custom Elements inyecten su HTML
     const checkBtnInterval = setInterval(() => {
         const btnOpen = document.getElementById("btn-open-invitation");
         const heroSection = document.getElementById("hero-section");
         const galaSection = document.getElementById("gala-section");
 
-        if (btnOpen) {
-            clearInterval(checkBtnInterval); // Detenemos la búsqueda
+        if (btnOpen && heroSection && galaSection) {
+            clearInterval(checkBtnInterval); // Detenemos el reloj de búsqueda
 
             btnOpen.addEventListener("click", (e) => {
-                // Efecto onda M3
+                // Efecto de onda Material Design 3 (Ripple)
                 const ripple = document.createElement("span");
                 ripple.classList.add("m3-ripple");
                 const rect = btnOpen.getBoundingClientRect();
@@ -22,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
                 btnOpen.appendChild(ripple);
 
-                // Transición fluida de salida/entrada
+                // Secuencia fluida de transición entre pantallas
                 setTimeout(() => {
                     heroSection.style.opacity = "0";
                     heroSection.style.transform = "scale(1.02)";
@@ -32,8 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         heroSection.style.display = "none";
                         
                         galaSection.classList.remove("m3-hidden");
-                        // Forzar lectura del DOM para asegurar la animación
-                        void galaSection.offsetWidth; 
+                        void galaSection.offsetWidth; // Forzar reflow del DOM para renderizar CSS
                         
                         galaSection.classList.add("is-active");
                     }, 400);
