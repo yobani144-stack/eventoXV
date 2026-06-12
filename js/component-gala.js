@@ -5,7 +5,7 @@ class InvitacionGala extends HTMLElement {
                 <div class="m3-hero-bg-wrapper">
                  <!-- <div class="m3-hero-bg-image" style="background-image: url('https://picsum.photos/1080/1920');"></div> -->
                   <div class="m3-hero-bg-image" style="background-image: url('img/novios11.jpeg');"></div> 
-                   <img src="img/momentos1.jpeg" alt="Momento 1">
+                  
                     <div class="m3-hero-bg-overlay"></div>
                 </div>
 
