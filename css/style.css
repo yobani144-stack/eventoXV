@@ -44,7 +44,7 @@ body {
 }
 
 /* ==========================================================================
-   CONTROL DE COMPONENTES WEB (COMPORTAMIENTO NATIVO DE CAPAS)
+   CONTROL DE COMPONENTES WEB (CORREGIDO PARA EVITAR EL APAGÓN)
    ========================================================================== */
 invitacion-hero {
     display: block;
@@ -54,27 +54,24 @@ invitacion-hero {
     transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
+/* Forzamos a que el componente gala responda correctamente a las clases */
 invitacion-gala {
-    position: absolute;
-    top: 0;
-    left: 0;
+    display: none !important; /* Oculto por defecto absoluta */
     width: 100%;
-    min-height: 100vh;
-    display: none; /* Oculto por defecto */
+    min-height: 100dvh;
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease-in-out, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: opacity 0.6s ease-in-out;
 }
 
-/* Clases de activación manejadas por tu main.js */
-.m3-hidden {
-    display: none !important;
-}
-
+/* Cuando JS le agrega 'is-active', rompemos el 'none' de arriba */
 invitacion-gala.is-active {
     display: flex !important;
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1 !important;
+}
+
+/* Clases de utilidad genéricas */
+.m3-hidden {
+    display: none !important;
 }
 
 /* ==========================================================================
@@ -107,15 +104,14 @@ invitacion-gala.is-active {
 
 .m3-typography--title-large {
     font-family: var(--md-ref-typeface-serif);
-    font-size: 1.6rem;
-    color: var(--md-sys-color-primary);
-    font-weight: 600;
+    font-size: 1.8rem;
+    color: #FFFFFF;
+    font-weight: 700;
 }
 
 .m3-typography--body-medium {
-    font-size: 0.95rem;
-    color: var(--md-sys-color-on-surface-variant);
-    line-height: 1.5;
+    font-size: 0.9rem;
+    color: rgba(230, 225, 233, 0.85);
 }
 
 .m3-ampersand {
@@ -214,9 +210,8 @@ invitacion-gala.is-active {
 .m3-content-section {
     position: relative;
     width: 100%;
-    /* dvh evita el scroll fantasma calculando el espacio real de la pantalla del celular */
     height: 100dvh; 
-    display: none;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -237,7 +232,7 @@ invitacion-gala.is-active {
     width: 100%;
     height: 100%;
     background-size: cover;
-    background-position: center 25%; /* Enfoque vertical equilibrado */
+    background-position: center 25%;
     transform: scale(1.02);
 }
 
@@ -264,7 +259,6 @@ invitacion-gala.is-active {
     width: 100%;
     max-width: 380px;
     height: 100%;
-    /* Reducción estratégica del padding superior/inferior */
     padding: 40px 20px 24px 20px; 
     display: flex;
     flex-direction: column;
@@ -286,18 +280,6 @@ invitacion-gala.is-active {
     color: var(--md-color-gold-accent);
     font-size: 28px !important;
     margin-bottom: 2px;
-}
-
-.m3-typography--title-large {
-    font-family: var(--md-ref-typeface-serif);
-    font-size: 1.8rem;
-    color: #FFFFFF;
-    font-weight: 700;
-}
-
-.m3-typography--body-medium {
-    font-size: 0.9rem;
-    color: rgba(230, 225, 233, 0.85);
 }
 
 /* Cristalización del Contador */
@@ -378,9 +360,9 @@ invitacion-gala.is-active .m3-gala-countdown { transition-delay: 0.3s; }
 @media (min-width: 850px) {
     .m3-content-section {
         flex-direction: row;
-        justify-content: flex-start; /* Alineación a la izquierda */
+        justify-content: flex-start; 
         align-items: center;
-        padding-left: 6%; /* Separación elegante del borde izquierdo */
+        padding-left: 6%; 
     }
 
     /* Redirección del degradado: Oscuro a la izquierda, completamente transparente a la derecha */
@@ -404,14 +386,14 @@ invitacion-gala.is-active .m3-gala-countdown { transition-delay: 0.3s; }
         max-width: 420px;
         height: auto;
         padding: 50px 40px;
-        background: rgba(20, 14, 27, 0.5); /* Caja de cristal sutil */
+        background: rgba(20, 14, 27, 0.5); 
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         border: 1px solid rgba(255, 255, 255, 0.05);
         border-radius: 28px;
         gap: 36px;
         box-shadow: 0px 25px 55px rgba(0, 0, 0, 0.5);
-        align-items: flex-start; /* Justificación tipográfica izquierda */
+        align-items: flex-start; 
         text-align: left;
         margin: 0;
     }
@@ -440,7 +422,7 @@ invitacion-gala.is-active .m3-gala-countdown { transition-delay: 0.3s; }
 
     .m3-countdown__box {
         padding: 16px 4px;
-        background: rgba(35, 27, 46, 0.6); /* Más contraste para pantallas claras */
+        background: rgba(35, 27, 46, 0.6); 
     }
 
     .m3-countdown__number {
