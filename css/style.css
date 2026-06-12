@@ -46,7 +46,6 @@ body {
 /* ==========================================================================
    CONTROL DE COMPONENTES WEB (COMPORTAMIENTO NATIVO DE CAPAS)
    ========================================================================== */
-
 invitacion-hero {
     display: block;
     width: 100%;
@@ -210,24 +209,18 @@ invitacion-gala.is-active {
 @keyframes ripple-effect { to { transform: scale(4); opacity: 0; } }
 
 /* ==========================================================================
-   INTERIOR DE INVITACIÓN ABIERTA (CONTENIDO GALA)
-   ========================================================================== */
-/* ==========================================================================
    INTERIOR DE INVITACIÓN ABIERTA (PORTADA CINEMATOGRÁFICA FULLSCREEN)
    ========================================================================== */
 .m3-content-section {
     position: relative;
     width: 100%;
-    /* dvh (Dynamic Viewport Height) evita el scroll fantasma causado por las barras móviles */
+    /* dvh evita el scroll fantasma calculando el espacio real de la pantalla del celular */
     height: 100dvh; 
-    display: none; /* Controlado por JS */
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-}
-.m3-content-section.is-active {
-    display: flex;
 }
 
 /* --- DETALLES DE LA FOTO DE PORTADA COMPLETA --- */
@@ -244,11 +237,11 @@ invitacion-gala.is-active {
     width: 100%;
     height: 100%;
     background-size: cover;
-    background-position: center 25%; /* Enfoque ideal para retratos verticales */
+    background-position: center 25%; /* Enfoque vertical equilibrado */
     transform: scale(1.02);
 }
 
-/* Capa de degradado de revista: Oscurece la base para que las fuentes lila/oro brillen */
+/* Degradado fluido inteligente */
 .m3-hero-bg-overlay {
     position: absolute;
     top: 0;
@@ -262,17 +255,16 @@ invitacion-gala.is-active {
         rgba(20, 14, 27, 0.85) 85%,
         #140e1b 100%
     );
-    transition: background 0.5s ease;
 }
 
-/* --- CONTENEDOR FLOTANTE ELEGANTE --- */
+/* --- CONTENEDOR FLOTANTE PARA MÓVILES (CERO SCROLL) --- */
 .m3-gala-container {
     position: relative;
     z-index: 2;
     width: 100%;
     max-width: 380px;
     height: 100%;
-    /* Padding balanceado para asegurar que todo quepa en celulares cortos */
+    /* Reducción estratégica del padding superior/inferior */
     padding: 40px 20px 24px 20px; 
     display: flex;
     flex-direction: column;
@@ -280,7 +272,8 @@ invitacion-gala.is-active {
     justify-content: space-between; 
     text-align: center;
 }
-/* Elementos internos */
+
+/* Encabezado elegante sin tarjeta */
 .m3-gala-header {
     display: flex;
     flex-direction: column;
@@ -307,7 +300,7 @@ invitacion-gala.is-active {
     color: rgba(230, 225, 233, 0.85);
 }
 
-/* --- BLOQUE DEL CONTADOR CRISTALIZADO (FROSTED GLASS EFFECT) --- */
+/* Cristalización del Contador */
 .m3-gala-countdown {
     width: 100%;
     display: flex;
@@ -331,7 +324,6 @@ invitacion-gala.is-active {
     width: 100%;
 }
 
-/* Cajas de cristal traslúcidas que dejan ver sutilmente la foto detrás */
 .m3-countdown__box {
     background: rgba(35, 27, 46, 0.45);
     backdrop-filter: blur(12px);
@@ -356,6 +348,7 @@ invitacion-gala.is-active {
     color: rgba(255, 255, 255, 0.6);
 }
 
+/* Indicador de deslizamiento */
 .m3-scroll-indicator {
     color: var(--md-sys-color-primary);
     opacity: 0.8;
@@ -366,15 +359,31 @@ invitacion-gala.is-active {
     margin-top: 4px;
 }
 
-/* --- ADAPTACIÓN RESPONSIVA PC (ASPECTO DE CARTELERA EDITORIAL) --- */
+/* Animaciones de entrada escalonadas */
+.m3-card-section {
+    width: 100%;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+invitacion-gala.is-active .m3-card-section { opacity: 1; transform: translateY(0); }
+invitacion-gala.is-active .m3-gala-header { transition-delay: 0.15s; }
+invitacion-gala.is-active .m3-gala-countdown { transition-delay: 0.3s; }
+
+
+/* ==========================================================================
+   DISEÑO EXCLUSIVO PARA COMPUTADORAS (ASIMÉTRICO LATERAL DE ALTA GAMA)
+   ========================================================================== */
 @media (min-width: 850px) {
     .m3-content-section {
         flex-direction: row;
-        justify-content: flex-start; /* Alinea los textos a un costado de la PC */
+        justify-content: flex-start; /* Alineación a la izquierda */
         align-items: center;
-        padding-left: 6%; /* Desfase elegante desde el borde izquierdo */
+        padding-left: 6%; /* Separación elegante del borde izquierdo */
     }
 
+    /* Redirección del degradado: Oscuro a la izquierda, completamente transparente a la derecha */
     .m3-hero-bg-overlay {
         background: linear-gradient(
             to right,
@@ -384,29 +393,45 @@ invitacion-gala.is-active {
             rgba(20, 14, 27, 0.0) 100%
         );
     }
-   /* Ajuste de la foto para cargarse hacia la derecha en monitores panorámicos */
+
+    /* Mueve la imagen de los novios hacia la derecha libre de la pantalla */
     .m3-hero-bg-image {
-        background-position: calc(50% + 150px) center; /* Mueve sutilmente a la pareja a la zona libre */
+        background-position: calc(50% + 150px) center; 
     }
 
+    /* El bloque flotante se convierte en una cartelera lateral limpia */
     .m3-gala-container {
         max-width: 420px;
         height: auto;
         padding: 50px 40px;
-        background: rgba(20, 14, 27, 0.5); /* Efecto esmerilado sutil para el bloque completo */
+        background: rgba(20, 14, 27, 0.5); /* Caja de cristal sutil */
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         border: 1px solid rgba(255, 255, 255, 0.05);
         border-radius: 28px;
         gap: 36px;
         box-shadow: 0px 25px 55px rgba(0, 0, 0, 0.5);
-        align-items: flex-start; /* Alinea los textos a la izquierda */
+        align-items: flex-start; /* Justificación tipográfica izquierda */
         text-align: left;
         margin: 0;
     }
 
+    .m3-gala-header {
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .m3-gala__icon {
+        align-self: flex-start;
+        font-size: 36px !important;
+    }
+
     .m3-typography--title-large {
         font-size: 2.4rem;
+    }
+
+    .m3-countdown {
+        align-items: flex-start;
     }
 
     .m3-countdown__grid {
@@ -415,65 +440,20 @@ invitacion-gala.is-active {
 
     .m3-countdown__box {
         padding: 16px 4px;
-        background: rgba(35, 27, 46, 0.6); /* Más contraste para la PC */
+        background: rgba(35, 27, 46, 0.6); /* Más contraste para pantallas claras */
     }
 
     .m3-countdown__number {
         font-size: 1.8rem;
     }
-}
-.m3-gala-header {
-        align-items: flex-start;
-        text-align: left;
-    }
-.m3-gala__icon {
-        align-self: flex-start;
-        font-size: 36px !important;
-    }
-.m3-countdown {
+
+    .m3-scroll-indicator {
         align-items: flex-start;
     }
-.m3-scroll-indicator {
-        align-items: flex-start;
-    }
-}
-/* ==========================================================================
-   PANTALLAS GRANDES (PC / MONITOR ADAPTACIÓN HORIZONTAL DOBLE COLUMNA)
-   ========================================================================== */
-@media (min-width: 850px) {
-    invitacion-gala {
-        justify-content: flex-start;
-        overflow-y: auto;
-    }
-    .m3-content-section {
-        padding: 60px 40px;
-    }
-    .m3-main-card {
-        max-width: 850px;
-        height: auto;
-        max-height: none;
-        padding: 50px;
-        display: grid;
-        grid-template-columns: 1.1fr 1fr;
-        grid-template-areas: 
-            "photo header"
-            "photo countdown"
-            "photo indicator";
-        align-items: center;
-        gap: 48px;
-        overflow: visible;
-    }
-    .m3-card-photo-wrapper { grid-area: photo; max-width: 100%; padding: 8px; border-radius: 28px; }
-    .m3-card-photo { border-radius: 22px; }
-    .m3-card-header { grid-area: header; align-items: flex-start; text-align: left; }
-    .m3-inner-card__icon { align-self: flex-start; font-size: 40px !important; }
-    .m3-countdown { grid-area: countdown; align-items: flex-start; }
-    .m3-countdown__grid { max-width: 100%; gap: 12px; }
-    .m3-countdown__box { padding: 18px 4px; border-radius: 16px; }
-    .m3-countdown__number { font-size: 2rem; }
-    .m3-countdown__label { font-size: 0.65rem; letter-spacing: 1px; }
-    .m3-scroll-indicator { grid-area: indicator; align-items: flex-start; margin-top: 0; }
 }
 
+/* ==========================================================================
+   UTILERÍAS DE ANIMACIÓN E ICONOS
+   ========================================================================== */
 @keyframes bounceIndicator { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
 .material-symbols-outlined { font-family: 'Material Symbols Outlined' !important; font-weight: normal; font-style: normal; font-size: 24px; line-height: 1; display: inline-block; -webkit-font-smoothing: antialiased; }
