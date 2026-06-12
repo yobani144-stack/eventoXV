@@ -1,0 +1,180 @@
+/* ==========================================================================
+   NUEVO MÓDULO: LÍNEA DEL TIEMPO INTERACTIVA M3 PREMIUM
+   ========================================================================== */
+invitacion-timeline {
+    display: none;
+    width: 100%;
+    background-color: var(--md-sys-color-surface-container);
+}
+
+invitacion-timeline.is-active {
+    display: block;
+}
+
+.m3-timeline-section {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px 20px;
+    color: var(--md-sys-color-on-surface);
+}
+
+/* Encabezado */
+.m3-timeline-header {
+    text-align: center;
+    margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.m3-timeline__icon {
+    color: var(--md-color-gold-accent);
+    font-size: 36px !important;
+}
+
+.m3-typography--title-timeline {
+    font-family: var(--md-ref-typeface-serif);
+    font-size: 2.2rem;
+    color: var(--md-sys-color-primary);
+    font-weight: 700;
+}
+
+.m3-typography--subtitle-timeline {
+    font-size: 0.95rem;
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+/* Estructura del Timeline Lineal */
+.m3-timeline-container {
+    position: relative;
+    width: 100%;
+    padding: 20px 0;
+}
+
+/* Eje central de oro brillante */
+.m3-timeline-line {
+    position: absolute;
+    left: 30px; /* Alineado a la izquierda por defecto para móviles */
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--md-sys-color-primary), var(--md-color-gold-accent), var(--md-sys-color-primary));
+}
+
+/* Hito Bloque */
+.m3-timeline-item {
+    position: relative;
+    width: 100%;
+    margin-bottom: 40px;
+    padding-left: 70px; /* Deja espacio para la línea y el círculo */
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Clase desencadenada por el IntersectionObserver al bajar scroll */
+.m3-timeline-item.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Burbujas flotantes M3 (Badges) */
+.m3-timeline-badge {
+    position: absolute;
+    left: 13px;
+    top: 15px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #2b2137;
+    border: 2px solid var(--md-color-gold-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    color: var(--md-sys-color-primary);
+    box-shadow: 0 0 10px rgba(243, 202, 101, 0.2);
+}
+
+.m3-timeline-badge span {
+    font-size: 18px !important;
+}
+
+/* Caja de Texto Esmerilada */
+.m3-timeline-content {
+    background: rgba(35, 27, 46, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 24px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    transition: border-color 0.3s ease;
+}
+
+.m3-timeline-item:hover .m3-timeline-content {
+    border-color: rgba(208, 188, 255, 0.2);
+}
+
+.m3-timeline-year {
+    display: inline-block;
+    font-family: var(--md-ref-typeface-serif);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--md-color-gold-accent);
+    margin-bottom: 4px;
+}
+
+.m3-timeline-node-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 8px;
+}
+
+.m3-timeline-node-text {
+    font-size: 0.9rem;
+    color: var(--md-sys-color-on-surface-variant);
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   ADAPTACIÓN EXCLUSIVA PARA PANTALLAS GRANDES (PC INTERCALADO SIMÉTRICO)
+   ========================================================================== */
+@media (min-width: 850px) {
+    .m3-timeline-line {
+        left: 50%; /* Centramos la línea exactamente a la mitad */
+        transform: translateX(-50%);
+    }
+
+    .m3-timeline-item {
+        width: 50%; /* Ocupan la mitad de la pantalla */
+        padding-left: 0;
+        margin-bottom: 60px;
+    }
+
+    /* Los nodos impares se alinean a la izquierda */
+    .m3-timeline-item:nth-child(even) {
+        left: 0;
+        padding-right: 50px;
+        text-align: right;
+    }
+    
+    .m3-timeline-item:nth-child(even) .m3-timeline-badge {
+        left: auto;
+        right: -18px; /* Queda clavado en la línea central */
+    }
+
+    /* Los nodos pares se alinean a la derecha */
+    .m3-timeline-item:nth-child(odd) {
+        left: 50%;
+        padding-left: 50px;
+        text-align: left;
+    }
+
+    .m3-timeline-item:nth-child(odd) .m3-timeline-badge {
+        left: -18px; /* Queda clavado en la línea central */
+    }
+}
