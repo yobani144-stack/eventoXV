@@ -6,7 +6,7 @@
 class InvitacionFooter extends HTMLElement {
     connectedCallback() {
         // Enlace directo a tu WhatsApp de negocios o catálogo de servicios
-        const enlaceDiseñador = "https://wa.me/521234567890?text=Hola!%20Vi%20la%20invitacion%20digital%20de%20Alejandro%20y%20Sofia%20y%20me%20gustaria%20pedir%20informes%20para%20un%20evento.";
+        const enlaceDiseñador = "https://wa.me/527291255411?text=Hola!%20Vi%20la%20invitacion%20digital%20de%20Alejandro%20y%20Sofia%20y%20me%20gustaria%20pedir%20informes%20para%20un%20evento.";
 
         this.innerHTML = `
             <footer class="m3-footer-section">
