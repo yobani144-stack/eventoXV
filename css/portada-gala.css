@@ -1,0 +1,232 @@
+/**
+ * ARCHIVO: css/portada-gala.css
+ * DESCRIPCIÓN: Maquetación editorial, tipografías y herrajes de la portada cinematográfica.
+ */
+
+/* Componente de la invitación abierta / gala */
+invitacion-gala {
+    display: none !important;
+    width: 100%;
+    min-height: 100dvh;
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+}
+
+invitacion-gala.is-active {
+    display: flex !important;
+    opacity: 1 !important;
+}
+
+.m3-content-section {
+    position: relative;
+    width: 100%;
+    height: 100dvh; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* --- LIENZO DE PERGAMINO EDITORIAL (TARJETA CENTRAL) --- */
+.m3-card {
+    position: relative;
+    width: 100%;
+    max-width: 360px;
+    background-color: #FDFAF2; /* Tono marfil pergamino exacto */
+    border-radius: var(--md-sys-shape-corner-large);
+    padding: 6px;
+    box-shadow: 0px 25px 60px rgba(0, 0, 0, 0.65);
+    transform-style: preserve-3d;
+    transition: transform 0.15s ease-out;
+    border: 1px solid rgba(243, 202, 101, 0.35);
+    z-index: 2;
+}
+
+.m3-card__border-line {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    border: 1px solid rgba(99, 83, 56, 0.15); /* Fileteado interior bronce */
+    border-radius: calc(var(--md-sys-shape-corner-large) - 6px);
+    pointer-events: none;
+}
+
+.m3-card__content {
+    padding: 40px 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+}
+
+/* --- DETALLES DE LA FOTO DE PORTADA / IMAGEN DE FONDO --- */
+.m3-hero-bg-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.m3-hero-bg-image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center 25%;
+    transform: scale(1.02);
+}
+
+/* Degradado continuo inteligente */
+.m3-hero-bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(20, 14, 27, 0.3) 0%,
+        rgba(20, 14, 27, 0.5) 40.,
+        rgba(20, 14, 27, 0.85) 85%,
+        #140e1b 100
+    );
+}
+
+.m3-gala-container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 380px;
+    height: 100%;
+    padding: 40px 20px 24px 20px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; 
+    text-align: center;
+}
+
+/* --- EFECTO ORO EN NOMBRE DE NOVIOS --- */
+.m3-hero-couple-names {
+    font-family: var(--md-ref-typeface-serif);
+    font-size: 3rem;
+    font-weight: 700;
+    color: #4B1F6D; /* Púrpura real profundo */
+    line-height: 1.1;
+    margin: 4px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-shadow: 1px 1px 0px #F3CA65, 
+                 2px 2px 0px #D4AF37, 
+                 3px 3px 6px rgba(0, 0, 0, 0.35);
+}
+
+.m3-name-amp {
+    font-family: var(--md-ref-typeface-serif);
+    font-size: 2rem;
+    color: #D4AF37;
+    font-style: italic;
+    margin: 2px 0;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+}
+
+.m3-hero-date {
+    font-family: var(--md-ref-typeface-plain);
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 3px;
+    color: #635338;
+    margin-bottom: 4px;
+}
+
+/* --- BOTÓN DE APERTURA PREMIUM ORO --- */
+.m3-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    height: 50px;
+    width: 100%;
+    padding: 0 24px;
+    border: none;
+    font-family: var(--md-ref-typeface-plain);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-radius: var(--md-sys-shape-corner-full);
+    cursor: pointer;
+    overflow: hidden;
+    background: linear-gradient(135deg, #E5C060 0%, #B89334 100%);
+    color: #2E1147;
+    box-shadow: 0px 6px 20px rgba(184, 147, 52, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.m3-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 8px 25px rgba(184, 147, 52, 0.55);
+}
+
+/* Indicador e interacciones */
+.m3-scroll-indicator {
+    color: var(--md-sys-color-primary);
+    opacity: 0.8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    margin-top: 4px;
+}
+
+/* Animaciones escalonadas */
+.m3-card-section {
+    width: 100%;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+invitacion-gala.is-active .m3-card-section { opacity: 1; transform: translateY(0); }
+
+/* --- DISEÑO EXCLUSIVO PARA COMPUTADORAS (ESCRITORIO) --- */
+@media (min-width: 850px) {
+    .m3-content-section {
+        flex-direction: row;
+        justify-content: flex-start; 
+        padding-left: 6%; 
+    }
+    .m3-hero-bg-overlay {
+        background: linear-gradient(
+            to right,
+            rgba(20, 14, 27, 0.95) 0%,
+            rgba(20, 14, 27, 0.7) 35%,
+            rgba(20, 14, 27, 0.2) 65%,
+            rgba(20, 14, 27, 0.0) 100%
+        );
+    }
+    .m3-hero-bg-image {
+        background-position: calc(50% + 150px) center; 
+    }
+    .m3-gala-container {
+        max-width: 420px;
+        height: auto;
+        padding: 50px 40px;
+        background: rgba(20, 14, 27, 0.5); 
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 28px;
+        gap: 36px;
+        box-shadow: 0px 25px 55px rgba(0, 0, 0, 0.5);
+        align-items: flex-start; 
+        text-align: left;
+        margin: 0;
+    }
+}
