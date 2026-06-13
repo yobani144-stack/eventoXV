@@ -89,7 +89,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     rsvpSection.classList.remove("m3-hidden");
                     rsvpSection.classList.add("is-active");
                 }
-                if (footerSection) { footerSection.classList.remove("m3-hidden"); footerSection.classList.add("is-active"); }
+                if (footerSection) { 
+                    footerSection.classList.remove("m3-hidden");
+                    footerSection.classList.add("is-active"); 
+                }
                 /* --- LIBERACIÓN DEL DESLIZAMIENTO GENERAL --- */
                 // Pasamos del bloqueo total de la pantalla inicial a permitir scroll vertical infinito
                 document.body.style.overflowY = "auto";
