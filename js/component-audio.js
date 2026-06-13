@@ -7,7 +7,7 @@ class InvitacionAudio extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
             <audio id="m3-background-audio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop></audio>
-
+ 
             <button class="m3-audio-fab" id="m3-audio-toggle" aria-label="Controlar música">
                 <div class="m3-audio-waves" id="m3-waves-container">
                     <span class="m3-wave-bar"></span>
