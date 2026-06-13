@@ -1,0 +1,171 @@
+/* ==========================================================================
+   NUEVO MÓDULO: CONFIRMACIÓN DE ASISTENCIA (DISEÑO ETÉREO CINEMATOGRÁFICO)
+   ========================================================================== */
+invitacion-rsvp {
+    display: none;
+    width: 100%;
+    background-color: var(--md-sys-color-surface-container);
+}
+
+invitacion-rsvp.is-active {
+    display: block;
+}
+
+.m3-rsvp-section {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 120px 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Fulgor decorativo de fondo */
+.m3-rsvp-glow-back {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(243, 202, 101, 0.1) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.m3-rsvp-glow-back.is-visible {
+    transform: translate(-50%, -50%) scale(1.2);
+}
+
+/* Contenedor central libre (Sin caja/sin tarjeta rígida) */
+.m3-rsvp-content-wrapper {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 580px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 28px;
+}
+
+.m3-rsvp-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.m3-rsvp__icon {
+    color: var(--md-color-gold-accent);
+    font-size: 32px !important;
+    text-shadow: 0 0 12px rgba(243, 202, 101, 0.4);
+}
+
+.m3-typography--label-rsvp {
+    font-family: var(--md-ref-typeface-plain);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: var(--md-sys-color-primary);
+}
+
+/* Tipografía de Gala Imponente */
+.m3-typography--title-rsvp {
+    font-family: var(--md-ref-typeface-serif);
+    font-size: 2.4rem;
+    line-height: 1.3;
+    color: #FFFFFF;
+    font-weight: 700;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.m3-typography--body-rsvp {
+    font-size: 1rem;
+    color: var(--md-sys-color-on-surface-variant);
+    line-height: 1.6;
+    max-width: 480px;
+}
+
+/* --- BOTÓN PREMIUM DE GALA (RE-DISEÑADO) --- */
+.m3-btn-rsvp {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    height: 56px;
+    padding: 0 44px;
+    border: none;
+    font-family: var(--md-ref-typeface-plain);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: .5px;
+    border-radius: var(--md-sys-shape-corner-full);
+    cursor: pointer;
+    overflow: hidden;
+    text-decoration: none;
+    /* Estética premium: Verde esmeralda profundo a lila M3 */
+    background: linear-gradient(135deg, #0f7065 0%, #1ebe71 100%);
+    color: #FFFFFF;
+    box-shadow: 0px 10px 25px rgba(30, 190, 113, 0.25);
+    transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.25s ease;
+}
+
+.m3-btn-rsvp:hover {
+    box-shadow: 0px 14px 32px rgba(30, 190, 113, 0.45);
+    transform: translateY(-3px) scale(1.02);
+}
+
+.m3-btn-rsvp:active {
+    transform: translateY(-1px) scale(0.99);
+}
+
+/* Destello metálico del botón */
+.m3-btn-rsvp__glint {
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.35), rgba(255,255,255,0));
+    transform: skewX(-25deg);
+    pointer-events: none;
+    animation: rsvpGlint 4.5s infinite ease-in-out;
+}
+
+@keyframes rsvpGlint {
+    0% { left: -150%; }
+    15% { left: 150%; }
+    100% { left: 150%; }
+}
+
+/* ==========================================================================
+   EFECTOS DE SCROLL ASIMÉTRICOS (FADE IN + MOVIMIENTO)
+   ========================================================================== */
+.fade-rsvp-item {
+    opacity: 0;
+    transform: translateY(30px) scale(0.96);
+    filter: blur(4px); /* Sutil desenfoque de movimiento inicial */
+    transition: opacity 0.8s cubic-bezier(0.215, 0.610, 0.355, 1), 
+                transform 0.8s cubic-bezier(0.215, 0.610, 0.355, 1),
+                filter 0.8s ease;
+    will-change: transform, opacity;
+}
+
+.fade-rsvp-item.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+}
+
+/* Ajustes responsivos móviles */
+@media (max-width: 600px) {
+    .m3-rsvp-section { padding: 90px 20px; }
+    .m3-typography--title-rsvp { font-size: 1.8rem; line-height: 1.4; }
+    .m3-btn-rsvp { width: 100%; padding: 0 24px; }
+}
