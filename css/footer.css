@@ -1,0 +1,122 @@
+/* ==========================================================================
+   NUEVO MÓDULO: FOOTER DE GALA & FIRMA DE AUTOR DISCRETA
+   ========================================================================== */
+invitacion-footer {
+    display: none;
+    width: 100%;
+    background-color: #110a17; /* Un tono ligeramente más profundo para cerrar */
+}
+
+invitacion-footer.is-active {
+    display: block;
+}
+
+.m3-footer-section {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 80px 24px 40px 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.m3-footer-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Estilos de despedida de los novios */
+.m3-footer-thanks {
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--md-sys-color-on-surface-variant);
+    margin-bottom: 12px;
+    opacity: 0.8;
+}
+
+.m3-footer-couple {
+    font-family: var(--md-ref-typeface-brand);
+    font-size: 2.8rem;
+    color: var(--md-color-gold-accent);
+    font-weight: 400;
+    line-height: 1;
+}
+
+.m3-footer-date {
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    color: var(--md-sys-color-primary);
+    margin-top: 12px;
+    font-weight: 500;
+}
+
+/* Separador elegante minimalista */
+.m3-footer-divider {
+    width: 40px;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 40px 0 30px 0;
+}
+
+/* --- BLOQUE DE INFORMES TOTALMENTE DISCRETO Y PREMIUM --- */
+.m3-designer-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    opacity: 0.45; /* Súper discreto por defecto */
+    transition: opacity 0.3s ease;
+}
+
+.m3-designer-card:hover {
+    opacity: 0.9; /* Se ilumina elegantemente solo al interactuar */
+}
+
+.m3-designer-text {
+    font-size: 0.75rem;
+    color: var(--md-sys-color-on-surface-variant);
+    letter-spacing: .3px;
+}
+
+.m3-designer-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--md-sys-color-primary);
+    text-decoration: none;
+    border-bottom: 1px dashed transparent;
+    transition: border-color 0.3s ease;
+    padding-bottom: 2px;
+}
+
+.m3-designer-link:hover {
+    border-color: var(--md-sys-color-primary);
+}
+
+.m3-designer-link .material-symbols-outlined {
+    font-size: 13px !important;
+}
+
+/* --- EFECTO DE APARECER / SCROLL --- */
+.fade-footer-item {
+    opacity: 0;
+    transform: scale(0.98);
+    transition: opacity 1s ease, transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.fade-footer-item.is-visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Ajustes pantallas chicas */
+@media (max-width: 480px) {
+    .m3-footer-couple { font-size: 2.3rem; }
+    .m3-designer-card { width: 100%; }
+}
