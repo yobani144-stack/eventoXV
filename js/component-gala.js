@@ -17,7 +17,7 @@ class InvitacionGala extends HTMLElement {
                         <p class="m3-typography--body-medium">Acompáñanos a celebrar nuestra historia de amor</p>
                     </div>
                     <div class="m3-card-section m3-gala-header">
-                    <span class="material-symbols-outlined m3-gala__icon">celebration</span>
+                    <span class="material-symbols-outlined m3-gala__icon">favorite</span>
                           <h2 class="m3-typography--title-large"> Alejandro y Sofia</h2>
                     </div>
 
