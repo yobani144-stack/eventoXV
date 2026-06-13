@@ -1,0 +1,130 @@
+/**
+ * ARCHIVO: css/court.css
+ * DESCRIPCIÓN: Estilos de la Corte de Honor con diseño flotante y destellos lila M3
+ */
+
+invitacion-court {
+    display: none;
+    width: 100%;
+    background-color: var(--md-sys-color-surface-container);
+}
+
+invitacion-court.is-active {
+    display: block;
+}
+
+.m3-court-section {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px 24px;
+    box-sizing: border-box;
+}
+
+.m3-court-block {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 44px;
+}
+
+.m3-court-header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.m3-court__icon {
+    color: var(--md-color-gold-accent, #f3ca65);
+    font-size: 36px !important;
+    text-shadow: 0 0 10px rgba(243, 202, 101, 0.3);
+}
+
+.m3-typography--title-court {
+    font-family: var(--md-ref-typeface-serif), 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--md-sys-color-primary, #d0bcff);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+/* Grilla de Tarjetas Libres */
+.m3-court-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Tarjeta Cristalizada Estilo Lienzo Libre */
+.m3-court-card {
+    background: rgba(35, 27, 46, 0.35);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 36px 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), border-color 0.4s ease;
+    box-sizing: border-box;
+}
+
+.m3-court-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(208, 188, 255, 0.2);
+}
+
+/* Subtítulos de Parentesco u Obligación */
+.m3-court-role {
+    font-family: var(--md-ref-typeface-plain), 'Roboto', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--md-color-gold-accent, #f3ca65);
+    margin-bottom: 6px;
+}
+
+/* Nombres de los Familiares */
+.m3-court-name {
+    font-family: var(--md-ref-typeface-serif), 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: #FFFFFF;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* ==========================================================================
+   ANIMACIONES DE REVELADO ASIMÉTRICO AL SCROLLEAR
+   ========================================================================== */
+.fade-court-item {
+    opacity: 0;
+    transform: translateY(30px) scale(0.97);
+    filter: blur(3px);
+    transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+                transform 0.8s cubic-bezier(0.25, 1, 0.5, 1),
+                filter 0.8s ease;
+    will-change: transform, opacity;
+}
+
+.fade-court-item.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+}
+
+/* Adaptación responsiva móvil */
+@media (max-width: 600px) {
+    .m3-typography--title-court { font-size: 1.6rem; }
+    .m3-court-card { padding: 30px 20px; }
+    .m3-court-name { font-size: 1.25rem; }
+}
