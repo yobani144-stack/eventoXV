@@ -1,41 +1,38 @@
 /**
  * ARCHIVO: js/main.js
- * DESCRIPCIÓN: Orquestador principal blindado contra errores de carga (Null Pointer)
+ * DESCRIPCIÓN: Orquestador principal unificado para la activación de módulos M3
+ * (Hero, Gala, Timeline, Locations y Carousel)
  */
 
 document.addEventListener("DOMContentLoaded", () => {
     
-    // 1. Captura segura de elementos buscando por ID
+    // 1. Captura centralizada de componentes estructurales (Custom Elements)
     const btnOpen = document.getElementById("btn-open-invitation");
     const heroSection = document.getElementById("hero-section");
     const galaSection = document.getElementById("gala-section");
     const timelineSection = document.getElementById("timeline-section");
     const locationsSection = document.getElementById("locations-section");
+    const carouselSection = document.getElementById("carousel-section");
 
-    // Diagnóstico rápido en consola para que sepas qué elemento falta en tu HTML
-    console.log("=== Diagnóstico de Componentes M3 ===");
-    console.log("Botón Abrir:", btnOpen);
-    console.log("Sección Hero:", heroSection);
-    console.log("Sección Gala:", galaSection);
-    console.log("Sección Timeline:", timelineSection);
-    console.log("Sección Ubicaciones:", locationsSection);
-    console.log("=====================================");
-
-    // 2. Solo colgamos el evento si el botón realmente existe en el HTML actual
+    // VALIDACIÓN DE SEGURIDAD INTERNA: Evita que el script muera si falta alguna sección en el HTML
     if (!btnOpen) {
-        console.error("Error crítico: No se encontró el botón con ID 'btn-open-invitation' en el HTML.");
-        return; // Detiene la ejecución de esta función de forma segura sin lanzar un Uncaught TypeError
+        console.warn("M3 de seguridad: No se detectó el botón 'btn-open-invitation' en el DOM.");
+        return; 
     }
 
+    /* ------------------------------------------------------------------
+       2. RECEPTOR DEL EVENTO CLIC (DISPARADOR DE LA EXPERIENCIA DIGITAL)
+       ------------------------------------------------------------------ */
     btnOpen.addEventListener("click", (e) => {
         
-        /* --- EFECTO ONDA NATIVO MATERIAL DESIGN 3 --- */
+        /* --- MICRO-INTERACCIÓN: EFECTO ONDA EN BOTÓN (RIPPLE EFFECT) --- */
         const oldRipple = btnOpen.querySelector(".m3-ripple-active");
-        if (oldRipple) oldRipple.remove();
+        if (oldRipple) oldRipple.remove(); // Limpieza preventiva de ondas residuales
 
         const ripple = document.createElement("span");
         ripple.classList.add("m3-ripple", "m3-ripple-active");
         
+        // Medidas métricas del botón para que la expansión nazca exactamente bajo el dedo/puntero
         const rect = btnOpen.getBoundingClientRect();
         const size = Math.max(rect.width, rect.height);
         
@@ -45,9 +42,9 @@ document.addEventListener("DOMContentLoaded", () => {
         
         btnOpen.appendChild(ripple);
 
-        /* --- SECUENCIA DE TRANSICIÓN SEGURA --- */
+        /* --- SECUENCIA DE CAPAS CINEMATOGRÁFICA (TRANSICIÓN DE ENTRADA) --- */
         setTimeout(() => {
-            // Animamos la desaparición del Hero si es que existe
+            // Desvanecimiento controlado de la portada (Escalado sutil hacia afuera)
             if (heroSection) {
                 heroSection.style.opacity = "0";
                 heroSection.style.transform = "scale(1.02)";
@@ -55,30 +52,42 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             setTimeout(() => {
+                // Desmontamos físicamente la portada para ahorrar memoria del dispositivo móvil
                 if (heroSection) heroSection.style.display = "none";
                 
-                // Despertamos y mostramos secuencialmente SOLO los componentes que sí existan en el HTML
+                /* --- ENCENDIDO Y DESPERTAR EN CASCADA DE LOS COMPONENTES --- */
+                
+                // 1. Despertar de la portada de gala premium (Foto de fondo & Cuenta regresiva)
                 if (galaSection) {
                     galaSection.classList.remove("m3-hidden");
-                    void galaSection.offsetWidth; // Forzar reflow
+                    void galaSection.offsetWidth; // Forzado de lectura física del DOM para estabilizar transiciones
                     galaSection.classList.add("is-active");
                 }
                 
+                // 2. Despertar del módulo de la historia (Línea del tiempo interactiva)
                 if (timelineSection) {
                     timelineSection.classList.remove("m3-hidden");
                     timelineSection.classList.add("is-active");
                 }
                 
+                // 3. Despertar del módulo de mapas (Ubicaciones inteligentes con Fade In/Out)
                 if (locationsSection) {
                     locationsSection.classList.remove("m3-hidden");
                     locationsSection.classList.add("is-active");
                 }
                 
-                // Habilitamos el scroll global en la página
+                // 4. Despertar del nuevo módulo fotográfico (Carrusel dinámico con Lightbox 3D)
+                if (carouselSection) {
+                    carouselSection.classList.remove("m3-hidden");
+                    carouselSection.classList.add("is-active");
+                }
+                
+                /* --- LIBERACIÓN DEL DESLIZAMIENTO GENERAL --- */
+                // Pasamos del bloqueo total de la pantalla inicial a permitir scroll vertical infinito
                 document.body.style.overflowY = "auto";
                 document.documentElement.style.overflowY = "auto";
 
-            }, 450);
-        }, 350);
+            }, 450); // Tiempo emparejado con la duración del fade-out del Hero
+        }, 350); // Margen de milisegundos para que el invitado aprecie la onda expansiva lila
     });
 });
