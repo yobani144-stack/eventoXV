@@ -1,0 +1,160 @@
+/* ==========================================================================
+   NUEVO MÓDULO: UBICACIONES ESPECTACULARES
+   ========================================================================== */
+invitacion-locations {
+    display: none;
+    width: 100%;
+    background-color: var(--md-sys-color-surface-container);
+}
+
+invitacion-locations.is-active {
+    display: block;
+}
+
+.m3-locations-section {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 100px 20px;
+}
+
+.m3-locations-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.m3-locations__icon {
+    color: var(--md-color-gold-accent);
+    font-size: 42px !important;
+}
+
+.m3-typography--title-locations {
+    font-family: var(--md-ref-typeface-serif);
+    font-size: 2.5rem;
+    color: var(--md-sys-color-primary);
+    margin-top: 10px;
+}
+
+/* Grilla de tarjetas */
+.m3-locations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+}
+
+/* Estilo de la Tarjeta */
+.m3-location-card {
+    background: rgba(35, 27, 46, 0.4);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.m3-location-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(208, 188, 255, 0.2);
+}
+
+.m3-location-image {
+    width: 100%;
+    height: 220px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.m3-location-tag {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    background: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    padding: 6px 16px;
+    border-radius: 99px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.m3-location-info {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.m3-location-name {
+    font-family: var(--md-ref-typeface-serif);
+    font-size: 1.6rem;
+    color: #FFF;
+}
+
+.m3-location-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.m3-location-details p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--md-sys-color-on-surface-variant);
+    font-size: 0.95rem;
+}
+
+.m3-location-details .material-symbols-outlined {
+    font-size: 20px !important;
+    color: var(--md-color-gold-accent);
+}
+
+/* Botón Maps Estilo M3 */
+.m3-btn-maps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: transparent;
+    border: 1px solid var(--md-sys-color-primary);
+    color: var(--md-sys-color-primary);
+    padding: 12px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.m3-btn-maps:hover {
+    background: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+}
+
+/* ==========================================================================
+   LÓGICA DE FADE IN / FADE OUT AL SCROLLEAR
+   ========================================================================== */
+.fade-element {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+    transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fade-element.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Ajuste responsivo para móvil */
+@media (max-width: 600px) {
+    .m3-locations-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .m3-typography--title-locations {
+        font-size: 1.8rem;
+    }
+}
