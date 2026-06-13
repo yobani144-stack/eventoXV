@@ -53,9 +53,12 @@ document.addEventListener("DOMContentLoaded", () => {
                   /*  if (timelineSection) {
                         timelineSection.classList.remove("m3-hidden");
                     }*/
-                    if (timelineSection) timelineSection.classList.remove("m3-hidden");
-                    if (locationsSection) locationsSection.classList.remove("m3-hidden"); // Añade esto
-                  
+                    if (timelineSection){
+                        timelineSection.classList.remove("m3-hidden");
+                    }
+                    if (locationsSection){
+                        locationsSection.classList.remove("m3-hidden"); // Añade esto
+                    }
                     // Forzar Reflow del navegador (Indispensable para recalcular transiciones CSS)
                     void galaSection.offsetWidth; 
                     
@@ -64,8 +67,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     /*if (timelineSection) {
                         timelineSection.classList.add("is-active");
                     }*/
-                    if (timelineSection) timelineSection.classList.add("is-active");
-                    if (locationsSection) locationsSection.classList.add("is-active"); // Añade esto
+                    if (timelineSection) {
+                        timelineSection.classList.add("is-active");
+                    }
+                    if (locationsSection){
+                        locationsSection.classList.add("is-active"); // Añade esto
+                    }
                   
                     
                     // 3. Modificación del Scroll: Habilitamos el deslizamiento vertical continuo en la app
