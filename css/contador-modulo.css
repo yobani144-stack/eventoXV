@@ -1,0 +1,58 @@
+/**
+ * ARCHIVO: css/contador-modulo.css
+ * DESCRIPCIÓN: Estilos independientes del contador de tiempo con Glassmorphism M3.
+ */
+
+.m3-hero-countdown {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    margin: 4px 0;
+}
+
+.m3-countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 60px;
+    border-radius: 14px;
+    
+    /* Efecto cristal traslúcido para integrarse con el pergamino */
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(212, 175, 55, 0.25); /* Sutil filamento de oro */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.m3-countdown-number {
+    font-family: var(--md-ref-typeface-plain);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #4B1F6D; /* Púrpura */
+    line-height: 1;
+}
+
+.m3-countdown-label {
+    font-family: var(--md-ref-typeface-plain);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #635338;
+    margin-top: 3px;
+    font-weight: 600;
+}
+
+/* Adaptación responsive para terminales móviles compactos */
+@media (max-width: 380px) {
+    .m3-countdown-item { 
+        width: 54px; 
+        height: 54px; 
+    }
+    .m3-countdown-number { 
+        font-size: 1.1rem; 
+    }
+}
