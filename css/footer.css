@@ -1,24 +1,33 @@
+/**
+ * ARCHIVO: css/footer.css
+ * DESCRIPCIÓN: Estilos independientes del Footer de Gala y Botón de Informes M3
+ */
+
 /* ==========================================================================
-   NUEVO MÓDULO: FOOTER DE GALA & FIRMA DE AUTOR DISCRETA
+   ESTADOS DE CONTROL DE FLUJO M3
    ========================================================================== */
 invitacion-footer {
     display: none;
     width: 100%;
-    background-color: #110a17; /* Un tono ligeramente más profundo para cerrar */
+    background-color: #110a17; /* Cierre profundo del lienzo oscuro */
 }
 
 invitacion-footer.is-active {
     display: block;
 }
 
+/* ==========================================================================
+   ESTRUCTURA DEL FOOTER
+   ========================================================================== */
 .m3-footer-section {
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
-    padding: 80px 24px 40px 24px;
+    padding: 80px 24px 50px 24px;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
 }
 
 .m3-footer-content {
@@ -26,97 +35,163 @@ invitacion-footer.is-active {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
+    box-sizing: border-box;
 }
 
-/* Estilos de despedida de los novios */
+/* --- TEXTOS DE DESPEDIDA DE LOS NOVIOS --- */
 .m3-footer-thanks {
     font-size: 0.9rem;
     font-style: italic;
-    color: var(--md-sys-color-on-surface-variant);
-    margin-bottom: 12px;
+    color: var(--md-sys-color-on-surface-variant, #cac4d0);
+    margin: 0 0 12px 0;
     opacity: 0.8;
+    text-align: center;
 }
 
 .m3-footer-couple {
-    font-family: var(--md-ref-typeface-brand);
+    font-family: var(--md-ref-typeface-brand), 'Playfair Display', serif;
     font-size: 2.8rem;
-    color: var(--md-color-gold-accent);
+    color: var(--md-color-gold-accent, #f3ca65);
     font-weight: 400;
     line-height: 1;
+    margin: 0;
+    text-align: center;
 }
 
 .m3-footer-date {
     font-size: 0.8rem;
     letter-spacing: 3px;
-    color: var(--md-sys-color-primary);
-    margin-top: 12px;
+    color: var(--md-sys-color-primary, #d0bcff);
+    margin: 12px 0 0 0;
     font-weight: 500;
+    text-align: center;
 }
 
-/* Separador elegante minimalista */
+/* Separador de hilos minimalista */
 .m3-footer-divider {
     width: 40px;
     height: 1px;
     background-color: rgba(255, 255, 255, 0.1);
-    margin: 40px 0 30px 0;
+    margin: 40px 0 34px 0;
 }
 
-/* --- BLOQUE DE INFORMES TOTALMENTE DISCRETO Y PREMIUM --- */
+/* ==========================================================================
+   MÓDULO DE ADQUISICIÓN / INFORMES (EMBUDO TOTALMENTE INTERACTIVO)
+   ========================================================================== */
 .m3-designer-card {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
-    opacity: 0.45; /* Súper discreto por defecto */
-    transition: opacity 0.3s ease;
-}
-
-.m3-designer-card:hover {
-    opacity: 0.9; /* Se ilumina elegantemente solo al interactuar */
+    gap: 14px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .m3-designer-text {
-    font-size: 0.75rem;
-    color: var(--md-sys-color-on-surface-variant);
+    font-size: 0.8rem;
+    color: var(--md-sys-color-on-surface-variant, #cac4d0);
     letter-spacing: .3px;
+    opacity: 0.7;
+    margin: 0;
+    text-align: center;
 }
 
-.m3-designer-link {
+/* --- BOTÓN DE ELEVACIÓN DE MARCA PREMIUM M3 --- */
+.m3-btn-designer {
+    position: relative;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    font-size: 0.75rem;
+    justify-content: center;
+    gap: 10px;
+    height: 44px;
+    padding: 0 28px;
+    font-family: var(--md-ref-typeface-plain), 'Roboto', sans-serif;
+    font-size: 0.8rem;
     font-weight: 700;
-    color: var(--md-sys-color-primary);
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    color: #FFFFFF;
     text-decoration: none;
-    border-bottom: 1px dashed transparent;
-    transition: border-color 0.3s ease;
-    padding-bottom: 2px;
+    border-radius: var(--md-sys-shape-corner-full, 99px);
+    box-sizing: border-box;
+    
+    /* Fondo Tonal Material M3 semi-translúcido */
+    background: rgba(208, 188, 255, 0.05);
+    border: 1px solid rgba(208, 188, 255, 0.25);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    
+    overflow: hidden;
+    transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.m3-designer-link:hover {
-    border-color: var(--md-sys-color-primary);
+/* Hover de atracción responsivo */
+.m3-btn-designer:hover {
+    background: rgba(208, 188, 255, 0.15);
+    border-color: var(--md-sys-color-primary, #d0bcff);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(208, 188, 255, 0.15);
 }
 
-.m3-designer-link .material-symbols-outlined {
-    font-size: 13px !important;
+.m3-btn-designer:active {
+    transform: translateY(0) scale(0.98);
 }
 
-/* --- EFECTO DE APARECER / SCROLL --- */
+.m3-icon-btn-designer {
+    font-size: 16px !important;
+    color: var(--md-color-gold-accent, #f3ca65);
+}
+
+/* --- ANIMACIÓN DE PULSO DE ATRACCIÓN PASIVA --- */
+.m3-designer-pulse {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--md-sys-shape-corner-full, 99px);
+    box-shadow: 0 0 0 0 rgba(208, 188, 255, 0.4);
+    pointer-events: none;
+    animation: designerPulse 3s infinite cubic-bezier(0.25, 0, 0, 1);
+}
+
+@keyframes designerPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(208, 188, 255, 0.4);
+    }
+    40% {
+        box-shadow: 0 0 0 12px rgba(208, 188, 255, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(208, 188, 255, 0);
+    }
+}
+
+/* ==========================================================================
+   MICRO-INTERACCIONES MECÁNICAS DE SCROLL
+   ========================================================================== */
 .fade-footer-item {
     opacity: 0;
-    transform: scale(0.98);
-    transition: opacity 1s ease, transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+    transform: scale(0.97) translateY(15px);
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform, opacity;
 }
 
 .fade-footer-item.is-visible {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1) translateY(0);
 }
 
-/* Ajustes pantallas chicas */
+/* ==========================================================================
+   RESPONSIVE DISPOSITIVOS MÓVILES
+   ========================================================================== */
 @media (max-width: 480px) {
-    .m3-footer-couple { font-size: 2.3rem; }
-    .m3-designer-card { width: 100%; }
+    .m3-footer-section {
+        padding: 60px 20px 40px 20px;
+    }
+    .m3-footer-couple { 
+        font-size: 2.3rem; 
+    }
+    .m3-btn-designer { 
+        width: 100%; 
+    }
 }
