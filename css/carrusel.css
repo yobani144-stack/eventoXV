@@ -1,12 +1,13 @@
 /**
  * ARCHIVO: css/carousel.css
- * DESCRIPCIÓN: Estilos del carrusel horizontal interactivo M3
+ * DESCRIPCIÓN: Estilos del carrusel horizontal interactivo M3 fundido con el fondo base
  */
 
 invitacion-carousel {
     display: none;
     width: 100%;
-    background-color: var(--md-sys-color-surface);
+    /* Corregido: Ahora se funde perfectamente con el tono místico oscuro general */
+    background-color: var(--md-sys-color-surface-container); 
 }
 
 invitacion-carousel.is-active {
@@ -15,38 +16,41 @@ invitacion-carousel.is-active {
 
 .m3-carousel-section {
     width: 100%;
-    max-width: 600px; /* Ancho ideal emulado para celulares de gala */
+    max-width: 600px; /* Ancho editorial ideal para celulares y monitores compactos */
     margin: 0 auto;
-    padding: 60px 24px;
+    padding: 80px 24px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 32px;
+    gap: 36px;
 }
 
-/* --- ENCABEZADO --- */
+/* --- ENCABEZADO DE LA GALERÍA --- */
 .m3-carousel-header {
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
 }
 
 .m3-carousel-icon {
     color: var(--md-color-gold-accent, #f3ca65);
     font-size: 32px !important;
+    text-shadow: 0 0 10px rgba(243, 202, 101, 0.2);
 }
 
 .m3-typography--title-carousel {
     font-family: var(--md-ref-typeface-serif), 'Playfair Display', serif;
-    font-size: 2rem;
+    font-size: 2.2rem;
     color: #FFFFFF;
     font-weight: 600;
+    letter-spacing: .5px;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
-/* --- CONTENEDOR ESCENARIO DEL SLIDER --- */
+/* --- ESCENARIO DEL SLIDER --- */
 .m3-carousel-container {
     position: relative;
     width: 100%;
@@ -55,20 +59,22 @@ invitacion-carousel.is-active {
     box-sizing: border-box;
 }
 
-/* Ventana de recorte para ocultar las fotos de los lados */
+/* Ventana de recorte cristalizada */
 .m3-carousel-track-wrapper {
     width: 100%;
     overflow: hidden;
-    border-radius: 28px; /* Esquinas curvas premium M3 */
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    border-radius: 28px; /* Esquinas ultra curvadas M3 premium */
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    /* Sombra profunda y suave que se integra orgánicamente sobre el fondo místico */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    background-color: rgba(35, 27, 46, 0.2); /* Sutil velo de profundidad traslúcido */
 }
 
-/* El riel interno que se mueve horizontalmente */
+/* El riel interno que desliza de forma horizontal */
 .m3-carousel-track {
     display: flex;
     width: 100%;
-    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); /* Transición más sedosa */
     will-change: transform;
 }
 
@@ -76,7 +82,7 @@ invitacion-carousel.is-active {
 .m3-carousel-slide {
     min-width: 100%;
     width: 100%;
-    aspect-ratio: 4 / 5; /* Formas estilizadas verticales para retratos de boda */
+    aspect-ratio: 4 / 5; /* Proporción de retrato fotográfico de alta costura */
     box-sizing: border-box;
     overflow: hidden;
 }
@@ -86,48 +92,51 @@ invitacion-carousel.is-active {
     height: 100%;
     object-fit: cover;
     pointer-events: none;
-    transition: transform 0.6s ease;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Efecto zoom refinado en la foto seleccionada */
+/* Micro-zoom estético en la foto que está activa en pantalla */
 .m3-carousel-slide.is-active img {
-    transform: scale(1.02);
+    transform: scale(1.03);
 }
 
-/* --- BOTONES DE NAVEGACIÓN FLOTANTES (FLECHAS) --- */
+/* --- BOTONES DE NAVEGACIÓN FLOTANTES (FLECHAS MINIMALISTAS) --- */
 .m3-carousel-nav {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    background: rgba(35, 27, 46, 0.6);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(20, 14, 27, 0.6); /* Integrado al tono oscuro base */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     color: #FFFFFF;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     z-index: 10;
-    transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s ease, color 0.3s ease;
 }
 
 .m3-carousel-nav:hover {
-    background: rgba(208, 188, 255, 0.2);
+    background: rgba(208, 188, 255, 0.15);
     border-color: var(--md-sys-color-primary, #d0bcff);
+    color: var(--md-sys-color-primary, #d0bcff);
 }
 
 .m3-carousel-nav:active {
-    transform: translateY(-50%) scale(0.9);
+    transform: translateY(-50%) scale(0.92);
 }
 
-.m3-prev { left: -12px; }
-.m3-next { right: -12px; }
+/* Ajuste de márgenes para que floten de forma fina sin pegarse al borde */
+.m3-prev { left: -14px; }
+.m3-next { right: -14px; }
 
-/* --- INDICADORES INFERIORES (DOTS) --- */
+/* --- INDICADORES INFERIORES DE POSICIÓN (DOTS) --- */
 .m3-carousel-dots {
     display: flex;
     justify-content: center;
@@ -139,27 +148,30 @@ invitacion-carousel.is-active {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.2);
     border: none;
     padding: 0;
     cursor: pointer;
-    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
-                background-color 0.3s ease, 
-                border-radius 0.3s ease;
+    transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1), 
+                background-color 0.35s ease, 
+                border-radius 0.35s ease;
 }
 
-/* Efecto de píldora expandida M3 para el punto activo */
+/* Efecto de píldora expandida nativa M3 en oro para la foto seleccionada */
 .m3-carousel-dot.is-active {
-    width: 22px;
-    border-radius: 4px;
+    width: 24px;
+    border-radius: 6px;
     background: var(--md-color-gold-accent, #f3ca65);
+    box-shadow: 0 0 8px rgba(243, 202, 101, 0.3);
 }
 
-/* --- ANIMACIÓN SCROLL ENTRADA --- */
+/* --- ANIMACIÓN DE REVELADO SCROLL INITIAL --- */
 .fade-carousel-item {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transform: translateY(25px);
+    transition: opacity 1s cubic-bezier(0.215, 0.610, 0.355, 1), 
+                transform 1s cubic-bezier(0.215, 0.610, 0.355, 1);
+    will-change: transform, opacity;
 }
 
 .fade-carousel-item.is-visible {
@@ -167,10 +179,15 @@ invitacion-carousel.is-active {
     transform: translateY(0);
 }
 
-/* Ajustes responsivos para celulares pequeños */
+/* --- RESPONSIVE PARA DISPOSITIVOS MÓVILES COMPACTOS --- */
 @media (max-width: 480px) {
-    .m3-carousel-section { padding: 40px 16px; }
+    .m3-carousel-section { 
+        padding: 60px 16px; 
+        gap: 28px;
+    }
     .m3-prev { left: 4px; }
     .m3-next { right: 4px; }
-    .m3-carousel-slide { aspect-ratio: 1 / 1; } /* Formato cuadrado óptimo en móviles compactos */
+    .m3-carousel-slide { 
+        aspect-ratio: 1 / 1; /* Formato cuadrado perfecto para máxima visibilidad en móviles */
+    }
 }
