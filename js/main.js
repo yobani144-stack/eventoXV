@@ -53,7 +53,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (timelineSection) {
                         timelineSection.classList.remove("m3-hidden");
                     }
-                    
+                    if (locationsSection) locationsSection.classList.remove("m3-hidden"); // Añade esto
+                  
                     // Forzar Reflow del navegador (Indispensable para recalcular transiciones CSS)
                     void galaSection.offsetWidth; 
                     
@@ -62,6 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (timelineSection) {
                         timelineSection.classList.add("is-active");
                     }
+                    if (locationsSection) locationsSection.classList.add("is-active"); // Añade esto
                     
                     // 3. Modificación del Scroll: Habilitamos el deslizamiento vertical continuo en la app
                     document.body.style.overflowY = "auto";
@@ -69,6 +71,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 }, 450); // Tiempo exacto que dura el fade-out de la portada
             }, 350); // Tiempo de tolerancia para apreciar la onda M3
+
+            
         });
         
     } else {
