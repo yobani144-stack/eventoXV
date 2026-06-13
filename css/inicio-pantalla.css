@@ -2,6 +2,47 @@
  * ARCHIVO: css/inicio-pantalla.css
  * DESCRIPCIÓN: Estilos para la pantalla de bienvenida / precarga de la invitación.
  */
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:wght@400;500;700&display=swap');
+
+/* ==========================================================================
+   TOKENS DE CONFIGURACIÓN PREMIUM (100% EDITABLE)
+   ========================================================================== */
+:root {
+    /* Paleta Material Design 3 - Modo Noche Místico */
+    --md-sys-color-primary: #D0BCFF;          /* Lavanda brillante */
+    --md-sys-color-on-primary: #381E72;       /* Texto oscuro dentro de botón */
+    --md-sys-color-surface: #231B2E;          /* Fondo de la Tarjeta */
+    --md-sys-color-surface-container: #140E1B; /* Fondo Exterior General */
+    --md-sys-color-on-surface: #E6E1E9;       /* Textos principales */
+    --md-sys-color-on-surface-variant: #CAC4D0; /* Textos secundarios */
+    --md-color-gold-accent: #F3CA65;          /* Oro brillante */
+
+    /* Tipografías */
+    --md-ref-typeface-brand: 'Alex Brush', cursive;
+    --md-ref-typeface-serif: 'Playfair Display', serif;
+    --md-ref-typeface-plain: 'Roboto', sans-serif;
+
+    --md-sys-shape-corner-large: 28px;
+    --md-sys-shape-corner-full: 999px;
+}
+
+/* ==========================================================================
+   RESET & BASE RESPONSIVA GENERAL
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: var(--md-ref-typeface-plain);
+    background-color: var(--md-sys-color-surface-container);
+    color: var(--md-sys-color-on-surface);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
 
 /* Forzar visualización de la primera pantalla */
 invitacion-hero {
