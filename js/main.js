@@ -1,7 +1,7 @@
 /**
  * ARCHIVO: js/main.js
  * DESCRIPCIÓN: Orquestador principal unificado para la activación de módulos M3
- * (Hero, Gala, Timeline, Locations y Carousel)
+ * CONTROLADOS: Hero, Gala, Timeline, Locations y RSVP (Confirmación Etérea)
  */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -58,37 +58,43 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 /* --- ENCENDIDO Y DESPERTAR EN CASCADA DE LOS COMPONENTES --- */
                 
-                // 1. Despertar de la portada de gala premium (Foto de fondo & Cuenta regresiva)
+                // 1. Portada de gala premium (Foto de fondo & Cuenta regresiva)
                 if (galaSection) {
                     galaSection.classList.remove("m3-hidden");
                     void galaSection.offsetWidth; // Forzado de lectura física del DOM para estabilizar transiciones
                     galaSection.classList.add("is-active");
                 }
                 
-                // 2. Despertar del módulo de la historia (Línea del tiempo interactiva)
+                // 2. Historia (Línea del tiempo interactiva con Fade In)
                 if (timelineSection) {
                     timelineSection.classList.remove("m3-hidden");
                     timelineSection.classList.add("is-active");
                 }
                 
-                // 3. Despertar del módulo de mapas (Ubicaciones inteligentes con Fade In/Out)
+                // 3. Mapas (Ubicaciones inteligentes con Fade In/Out según Scroll)
                 if (locationsSection) {
                     locationsSection.classList.remove("m3-hidden");
                     locationsSection.classList.add("is-active");
                 }
                 
-                // 4. Despertar del nuevo módulo fotográfico (Carrusel dinámico con Lightbox 3D)
+                // 4. Galería fotográfica (Carrusel dinámico con Parallax y Lightbox 3D)
                 if (carouselSection) {
                     carouselSection.classList.remove("m3-hidden");
                     carouselSection.classList.add("is-active");
                 }
-                if (rsvpSection) { rsvpSection.classList.remove("m3-hidden"); rsvpSection.classList.add("is-active"); } // Activación
+
+                // 5. Cierre Espectacular (Módulo de confirmación etéreo con fulgor)
+                if (rsvpSection) {
+                    rsvpSection.classList.remove("m3-hidden");
+                    rsvpSection.classList.add("is-active");
+                }
+                
                 /* --- LIBERACIÓN DEL DESLIZAMIENTO GENERAL --- */
                 // Pasamos del bloqueo total de la pantalla inicial a permitir scroll vertical infinito
                 document.body.style.overflowY = "auto";
                 document.documentElement.style.overflowY = "auto";
 
             }, 450); // Tiempo emparejado con la duración del fade-out del Hero
-        }, 350); // Margen de milisegundos para que el invitado aprecie la onda expansiva lila
+        }, 350); // Margen de milisegundos para que el invitado aprecie la onda expansiva
     });
 });
