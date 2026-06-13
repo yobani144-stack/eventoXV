@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const timelineSection = document.getElementById("timeline-section");
     const locationsSection = document.getElementById("locations-section");
     const carouselSection = document.getElementById("carousel-section");
+    const rsvpSection = document.getElementById("rsvp-section");
 
     // VALIDACIÓN DE SEGURIDAD INTERNA: Evita que el script muera si falta alguna sección en el HTML
     if (!btnOpen) {
@@ -81,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     carouselSection.classList.remove("m3-hidden");
                     carouselSection.classList.add("is-active");
                 }
-                
+                if (rsvpSection) { rsvpSection.classList.remove("m3-hidden"); rsvpSection.classList.add("is-active"); } // Activación
                 /* --- LIBERACIÓN DEL DESLIZAMIENTO GENERAL --- */
                 // Pasamos del bloqueo total de la pantalla inicial a permitir scroll vertical infinito
                 document.body.style.overflowY = "auto";
