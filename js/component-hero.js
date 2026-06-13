@@ -1,71 +1,102 @@
+/**
+ * ARCHIVO: js/component-hero.js
+ * DESCRIPCIÓN: Portada Premium (Hero) con nombres en relieve y contador de gala integrado
+ */
+
 class InvitacionHero extends HTMLElement {
     connectedCallback() {
-        // Inyectamos el HTML limpio de la Portada
         this.innerHTML = `
-            <section class="m3-hero">
-                <div class="m3-particles" id="particles-container"></div>
-                <div class="m3-hero__pattern"></div>
-                
-                <div class="m3-card-3d-wrapper" id="card-wrapper">
-                    <div class="m3-card" id="main-card">
-                        <div class="m3-card__border-line"></div>
-                        <div class="m3-card__content">
-                            <p class="m3-typography--label-large">NUESTRA BODA</p>
-                            <h1 class="m3-typography--display-large">Alejandro <span class="m3-ampersand">&amp;</span> Sofía</h1>
-                            <p class="m3-typography--headline-medium">12 . 12 . 2026</p>
-                            <button class="m3-btn m3-btn--filled" id="btn-open-invitation">
-                                <span class="material-symbols-outlined m3-btn__icon">mail</span>
-                                <span class="m3-btn__label">Abrir Invitación</span>
-                                <span class="m3-btn__glint"></span>
-                            </button>
+            <section class="m3-hero-section" id="hero-section">
+                <div class="m3-hero-bg-overlay"></div>
+
+                <div class="m3-hero-frame">
+                    <p class="m3-hero-subtitle">NUESTRA BODA</p>
+                    
+                    <h1 class="m3-hero-couple-names">
+                        <span class="m3-name-glow">Alejandro</span>
+                        <span class="m3-name-amp">&</span>
+                        <span class="m3-name-glow">Sofía</span>
+                    </h1>
+
+                    <p class="m3-hero-date">12 . 12 . 2026</p>
+
+                    <div class="m3-hero-countdown" id="hero-countdown">
+                        <div class="m3-countdown-item">
+                            <span class="m3-countdown-number" id="countdown-days">00</span>
+                            <span class="m3-countdown-label">Días</span>
+                        </div>
+                        <div class="m3-countdown-item">
+                            <span class="m3-countdown-number" id="countdown-hours">00</span>
+                            <span class="m3-countdown-label">Horas</span>
+                        </div>
+                        <div class="m3-countdown-item">
+                            <span class="m3-countdown-number" id="countdown-minutes">00</span>
+                            <span class="m3-countdown-label">Min</span>
+                        </div>
+                        <div class="m3-countdown-item">
+                            <span class="m3-countdown-number" id="countdown-seconds">00</span>
+                            <span class="m3-countdown-label">Seg</span>
                         </div>
                     </div>
+
+                    <div class="m3-hero-seal-container">
+                        <div class="m3-wax-seal">
+                            <span class="material-symbols-outlined m3-seal-icon">mail</span>
+                        </div>
+                    </div>
+
+                    <div class="m3-hero-emblem-wrapper">
+                        <div class="m3-gold-emblem">
+                            <span class="m3-emblem-monogram">A & S</span>
+                        </div>
+                    </div>
+
+                    <button class="m3-btn-open-premium" id="btn-open-invitation">
+                        <span class="m3-btn-text">Desliza o Toca para más magia</span>
+                        <span class="material-symbols-outlined m3-btn-icon-pulse">expand_more</span>
+                    </button>
                 </div>
             </section>
         `;
 
-        // Ejecutamos su interactividad interna
-        this.inicializarEfectos();
+        this.inicializarContador();
     }
 
-    inicializarEfectos() {
-        const cardWrapper = this.querySelector("#card-wrapper");
-        const mainCard = this.querySelector("#main-card");
-        const particlesContainer = this.querySelector("#particles-container");
+    inicializarContador() {
+        // Fecha del evento (12 de Diciembre de 2026 18:00:00)
+        const fechaEvento = new Date("Dec 12, 2026 18:00:00").getTime();
 
-        // Generador de Partículas
-        if (particlesContainer) {
-            const colors = ['#FFFFFF', '#D0BCFF', '#F3CA65'];
-            for (let i = 0; i < 20; i++) {
-                const p = document.createElement("div");
-                p.classList.add("m3-particle");
-                const size = Math.random() * 8 + 4;
-                p.style.width = p.style.height = `${size}px`;
-                p.style.left = `${Math.random() * 100}%`;
-                p.style.color = p.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                p.style.animationDuration = `${Math.random() * 7 + 6}s`;
-                p.style.animationDelay = `${Math.random() * 6}s`;
-                particlesContainer.appendChild(p);
+        const dd = this.querySelector("#countdown-days");
+        const hh = this.querySelector("#countdown-hours");
+        const mm = this.querySelector("#countdown-minutes");
+        const ss = this.querySelector("#countdown-seconds");
+
+        const actualizarReloj = () => {
+            const ahora = new Date().getTime();
+            const diferencia = fechaEvento - ahora;
+
+            if (diferencia <= 0) {
+                clearInterval(intervalo);
+                this.querySelector("#hero-countdown").innerHTML = "<p class='m3-countdown-finished'>¡Llegó el gran día!</p>";
+                return;
             }
-        }
 
-        // Parallax 3D
-        if (cardWrapper && mainCard) {
-            const moveCard = (clientX, clientY) => {
-                const rect = cardWrapper.getBoundingClientRect();
-                const x = (clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
-                const y = (clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
-                mainCard.style.transform = `rotateX(${-y * 12}deg) rotateY(${x * 12}deg)`;
-            };
-            cardWrapper.addEventListener("mousemove", (e) => moveCard(e.clientX, e.clientY));
-            cardWrapper.addEventListener("mouseleave", () => mainCard.style.transform = "rotateX(0deg) rotateY(0deg)");
-            cardWrapper.addEventListener("touchmove", (e) => { 
-                if (e.touches.length > 0) moveCard(e.touches[0].clientX, e.touches[0].clientY); 
-            });
-            cardWrapper.addEventListener("touchend", () => mainCard.style.transform = "rotateX(0deg) rotateY(0deg)");
-        }
+            // Cálculos matemáticos de tiempo estándar
+            const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+            // Formatear con ceros a la izquierda si es menor a 10
+            if(dd) dd.innerText = dias < 10 ? "0" + dias : dias;
+            if(hh) hh.innerText = horas < 10 ? "0" + horas : horas;
+            if(mm) mm.innerText = minutos < 10 ? "0" + minutos : minutos;
+            if(ss) ss.innerText = segundos < 10 ? "0" + segundos : segundos;
+        };
+
+        actualizarReloj(); // Ejecución inmediata inicial
+        const intervalo = setInterval(actualizarReloj, 1000);
     }
 }
 
-// Registramos la etiqueta personalizada en el navegador
 customElements.define('invitacion-hero', InvitacionHero);
