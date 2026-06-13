@@ -1,10 +1,16 @@
+/**
+ * ARCHIVO: js/component-rsvp.js
+ * DESCRIPCIÓN: Componente de confirmación etéreo corregido y libre de errores
+ */
+
 class InvitacionRsvp extends HTMLElement {
     connectedCallback() {
-        // CONFIGURACIÓN DE WHATSAPP
+        // CONFIGURACIÓN DE WHATSAPP (Corregida)
         const telefonoWhatsApp = "527291255411"; // Tu número sin el '+'
         const mensajePredefinido = "¡Hola! Recibí la invitación de Alejandro & Sofía. ✨ Queremos confirmar nuestra asistencia para compartir con ustedes este día tan especial. ¡Nos vemos pronto!";
 
-        const urlWhatsApp = `https://wa.me/${telefonoTelephone}?text=${encodeURIComponent(mensajePredefinido)}`;
+        // Usamos la variable correcta: telefonoWhatsApp
+        const urlWhatsApp = `https://wa.me/${telefonoWhatsApp}?text=${encodeURIComponent(mensajePredefinido)}`;
 
         this.innerHTML = `
             <section class="m3-rsvp-section">
@@ -56,7 +62,6 @@ class InvitacionRsvp extends HTMLElement {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
                 } else {
-                    // Si el usuario vuelve hacia arriba, los elementos desaparecen sutilmente
                     if (entry.boundingClientRect.top > 0) {
                         entry.target.classList.remove('is-visible');
                     }
