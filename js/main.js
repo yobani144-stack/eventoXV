@@ -50,9 +50,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     
                     // 1. Despertamos los componentes quitando el bloqueo estricto 'display: none'
                     galaSection.classList.remove("m3-hidden");
-                    if (timelineSection) {
+                  /*  if (timelineSection) {
                         timelineSection.classList.remove("m3-hidden");
-                    }
+                    }*/
+                    if (timelineSection) timelineSection.classList.remove("m3-hidden");
                     if (locationsSection) locationsSection.classList.remove("m3-hidden"); // Añade esto
                   
                     // Forzar Reflow del navegador (Indispensable para recalcular transiciones CSS)
@@ -60,10 +61,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     
                     // 2. Encendemos las clases de animación que disparan el CSS esmerilado e interno
                     galaSection.classList.add("is-active");
-                    if (timelineSection) {
+                    /*if (timelineSection) {
                         timelineSection.classList.add("is-active");
-                    }
+                    }*/
+                    if (timelineSection) timelineSection.classList.add("is-active");
                     if (locationsSection) locationsSection.classList.add("is-active"); // Añade esto
+                  
                     
                     // 3. Modificación del Scroll: Habilitamos el deslizamiento vertical continuo en la app
                     document.body.style.overflowY = "auto";
