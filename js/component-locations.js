@@ -11,7 +11,7 @@ class InvitacionLocations extends HTMLElement {
                 <div class="m3-locations-grid">
                     
                     <div class="m3-location-card fade-element">
-                        <div class="m3-location-image" style="background-image: url('https://images.unsplash.com/photo-1548625361-195fe61a55ef?q=80&w=1000&auto=format&fit=crop');">
+                        <div class="m3-location-image" style="background-image: url('img/iglesia2.jpeg');">
                             <div class="m3-location-tag">Ceremonia</div>
                         </div>
                         <div class="m3-location-info">
